@@ -1,0 +1,6 @@
+[submodule "Measurement"]
+	path = Measurement
+	url = http://krr-app-bbgit01/Measurement.git
+[submodule "MessageLogs"]
+	path = MessageLogs
+	url = http://krr-app-bbgit01/MessageLogs.git
