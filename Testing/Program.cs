@@ -5,40 +5,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TReport;
 
 namespace Testing
 {
     class Program
     {
-        public class DM_BF9_UnloadBunker
-        {
-            public DateTime datetime { get; set; }
-            public PressureValue davl1 { get; set; }
-        }
+        //public class DM_BF9_UnloadBunker
+        //{
+        //    public DateTime datetime { get; set; }
+        //    public PressureValue davl1 { get; set; }
+        //}
 
-        public class BF9_UnloadBunkerDataMeasurement : DataMeasurement<DM_BF9_UnloadBunker>
-        {
-            public BF9_UnloadBunkerDataMeasurement(UnloadBunker obj)
-                : base(obj)
-            {
+        //public class BF9_UnloadBunkerDataMeasurement : DataMeasurement<DM_BF9_UnloadBunker>
+        //{
+        //    public BF9_UnloadBunkerDataMeasurement(UnloadBunker obj)
+        //        : base(obj)
+        //    {
 
-            }
+        //    }
 
-            public BF9_UnloadBunkerDataMeasurement(List<UnloadBunker> list_obj)
-                : base(list_obj)
-            {
+        //    public BF9_UnloadBunkerDataMeasurement(List<UnloadBunker> list_obj)
+        //        : base(list_obj)
+        //    {
 
-            }
+        //    }
 
-            public override DM_BF9_UnloadBunker Convert(object obj)
-            {
-                return new DM_BF9_UnloadBunker()
-                {
-                    datetime = ((UnloadBunker)obj).Дата_и_время,
-                    davl1 = new PressureValue((double)((UnloadBunker)obj).Точность_рассыпания, "Точность_рассыпания", uPressure.bar, Multiplier.No)
-                };
-            }
-        }
+        //    public override DM_BF9_UnloadBunker Convert(object obj)
+        //    {
+        //        return new DM_BF9_UnloadBunker()
+        //        {
+        //            datetime = ((UnloadBunker)obj).Дата_и_время,
+        //            davl1 = new PressureValue((double)((UnloadBunker)obj).Точность_рассыпания, "Точность_рассыпания", uPressure.bar, Multiplier.No)
+        //        };
+        //    }
+        //}
         
         static void Main(string[] args)
         {
@@ -67,10 +68,19 @@ namespace Testing
             //}
 
             EFBF9.Concrete.EFBF9 efdp9 = new EFBF9.Concrete.EFBF9();
-            List<UnloadBunker> list = new List<UnloadBunker>();
-            list = efdp9.GetBF9UnloadBunker(DateTime.Now.AddHours(-5), DateTime.Now);
-            BF9_UnloadBunkerDataMeasurement ubdm = new BF9_UnloadBunkerDataMeasurement(list);
-            BF9_UnloadBunkerDataMeasurement ubdm1 = new BF9_UnloadBunkerDataMeasurement(list[1]);
+            //List<UnloadBunker> list = new List<UnloadBunker>();
+            //list = efdp9.GetBF9UnloadBunker(DateTime.Now.AddHours(-5), DateTime.Now);
+            //BF9_UnloadBunkerDataMeasurement ubdm = new BF9_UnloadBunkerDataMeasurement(list);
+            //BF9_UnloadBunkerDataMeasurement ubdm1 = new BF9_UnloadBunkerDataMeasurement(list[1]);
+
+
+            // Тест энергоресурсов за сутки
+            List<EnergoSutki> list = efdp9.GetBF9EnergoSutki(DateTime.Now.AddDays(-1));
+
+            TREnergy tre = new TREnergy(trObj.add);
+            tre.GetEnergoSutki(DateTime.Now.AddDays(-1));
+            //BF9_TREnergoSutki
+
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }
