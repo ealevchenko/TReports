@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +11,7 @@ namespace TReport
 
     public enum trObj : int
     {
+        not = 0,
         add = 100,
         ac1 = 110, ac1_am1 = 111, ac1_am2 = 112, ac1_am3 = 113, ac1_am4 = 114, ac1_am5 = 115, ac1_am6 = 116,
         ac2 = 120, ac2_am1 = 121, ac2_am2 = 122, ac2_am3 = 123, ac2_am4 = 124, ac2_am5 = 125, ac2_am6 = 126,
@@ -24,10 +27,20 @@ namespace TReport
 
     public class TR
     {
-        protected trObj trObj;
+        protected List<trObj> trObjs = new List<trObj>();
+
         public TR(trObj trObj)
         {
-            this.trObj = trObj;
+            this.trObjs.Add(trObj);
         }
+
+        public TR(trObj[] trObjs) {
+            this.trObjs = trObjs.ToList();
+        }
+
+        public TR(List<trObj> trObjs) {
+            this.trObjs = trObjs;
+        }
+
     }
 }
