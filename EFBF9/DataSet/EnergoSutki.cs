@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace EFBF9.DataSet
 {
-    public class EnergoSutki
+    public class bf9_EnergySutki
     {
+        #region Данные
         public DateTime Date { get; set; }
         public double? Rodom_Gaz { get; set; }
         public double? Ronatur_Gaz { get; set; }
@@ -140,5 +141,7 @@ namespace EFBF9.DataSet
         public float? BVN_FVG4avg { get; set; }
         public float? DP_O2CD124 { get; set; }
         public double? WL_domgaz { get; set; }
+        #endregion
+
     }
 }

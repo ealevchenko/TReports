@@ -75,12 +75,12 @@ namespace EFBF9.Concrete
         /// </summary>
         /// <param name="dt"></param>
         /// <returns></returns>
-        public List<EnergoSutki> GetBF9EnergoSutki(DateTime dt)
+        public List<bf9_EnergySutki> GetBF9EnergoSutki(DateTime dt)
         {
             try
             {
                 SqlParameter dt_start = new SqlParameter("@DT", dt);
-                return context.Database.SqlQuery<EnergoSutki>("EXEC " + this.sp_bf9_es + " @DT", dt_start).ToList();
+                return context.Database.SqlQuery<bf9_EnergySutki>("EXEC " + this.sp_bf9_es + " @DT", dt_start).ToList();
             }
             catch (Exception e)
             {
