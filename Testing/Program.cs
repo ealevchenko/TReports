@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TReport;
+using TReport.Energy;
 
 namespace Testing
 {
@@ -75,10 +76,10 @@ namespace Testing
 
 
             // Тест энергоресурсов за сутки
-            List<EnergoSutki> list = efdp9.GetBF9EnergoSutki(DateTime.Now.AddDays(-1));
+            List<bf9_EnergySutki> list = efdp9.GetBF9EnergoSutki(DateTime.Now.AddDays(-1));
 
-            TREnergy tre = new TREnergy(trObj.add);
-            tre.GetEnergoSutki(DateTime.Now.AddDays(-1));
+            TREnergy tre = new TREnergy(trObj.dc2_dp9);
+            tre.GetEnergySutki(DateTime.Now.AddDays(-1));
             //BF9_TREnergoSutki
 
             Console.WriteLine("Press any key to exit...");
