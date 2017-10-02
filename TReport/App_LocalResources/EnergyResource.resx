@@ -117,37 +117,49 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ac1" xml:space="preserve">
-    <value>АЦ-1</value>
+  <data name="avg_pressure" xml:space="preserve">
+    <value>Средне давление</value>
   </data>
-  <data name="ac2" xml:space="preserve">
-    <value>АЦ-2</value>
+  <data name="avg_temp" xml:space="preserve">
+    <value>Средняя температура</value>
   </data>
-  <data name="ac3" xml:space="preserve">
-    <value>АЦ-3</value>
+  <data name="blast" xml:space="preserve">
+    <value>Дутье</value>
   </data>
-  <data name="add" xml:space="preserve">
-    <value>АДД</value>
+  <data name="blast_furnace_gas" xml:space="preserve">
+    <value>Доменный газ</value>
   </data>
-  <data name="dc1" xml:space="preserve">
-    <value>ДЦ-1</value>
+  <data name="compressed_air" xml:space="preserve">
+    <value>Сжатый воздух</value>
   </data>
-  <data name="dc1_dp6" xml:space="preserve">
-    <value>ДЦ-1, ДП-6</value>
+  <data name="flow_sutky" xml:space="preserve">
+    <value>Расход за сутки</value>
   </data>
-  <data name="dc1_dp7" xml:space="preserve">
-    <value>ДЦ-1, ДП-7</value>
+  <data name="natur_gas" xml:space="preserve">
+    <value>Природный газ</value>
   </data>
-  <data name="dc1_dp8" xml:space="preserve">
-    <value>ДЦ-1, ДП-8</value>
+  <data name="natur_gas_bf" xml:space="preserve">
+    <value>Природный газ на печь</value>
   </data>
-  <data name="dc2" xml:space="preserve">
-    <value>ДЦ-2</value>
+  <data name="nitrogen" xml:space="preserve">
+    <value>Азот</value>
   </data>
-  <data name="dc2_dp9" xml:space="preserve">
-    <value>ДЦ-2, ДП-9</value>
+  <data name="oxygen" xml:space="preserve">
+    <value>Кислород</value>
   </data>
-  <data name="dc2_dp9_pci" xml:space="preserve">
-    <value>ДЦ-2, ПУТ</value>
+  <data name="planimetric_value" xml:space="preserve">
+    <value>Планиметрическое число</value>
+  </data>
+  <data name="pr_flow_sutky" xml:space="preserve">
+    <value>Приведенный расход за сутки</value>
+  </data>
+  <data name="steam" xml:space="preserve">
+    <value>Пар</value>
+  </data>
+  <data name="time_max" xml:space="preserve">
+    <value>Время подачи, макс</value>
+  </data>
+  <data name="time_norm" xml:space="preserve">
+    <value>Время подачи, норма</value>
   </data>
 </root>

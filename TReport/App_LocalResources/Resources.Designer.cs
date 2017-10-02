@@ -61,11 +61,101 @@ namespace TReport.App_LocalResources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Природный газ на ДП9.
+        ///   Ищет локализованную строку, похожую на АЦ-1.
         /// </summary>
-        public static string natural_gas_bf9 {
+        public static string ac1 {
             get {
-                return ResourceManager.GetString("natural_gas_bf9", resourceCulture);
+                return ResourceManager.GetString("ac1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на АЦ-2.
+        /// </summary>
+        public static string ac2 {
+            get {
+                return ResourceManager.GetString("ac2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на АЦ-3.
+        /// </summary>
+        public static string ac3 {
+            get {
+                return ResourceManager.GetString("ac3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на АДД.
+        /// </summary>
+        public static string add {
+            get {
+                return ResourceManager.GetString("add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ДЦ-1.
+        /// </summary>
+        public static string dc1 {
+            get {
+                return ResourceManager.GetString("dc1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ДЦ-1, ДП-6.
+        /// </summary>
+        public static string dc1_dp6 {
+            get {
+                return ResourceManager.GetString("dc1_dp6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ДЦ-1, ДП-7.
+        /// </summary>
+        public static string dc1_dp7 {
+            get {
+                return ResourceManager.GetString("dc1_dp7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ДЦ-1, ДП-8.
+        /// </summary>
+        public static string dc1_dp8 {
+            get {
+                return ResourceManager.GetString("dc1_dp8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ДЦ-2.
+        /// </summary>
+        public static string dc2 {
+            get {
+                return ResourceManager.GetString("dc2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ДЦ-2, ДП-9.
+        /// </summary>
+        public static string dc2_dp9 {
+            get {
+                return ResourceManager.GetString("dc2_dp9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ДЦ-2, ПУТ.
+        /// </summary>
+        public static string dc2_dp9_pci {
+            get {
+                return ResourceManager.GetString("dc2_dp9_pci", resourceCulture);
             }
         }
     }
