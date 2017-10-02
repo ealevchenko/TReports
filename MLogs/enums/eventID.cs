@@ -9,8 +9,21 @@ namespace MessageLog
 
     public enum eventID : int
     {
+       
         Null = -1,
+
+        TData = 1000,
+
         EFBF9 = 2000,
-        EFBF9_EFBF9UnloadMaterial = 2100
+        EFBF9_EFBF9UnloadMaterial = 2100,
+
+        EFBF8 = 3000,
+        EFBF8_EFBF9UnloadMaterial = 3100,
+
+        EFBF7 = 4000,
+        EFBF7_EFBF9UnloadMaterial = 4100
+
+
+
     }
 }
