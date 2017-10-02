@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IBF9EnergySutki.cs" />
     <Compile Include="Abstract\IBF9UnloadMaterial.cs" />
     <Compile Include="Abstract\IBF9UnloadBunker.cs" />
     <Compile Include="Concrete\EFBF9.cs" />

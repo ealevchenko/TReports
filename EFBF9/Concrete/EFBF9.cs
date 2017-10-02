@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EFBF9.Concrete
 {
-    public class EFBF9 : IBF9UnloadMaterial, IBF9UnloadBunker
+    public class EFBF9 : IBF9UnloadMaterial, IBF9UnloadBunker, IBF9EnergySutki
     {
         protected EFDbContext context = new EFDbContext();
         protected string sp_bf9_ums;
@@ -75,7 +75,7 @@ namespace EFBF9.Concrete
         /// </summary>
         /// <param name="dt"></param>
         /// <returns></returns>
-        public List<bf9_EnergySutki> GetBF9EnergoSutki(DateTime dt)
+        public List<bf9_EnergySutki> GetBF9EnergySutki(DateTime dt)
         {
             try
             {
