@@ -1,4 +1,6 @@
-﻿using EFBF9.DataSet;
+﻿using EFBF7.DataSet;
+using EFBF8.DataSet;
+using EFBF9.DataSet;
 using Measurement;
 using System;
 using System.Collections.Generic;
@@ -6,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TReport;
-using TReport.Energy;
 
 namespace Testing
 {
@@ -44,6 +45,26 @@ namespace Testing
         
         static void Main(string[] args)
         {
+            #region Test_EFBF7
+            Test_EFBF7 tefbf7 = new Test_EFBF7();
+            //tefbf7.GetBF7EnergySutkit(); // Получить энерго ресурсы за уазаную дату
+            #endregion
+
+            #region Test_EFBF8
+            Test_EFBF8 tefbf8 = new Test_EFBF8();
+            //tefbf8.GetBF8EnergySutkit(); // Получить энерго ресурсы за уазаную дату
+            #endregion     
+
+            #region Test_EFBF9
+            Test_EFBF9 tefbf9 = new Test_EFBF9();
+            //tefbf9.GetBF9EnergySutkit(); // Получить энерго ресурсы за уазаную дату
+            #endregion  
+        
+            #region Test_TREnergy
+            Test_TREnergy ttre = new Test_TREnergy();
+            ttre.GetEnergySutkit(); // Получить энерго ресурсы за уазаную дату по всем печам
+            #endregion  
+
             //PressureUnit pu = new PressureUnit("Тест параметр давление", uPressure.kgs_m2, Multiplier.No);
             //FlowUnit fu = new FlowUnit("Тест параметр расход", uFlow.kg_hour, Multiplier.No);
 
@@ -68,19 +89,11 @@ namespace Testing
             //    Console.WriteLine("Элемент {0}, класс {1}, значение {2}, тип {3}", um.Description, um.GetType(), um.Value, um.TypeValue);
             //}
 
-            EFBF9.Concrete.EFBF9 efdp9 = new EFBF9.Concrete.EFBF9();
+            //EFBF9.Concrete.EFBF9 efdp9 = new EFBF9.Concrete.EFBF9();
             //List<UnloadBunker> list = new List<UnloadBunker>();
             //list = efdp9.GetBF9UnloadBunker(DateTime.Now.AddHours(-5), DateTime.Now);
             //BF9_UnloadBunkerDataMeasurement ubdm = new BF9_UnloadBunkerDataMeasurement(list);
             //BF9_UnloadBunkerDataMeasurement ubdm1 = new BF9_UnloadBunkerDataMeasurement(list[1]);
-
-
-            // Тест энергоресурсов за сутки
-            List<bf9_EnergySutki> list = efdp9.GetBF9EnergoSutki(DateTime.Now.AddDays(-1));
-
-            TREnergy tre = new TREnergy(trObj.dc2_dp9);
-            tre.GetEnergySutki(DateTime.Now.AddDays(-1));
-            //BF9_TREnergoSutki
 
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
