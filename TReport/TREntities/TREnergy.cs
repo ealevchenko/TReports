@@ -1,6 +1,4 @@
-﻿using EFBF9.Abstract;
-using EFBF9.DataSet;
-using Measurement;
+﻿using Measurement;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,17 +7,17 @@ using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using TReport.App_LocalResources;
+using TReport.TData;
+using TReport.TData.DataSet;
+using TReport.TData.Interfaces;
 
-namespace TReport.Energy
+namespace TReport.TREntities
 {
 
     public class TREnergy : TR
     {
 
-        public enum teNaturGas: int
-        {
-            Natur_gas_bf = 1,
-        }
+
 
         public class EnergySutkiObject
         {
@@ -34,6 +32,10 @@ namespace TReport.Energy
         }
 
         protected List<EnergySutkiObject> list_energy_sutki = new List<EnergySutkiObject>(); // Список всех данных по всем объектам
+        public List<EnergySutkiObject> ListEnergySutki { get { return this.list_energy_sutki; } }
+
+        protected List<GroupEnergyValueObjEntity> list_group_energy_value = new List<GroupEnergyValueObjEntity>(); // Список полученых наборов данных по энергоресурсам
+        public List<GroupEnergyValueObjEntity> ListGroupEnergyValue { get { return this.list_group_energy_value; } }
 
         public TREnergy(trObj trObj) : base(trObj) { }
 
@@ -41,6 +43,16 @@ namespace TReport.Energy
 
         public TREnergy(List<trObj> trObjs) : base(trObjs) { }
 
+        /// <summary>
+        /// Получить строку с учетом культуры
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public string GetEnergyResource(string key)
+        {
+            ResourceManager resourceManager = new ResourceManager(typeof(EnergyResource));
+            return resourceManager.GetString(key, CultureInfo.CurrentCulture);
+        }
 
         #region методы для работы с исходными данными EnergoSutki & EnergoSutkiObject
         /// <summary>
@@ -51,20 +63,9 @@ namespace TReport.Energy
         /// <returns></returns>
         public EnergySutkiObject GetEnergySutkiObject(DateTime date, trObj trobj)
         {
-            IEnergySutki ies = null;
-            switch (trobj)
-            {
-                case trObj.dc2_dp9:
-                    EFBF9.Concrete.EFBF9 efdp9 = new EFBF9.Concrete.EFBF9();
-                    List<bf9_EnergySutki> list = null;
-                    list = efdp9.GetBF9EnergoSutki(date);
-                    ies = (list != null && list.Count() > 0) ? new bf9_UnitEnergySutki(list[0]) : null;
-                    break;
-                case trObj.dc1_dp8:
+            TData.TData data = new TData.TData();
+            return new EnergySutkiObject(trobj, data.GetEnergySutkiObject(date, trobj));
 
-                    break;
-            }
-            return new EnergySutkiObject(trobj, ies);
         }
         /// <summary>
         /// получить список всех параметров EnergoSutki по всем объектам
@@ -82,10 +83,17 @@ namespace TReport.Energy
         }
         #endregion
 
-        #region Природный газ на печь
+        #region Природный газ
 
-
-
+        public enum teNaturGas : int
+        {
+            natur_gas_bf = 1,
+        }
+        /// <summary>
+        /// Получить набор данных природный газ на печь
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public EnergyValueObjEntity GetNaturGasBF(trObj obj)
         {
 
@@ -94,93 +102,123 @@ namespace TReport.Energy
             EnergyValueObjEntity evoe = new EnergyValueObjEntity()
             {
                 obj = (int)obj,
-                name = "Природный газ на печь",
+                name = GetEnergyResource(teNaturGas.natur_gas_bf.ToString()) + " " + base.GetResource(obj.ToString()),
                 flow = new FlowValue(
                     (eso.energy_sutki.NG_flow != null ? (double)eso.energy_sutki.NG_flow : 0.0),
-                    "Расход за сутки",
+                    GetEnergyResource("flow_sutky"),
                     eso.energy_sutki.NG_flow_unit,
                     eso.energy_sutki.NG_flow_multiplier
                     ),
                 avg_temp = new TempValue(
                     (eso.energy_sutki.NG_temp != null ? (double)eso.energy_sutki.NG_temp : 0.0),
-                    "Средняя температура",
+                    GetEnergyResource("avg_temp"),
                     eso.energy_sutki.NG_temp_unit,
                     eso.energy_sutki.NG_temp_multiplier
                     ),
                 avg_pressure = new PressureValue(
                     (eso.energy_sutki.NG_pressure != null ? (double)eso.energy_sutki.NG_pressure : 0.0),
-                    "Средне давление",
+                    GetEnergyResource("avg_pressure"),
                     eso.energy_sutki.NG_pressure_unit,
                     eso.energy_sutki.NG_pressure_multiplier
                     ),
                 planimetric = new PlanimetricValue(
                     (eso.energy_sutki.NG_planimetric != null ? (double)eso.energy_sutki.NG_planimetric : 0.0),
-                    "Планиметрическое число",
+                    GetEnergyResource("planimetric_value"),
                     eso.energy_sutki.NG_planimetric_unit,
                     eso.energy_sutki.NG_planimetric_multiplier
                     ),
                 pr_flow = new FlowValue(
                     (eso.energy_sutki.NG_pr_flow != null ? (double)eso.energy_sutki.NG_pr_flow : 0.0),
-                    "Приведенный расход за сутки",
+                    GetEnergyResource("pr_flow_sutky"),
                     eso.energy_sutki.NG_pr_flow_unit,
                     eso.energy_sutki.NG_pr_flow_multiplier
                     ),
                 time_norm = new TimeValue(
                     (eso.energy_sutki.NG_time_norm != null ? (int)eso.energy_sutki.NG_time_norm : 0),
-                    "Время подачи, норма",
+                    GetEnergyResource("time_norm"),
                     eso.energy_sutki.NG_time_norm_unit,
                     eso.energy_sutki.NG_time_norm_multiplier
                     ),
                 time_max = new TimeValue(
                     (eso.energy_sutki.NG_time_max != null ? (int)eso.energy_sutki.NG_time_max : 0),
-                    "Время подачи, макс",
+                    GetEnergyResource("time_max"),
                     eso.energy_sutki.NG_time_max_unit,
                     eso.energy_sutki.NG_time_max_multiplier
                     ),
             };
             return evoe;
         }
-
-        public TypeEnergyValueObjEntity GetTypeNaturGas(teNaturGas type) {
+        /// <summary>
+        /// Получить набор данных природный газ
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public TypeEnergyValueObjEntity GetTypeNaturGas(teNaturGas type)
+        {
             List<EnergyValueObjEntity> list = new List<EnergyValueObjEntity>();
             foreach (trObj obj in base.trObjs)
             {
-                if(type == teNaturGas.Natur_gas_bf) list.Add(GetNaturGasBF(obj));
+                if (type == teNaturGas.natur_gas_bf) list.Add(GetNaturGasBF(obj));
             }
             return new TypeEnergyValueObjEntity()
             {
                 type = (int)type,
-                name = type.ToString(),
+                name = GetEnergyResource(type.ToString()),
                 list_energy = list,
             };
         }
-
-        public GroupEnergyValueObjEntity GetGroup(groupEnergy group) {
+        /// <summary>
+        /// Получить список набора данных природный газ
+        /// </summary>
+        /// <returns></returns>
+        public List<TypeEnergyValueObjEntity> GetTypeNaturGas()
+        {
             List<TypeEnergyValueObjEntity> list = new List<TypeEnergyValueObjEntity>();
             foreach (teNaturGas type in Enum.GetValues(typeof(teNaturGas)))
             {
-                if (group == groupEnergy.Natur_gas) list.Add(GetTypeNaturGas(type));
+                list.Add(GetTypeNaturGas(type));
+            }
+            return list;
+        }
+        #endregion
+
+        #region GroupEnergy
+        /// <summary>
+        /// Получить группу набора данных groupEnergy
+        /// </summary>
+        /// <param name="group"></param>
+        /// <returns></returns>
+        public GroupEnergyValueObjEntity GetGroup(groupEnergy group)
+        {
+            List<TypeEnergyValueObjEntity> list = new List<TypeEnergyValueObjEntity>();
+            switch (group)
+            {
+                case groupEnergy.natur_gas: list = GetTypeNaturGas(); break;
             }
             return new GroupEnergyValueObjEntity()
             {
                 group = group,
-                name = group.ToString(),
+                name = GetEnergyResource(group.ToString()),
                 list_type_energy = list
             };
         }
 
+        public List<GroupEnergyValueObjEntity> GetGroup() {
+            List<GroupEnergyValueObjEntity> list = new List<GroupEnergyValueObjEntity>();
+            foreach (groupEnergy group in Enum.GetValues(typeof(groupEnergy))) {
+                list.Add(GetGroup(group));}
+                return list;
+        }
         #endregion
 
         public void GetEnergySutki(DateTime date)
         {
 
-            this.list_energy_sutki = GetEnergySutkiObject(date);
-            List<GroupEnergyValueObjEntity> list = new List<GroupEnergyValueObjEntity>();
+            this.list_energy_sutki = GetEnergySutkiObject(date);    // Соберем исходные данные из баз данных всех указаных объектов
+            this.list_group_energy_value = GetGroup();              // формируем набор данных по энергоресурсам
 
-            foreach (groupEnergy group in Enum.GetValues(typeof(groupEnergy))) {
-                list.Add(GetGroup(group));
-            }
         }
+
         //public class TREnergoSutki
         //{
         //    public trObj trObj { get; set; }

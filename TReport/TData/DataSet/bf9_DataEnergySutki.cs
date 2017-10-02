@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TReport.TData.Interfaces;
 
-namespace TReport.Energy
+namespace TReport.TData.DataSet
 {
-    public class bf9_UnitEnergySutki : bf9_EnergySutki, IEnergySutki
+    public class bf9_DataEnergySutki : bf9_EnergySutki, IEnergySutki
     {
 
         #region IESNaturGas
@@ -134,7 +135,7 @@ namespace TReport.Energy
 
         #endregion
 
-        public bf9_UnitEnergySutki(bf9_EnergySutki es)
+        public bf9_DataEnergySutki(bf9_EnergySutki es)
         {
             base.Date = es.Date;
             base.Rodom_Gaz = es.Rodom_Gaz;

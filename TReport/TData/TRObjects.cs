@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TReport
+namespace TReport.TData
 {
 
     public enum trObj : int
@@ -23,24 +21,5 @@ namespace TReport
         rd = 300,
         srs1 = 310, srs1_lms250_3_em = 311,
         srs2 = 320, srs2_lms250_4_em = 321
-    }
-
-    public class TR
-    {
-        protected List<trObj> trObjs = new List<trObj>();
-
-        public TR(trObj trObj)
-        {
-            this.trObjs.Add(trObj);
-        }
-
-        public TR(trObj[] trObjs) {
-            this.trObjs = trObjs.ToList();
-        }
-
-        public TR(List<trObj> trObjs) {
-            this.trObjs = trObjs;
-        }
-
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TReport.Energy
+namespace TReport.TData.Interfaces
 {
     public interface INaturGas_BF
     {
