@@ -129,6 +129,12 @@
   <data name="blast_furnace_gas" xml:space="preserve">
     <value>Доменный газ</value>
   </data>
+  <data name="blast_furnace_gas_bvn" xml:space="preserve">
+    <value>Доменный газ (на БВН)</value>
+  </data>
+  <data name="blast_furnace_gas_gsu5" xml:space="preserve">
+    <value>Выход доменного газа на ГСУ №5</value>
+  </data>
   <data name="compressed_air" xml:space="preserve">
     <value>Сжатый воздух</value>
   </data>
@@ -140,6 +146,12 @@
   </data>
   <data name="natur_gas_bf" xml:space="preserve">
     <value>Природный газ на печь</value>
+  </data>
+  <data name="natur_gas_hpp3" xml:space="preserve">
+    <value>Природный газ на ТЭЦ-3</value>
+  </data>
+  <data name="natur_gas_tn" xml:space="preserve">
+    <value>Природный газ на технужды</value>
   </data>
   <data name="nitrogen" xml:space="preserve">
     <value>Азот</value>
@@ -161,5 +173,8 @@
   </data>
   <data name="time_norm" xml:space="preserve">
     <value>Время подачи, норма</value>
+  </data>
+  <data name="top_gas" xml:space="preserve">
+    <value>Колошниковый газ (на выходе)</value>
   </data>
 </root>

@@ -97,6 +97,24 @@ namespace TReport.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Доменный газ (на БВН).
+        /// </summary>
+        public static string blast_furnace_gas_bvn {
+            get {
+                return ResourceManager.GetString("blast_furnace_gas_bvn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выход доменного газа на ГСУ №5.
+        /// </summary>
+        public static string blast_furnace_gas_gsu5 {
+            get {
+                return ResourceManager.GetString("blast_furnace_gas_gsu5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Сжатый воздух.
         /// </summary>
         public static string compressed_air {
@@ -129,6 +147,24 @@ namespace TReport.App_LocalResources {
         public static string natur_gas_bf {
             get {
                 return ResourceManager.GetString("natur_gas_bf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Природный газ на ТЭЦ-3.
+        /// </summary>
+        public static string natur_gas_hpp3 {
+            get {
+                return ResourceManager.GetString("natur_gas_hpp3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Природный газ на технужды.
+        /// </summary>
+        public static string natur_gas_tn {
+            get {
+                return ResourceManager.GetString("natur_gas_tn", resourceCulture);
             }
         }
         
@@ -192,6 +228,15 @@ namespace TReport.App_LocalResources {
         public static string time_norm {
             get {
                 return ResourceManager.GetString("time_norm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Колошниковый газ (на выходе).
+        /// </summary>
+        public static string top_gas {
+            get {
+                return ResourceManager.GetString("top_gas", resourceCulture);
             }
         }
     }
