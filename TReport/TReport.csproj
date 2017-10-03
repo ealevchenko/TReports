@@ -56,8 +56,10 @@
     </Compile>
     <Compile Include="TData\DataSet\bf8_DataEnergySutki.cs" />
     <Compile Include="TData\DataSet\bf9_DataEnergySutki.cs" />
-    <Compile Include="TData\Interfaces\IEnergySutki.cs" />
+    <Compile Include="TData\Interfaces\IBlastFurnaceGas_BVN.cs" />
+    <Compile Include="TData\Interfaces\INaturGas_TN.cs" />
     <Compile Include="TData\Interfaces\INaturGas_BF.cs" />
+    <Compile Include="TData\Interfaces\INaturGas_HPP3.cs" />
     <Compile Include="TData\TData.cs" />
     <Compile Include="TData\TRObjects.cs" />
     <Compile Include="TREntities\TR.cs" />

@@ -9,125 +9,356 @@ using TReport.TData.Interfaces;
 
 namespace TReport.TData.DataSet
 {
-    public class bf8_DataEnergySutki : bf8_EnergySutki, IEnergySutki
+    public class bf8_DataEnergySutki : bf8_EnergySutki, INaturGas_BF, INaturGas_TN, IBlastFurnaceGas_BVN
     {
         public DateTime Date { get; set; }
+
         #region IESNaturGas
 
         #region Flow
-        public double? NG_flow
+        public double? NG_BF_flow
         {
             get { return base.Fpg; }
         }
 
-        public uFlow NG_flow_unit
+        public uFlow NG_BF_flow_unit
         {
-            get { return uFlow.m3_hour; }
+            get { return uFlow.mm3_sutki; }
         }
 
-        public Multiplier NG_flow_multiplier
+        public Multiplier NG_BF_flow_multiplier
         {
             get { return Multiplier.thousand; }
         }
         #endregion
 
         #region Temp
-        public double? NG_temp
+        public double? NG_BF_temp
         {
             get { return base.Tpg; }
         }
 
-        public uTemp NG_temp_unit
+        public uTemp NG_BF_temp_unit
         {
             get { return uTemp.grad_C; }
         }
 
-        public Multiplier NG_temp_multiplier
+        public Multiplier NG_BF_temp_multiplier
         {
             get { return Multiplier.No; }
         }
         #endregion
 
         #region Pressure
-        public double? NG_pressure
+        public double? NG_BF_pressure
         {
             get { return base.Ppg; }
         }
 
-        public uPressure NG_pressure_unit
+        public uPressure NG_BF_pressure_unit
         {
             get { return uPressure.kPa; }
         }
 
-        public Multiplier NG_pressure_multiplier
+        public Multiplier NG_BF_pressure_multiplier
         {
             get { return Multiplier.No; }
         }
         #endregion
 
         #region Planimetric
-        public double? NG_planimetric
+        public double? NG_BF_planimetric
         {
             get { return base.Fpg_plan; }
         }
 
-        public uPlanimetric NG_planimetric_unit
+        public uPlanimetric NG_BF_planimetric_unit
         {
             get { return uPlanimetric.Np; }
         }
 
-        public Multiplier NG_planimetric_multiplier
+        public Multiplier NG_BF_planimetric_multiplier
         {
             get { return Multiplier.No; }
         }
         #endregion
 
         #region pr_Flow
-        public double? NG_pr_flow
+        public double? NG_BF_pr_flow
         {
             get { return null; }
         }
 
-        public uFlow NG_pr_flow_unit
+        public uFlow NG_BF_pr_flow_unit
         {
-            get { return uFlow.m3_hour; }
+            get { return uFlow.mm3_sutki; }
         }
 
-        public Multiplier NG_pr_flow_multiplier
+        public Multiplier NG_BF_pr_flow_multiplier
         {
             get { return Multiplier.thousand; }
         }
         #endregion
 
         #region pr_Time_norm
-        public int? NG_time_norm
+        public int? NG_BF_time_norm
         {
             get { return (int)base.vr_pg_m; }
         }
 
-        public uTime NG_time_norm_unit
+        public uTime NG_BF_time_norm_unit
         {
             get { return uTime.min; }
         }
 
-        public Multiplier NG_time_norm_multiplier
+        public Multiplier NG_BF_time_norm_multiplier
         {
             get { return Multiplier.No; }
         }
         #endregion
 
         #region pr_Time_max
-        public int? NG_time_max
+        public int? NG_BF_time_max
         {
             get { return (int)base.vr_pg_m_98; }
         }
 
-        public uTime NG_time_max_unit
+        public uTime NG_BF_time_max_unit
         {
             get { return uTime.min; }
         }
 
-        public Multiplier NG_time_max_multiplier
+        public Multiplier NG_BF_time_max_multiplier
+        {
+            get { return Multiplier.No; }
+        }
+        #endregion
+
+        #endregion
+
+        #region INaturGas_TN
+        public double? NG_TN_flow
+        {
+            get { return this.Fnat_gas_teh; }
+        }
+
+        public uFlow NG_TN_flow_unit
+        {
+            get { return uFlow.mm3_sutki; }
+        }
+
+        public Multiplier NG_TN_flow_multiplier
+        {
+            get { return Multiplier.No; }
+        }
+
+        public double? NG_TN_temp
+        {
+            get { return null; }
+        }
+
+        public uTemp NG_TN_temp_unit
+        {
+            get { return uTemp.not; }
+        }
+
+        public Multiplier NG_TN_temp_multiplier
+        {
+            get { return Multiplier.No; }
+        }
+
+        public double? NG_TN_pressure
+        {
+            get { return null; }
+        }
+
+        public uPressure NG_TN_pressure_unit
+        {
+            get { return uPressure.not; }
+        }
+
+        public Multiplier NG_TN_pressure_multiplier
+        {
+            get { return Multiplier.No; }
+        }
+
+        public double? NG_TN_planimetric
+        {
+            get { return null; }
+        }
+
+        public uPlanimetric NG_TN_planimetric_unit
+        {
+            get { return uPlanimetric.not; }
+        }
+
+        public Multiplier NG_TN_planimetric_multiplier
+        {
+            get { return Multiplier.No; }
+        }
+
+        public double? NG_TN_pr_flow
+        {
+            get { return null; }
+        }
+
+        public uFlow NG_TN_pr_flow_unit
+        {
+            get { return uFlow.not; }
+        }
+
+        public Multiplier NG_TN_pr_flow_multiplier
+        {
+            get { return Multiplier.No; }
+        }
+
+        public int? NG_TN_time_norm
+        {
+            get { return null; }
+        }
+
+        public uTime NG_TN_time_norm_unit
+        {
+            get { return uTime.not; }
+        }
+
+        public Multiplier NG_TN_time_norm_multiplier
+        {
+            get { return Multiplier.No; }
+        }
+
+        public int? NG_TN_time_max
+        {
+            get { return null; }
+        }
+
+        public uTime NG_TN_time_max_unit
+        {
+            get { return uTime.not; }
+        }
+
+        public Multiplier NG_TN_time_max_multiplier
+        {
+            get { return Multiplier.No; }
+        }
+        #endregion
+
+        #region IBlastFurnaceGas_BVN
+
+        #region Flow
+        public double? BFG_BVN_flow
+        {
+            get { return base.Fdg_BVN; }
+        }
+
+        public uFlow BFG_BVN_flow_unit
+        {
+            get { return uFlow.mm3_sutki; }
+        }
+
+        public Multiplier BFG_BVN_flow_multiplier
+        {
+            get { return Multiplier.thousand; }
+        }
+        #endregion
+
+        #region Temp
+        public double? BFG_BVN_temp
+        {
+            get { return base.Tdg_BVN; }
+        }
+
+        public uTemp BFG_BVN_temp_unit
+        {
+            get { return uTemp.grad_C; }
+        }
+
+        public Multiplier BFG_BVN_temp_multiplier
+        {
+            get { return Multiplier.No; }
+        }
+        #endregion
+
+        #region Pressure
+        public double? BFG_BVN_pressure
+        {
+            get { return base.Pdg_BVN; }
+        }
+
+        public uPressure BFG_BVN_pressure_unit
+        {
+            get { return uPressure.kPa; }
+        }
+
+        public Multiplier BFG_BVN_pressure_multiplier
+        {
+            get { return Multiplier.No; }
+        }
+        #endregion
+
+        #region Planimetric
+        public double? BFG_BVN_planimetric
+        {
+            get { return base.Fdg_BVN_plan; }
+        }
+
+        public uPlanimetric BFG_BVN_planimetric_unit
+        {
+            get { return uPlanimetric.Np; }
+        }
+
+        public Multiplier BFG_BVN_planimetric_multiplier
+        {
+            get { return Multiplier.No; }
+        }
+        #endregion
+
+        #region pr_Flow
+        public double? BFG_BVN_pr_flow
+        {
+            get { return null; }
+        }
+
+        public uFlow BFG_BVN_pr_flow_unit
+        {
+            get { return uFlow.mm3_sutki; }
+        }
+
+        public Multiplier BFG_BVN_pr_flow_multiplier
+        {
+            get { return Multiplier.thousand; }
+        }
+        #endregion
+
+        #region pr_Time_norm
+        public int? BFG_BVN_time_norm
+        {
+            get { return (int?)base.vr_dg_BVN_m; }
+        }
+
+        public uTime BFG_BVN_time_norm_unit
+        {
+            get { return uTime.min; }
+        }
+
+        public Multiplier BFG_BVN_time_norm_multiplier
+        {
+            get { return Multiplier.No; }
+        }
+        #endregion
+
+        #region pr_Time_max
+        public int? BFG_BVN_time_max
+        {
+            get { return (int?)base.vr_dg_BVN_m_98; }
+        }
+
+        public uTime BFG_BVN_time_max_unit
+        {
+            get { return uTime.min; }
+        }
+
+        public Multiplier BFG_BVN_time_max_multiplier
         {
             get { return Multiplier.No; }
         }
@@ -279,8 +510,6 @@ namespace TReport.TData.DataSet
             base.FDG_na_svechu = es.FDG_na_svechu;
             base.D_BF_GAS_AVER = es.D_BF_GAS_AVER;
         }
-
-
 
     }
 }

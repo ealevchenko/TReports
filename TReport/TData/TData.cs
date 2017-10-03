@@ -33,12 +33,12 @@ namespace TReport.TData
                 EFBF9.Concrete.EFBF9 ef = new EFBF9.Concrete.EFBF9();
                 List<bf9_EnergySutki> list = null;
                 list = ef.GetBF9EnergySutki(date);
-                return (list != null && list.Count() > 0) ? new bf9_DataEnergySutki(list[0]) : null;
+                return (list != null && list.Count() > 0) ? new bf9_DataEnergySutki(list[0]) : new bf9_DataEnergySutki(new bf9_EnergySutki());
             }
             catch (Exception e)
             {
                 e.WriteErrorMethod(String.Format("GetBF9EnergySutki(date={0})", date), eventID);
-                return null;
+                return new bf9_DataEnergySutki(new bf9_EnergySutki());
             }
         }
         /// <summary>
@@ -53,12 +53,12 @@ namespace TReport.TData
                 EFBF8.Concrete.EFBF8 ef = new EFBF8.Concrete.EFBF8();
                 List<bf8_EnergySutki> list = null;
                 list = ef.GetBF8EnergySutki(date);
-                return (list != null && list.Count() > 0) ? new bf8_DataEnergySutki(list[0]) : null;
+                return (list != null && list.Count() > 0) ? new bf8_DataEnergySutki(list[0]) : new  bf8_DataEnergySutki(new bf8_EnergySutki()); 
             }
             catch (Exception e)
             {
                 e.WriteErrorMethod(String.Format("GetBF8EnergySutki(date={0})", date), eventID);
-                return null;
+                return new bf8_DataEnergySutki(new bf8_EnergySutki()); 
             }
         }
         /// <summary>
@@ -67,7 +67,7 @@ namespace TReport.TData
         /// <param name="date"></param>
         /// <param name="trobj"></param>
         /// <returns></returns>
-        public IEnergySutki GetEnergySutkiObject(DateTime date, trObj trobj)
+        public object GetEnergySutkiObject(DateTime date, trObj trobj)
         {
             try
             {
