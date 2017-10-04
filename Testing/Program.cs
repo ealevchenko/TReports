@@ -38,7 +38,7 @@ namespace Testing
         //        return new DM_BF9_UnloadBunker()
         //        {
         //            datetime = ((UnloadBunker)obj).Дата_и_время,
-        //            davl1 = new PressureValue((double)((UnloadBunker)obj).Точность_рассыпания, "Точность_рассыпания", uPressure.bar, Multiplier.No)
+        //            davl1 = new PressureValue((double)((UnloadBunker)obj).Точность_рассыпания, "Точность_рассыпания", uPressure.bar, Multiplier.not)
         //        };
         //    }
         //}
@@ -65,8 +65,8 @@ namespace Testing
             ttre.GetEnergySutkit(); // Получить энерго ресурсы за уазаную дату по всем печам
             #endregion  
 
-            //PressureUnit pu = new PressureUnit("Тест параметр давление", uPressure.kgs_m2, Multiplier.No);
-            //FlowUnit fu = new FlowUnit("Тест параметр расход", uFlow.kg_hour, Multiplier.No);
+            //PressureUnit pu = new PressureUnit("Тест параметр давление", uPressure.kgs_m2, Multiplier.nott);
+            //FlowUnit fu = new FlowUnit("Тест параметр расход", uFlow.kg_hour, Multiplier.not);
 
             //List<UnitMeasurement> list = new List<UnitMeasurement>();
             //list.Add(pu);
@@ -77,8 +77,8 @@ namespace Testing
             //    Console.WriteLine("Элемент {0}, класс {1}", um.Description, um.GetType());
             //}
 
-            //PressureValue pv = new PressureValue(4.5, "Тест параметр давление", uPressure.kgs_m2, Multiplier.No);
-            //FlowValue fv = new FlowValue(1.1, "Тест параметр расход", uFlow.g_hour, Multiplier.No);
+            //PressureValue pv = new PressureValue(4.5, "Тест параметр давление", uPressure.kgs_m2, Multiplier.not);
+            //FlowValue fv = new FlowValue(1.1, "Тест параметр расход", uFlow.g_hour, Multiplier.not);
 
             //List<ValueMeasurement> vlist = new List<ValueMeasurement>();
             //vlist.Add(pv);

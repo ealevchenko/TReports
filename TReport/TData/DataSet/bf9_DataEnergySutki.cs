@@ -44,7 +44,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier NG_BF_temp_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
         #endregion
 
@@ -61,7 +61,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier NG_BF_pressure_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
         #endregion
 
@@ -78,7 +78,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier NG_BF_planimetric_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
         #endregion
 
@@ -112,7 +112,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier NG_BF_time_norm_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
         #endregion
 
@@ -129,7 +129,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier NG_BF_time_max_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
         #endregion
 
@@ -164,7 +164,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier NG_HPP3_temp_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
 
         public double? NG_HPP3_pressure
@@ -179,7 +179,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier NG_HPP3_pressure_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
 
         public double? NG_HPP3_planimetric
@@ -194,7 +194,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier NG_HPP3_planimetric_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
 
         public double? NG_HPP3_pr_flow
@@ -209,7 +209,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier NG_HPP3_pr_flow_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
 
         public int? NG_HPP3_time_norm
@@ -224,7 +224,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier NG_HPP3_time_norm_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
 
         public int? NG_HPP3_time_max
@@ -239,7 +239,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier NG_HPP3_time_max_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
 
         #endregion
@@ -272,7 +272,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier NG_TN_temp_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
 
         public double? NG_TN_pressure
@@ -287,7 +287,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier NG_TN_pressure_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
 
         public double? NG_TN_planimetric
@@ -302,7 +302,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier NG_TN_planimetric_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
 
         public double? NG_TN_pr_flow
@@ -317,7 +317,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier NG_TN_pr_flow_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
 
         public int? NG_TN_time_norm
@@ -332,7 +332,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier NG_TN_time_norm_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
 
         public int? NG_TN_time_max
@@ -347,7 +347,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier NG_TN_time_max_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
         #endregion
 
@@ -383,7 +383,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier BFG_BVN_temp_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
         #endregion
 
@@ -400,7 +400,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier BFG_BVN_pressure_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
         #endregion
 
@@ -417,7 +417,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier BFG_BVN_planimetric_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
         #endregion
 
@@ -451,7 +451,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier BFG_BVN_time_norm_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
         #endregion
 
@@ -468,7 +468,7 @@ namespace TReport.TData.DataSet
 
         public Multiplier BFG_BVN_time_max_multiplier
         {
-            get { return Multiplier.No; }
+            get { return Multiplier.not; }
         }
         #endregion
 
