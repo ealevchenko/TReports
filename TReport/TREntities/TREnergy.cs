@@ -53,6 +53,14 @@ namespace TReport.TREntities
         public class EnergyValueObjEntity : EnergyValueEntity
         {
             public int obj { get; set; }
+            public string Object
+            {
+                get
+                {
+                    ResourceManager resourceManager = new ResourceManager(typeof(Resources));
+                    return resourceManager.GetString(((trObj)obj).ToString(), CultureInfo.CurrentCulture);
+                }
+            }
             public EnergyValueObjEntity()
                 : base()
             {
