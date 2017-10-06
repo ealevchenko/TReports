@@ -115,6 +115,15 @@ namespace TReport.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Холодное дутье.
+        /// </summary>
+        public static string cold_blast {
+            get {
+                return ResourceManager.GetString("cold_blast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Сжатый воздух.
         /// </summary>
         public static string compressed_air {
@@ -129,6 +138,15 @@ namespace TReport.App_LocalResources {
         public static string flow_sutky {
             get {
                 return ResourceManager.GetString("flow_sutky", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Горячее дутье.
+        /// </summary>
+        public static string hot_blast {
+            get {
+                return ResourceManager.GetString("hot_blast", resourceCulture);
             }
         }
         
@@ -219,6 +237,33 @@ namespace TReport.App_LocalResources {
         public static string steam {
             get {
                 return ResourceManager.GetString("steam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Пар на печь.
+        /// </summary>
+        public static string steam_bf {
+            get {
+                return ResourceManager.GetString("steam_bf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Пар на бойлеры.
+        /// </summary>
+        public static string steam_bl {
+            get {
+                return ResourceManager.GetString("steam_bl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Пар на БВН.
+        /// </summary>
+        public static string steam_bvn {
+            get {
+                return ResourceManager.GetString("steam_bvn", resourceCulture);
             }
         }
         

@@ -135,11 +135,17 @@
   <data name="blast_furnace_gas_gsu5" xml:space="preserve">
     <value>Выход доменного газа на ГСУ №5</value>
   </data>
+  <data name="cold_blast" xml:space="preserve">
+    <value>Холодное дутье</value>
+  </data>
   <data name="compressed_air" xml:space="preserve">
     <value>Сжатый воздух</value>
   </data>
   <data name="flow_sutky" xml:space="preserve">
     <value>Расход за сутки</value>
+  </data>
+  <data name="hot_blast" xml:space="preserve">
+    <value>Горячее дутье</value>
   </data>
   <data name="natur_gas" xml:space="preserve">
     <value>Природный газ</value>
@@ -170,6 +176,15 @@
   </data>
   <data name="steam" xml:space="preserve">
     <value>Пар</value>
+  </data>
+  <data name="steam_bf" xml:space="preserve">
+    <value>Пар на печь</value>
+  </data>
+  <data name="steam_bl" xml:space="preserve">
+    <value>Пар на бойлеры</value>
+  </data>
+  <data name="steam_bvn" xml:space="preserve">
+    <value>Пар на БВН</value>
   </data>
   <data name="time_max" xml:space="preserve">
     <value>Время подачи, макс</value>

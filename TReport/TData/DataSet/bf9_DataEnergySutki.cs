@@ -9,7 +9,7 @@ using TReport.TData.Interfaces;
 
 namespace TReport.TData.DataSet
 {
-    public class bf9_DataEnergySutki : bf9_EnergySutki, INaturGas_BF, INaturGas_HPP3, INaturGas_TN, IBlastFurnaceGas_BVN, ITopGas
+    public class bf9_DataEnergySutki : bf9_EnergySutki, INaturGas_BF, INaturGas_HPP3, INaturGas_TN, IBlastFurnaceGas_BVN, ITopGas, IColdBlast, IHotBlast
     {
 
         #region IESNaturGas
@@ -56,7 +56,7 @@ namespace TReport.TData.DataSet
 
         public uPressure NG_BF_pressure_unit
         {
-            get { return uPressure.kg_sm2; }
+            get { return uPressure.kgs_sm2; }
         }
 
         public Multiplier NG_BF_pressure_multiplier
@@ -73,7 +73,7 @@ namespace TReport.TData.DataSet
 
         public uPlanimetric NG_BF_planimetric_unit
         {
-            get { return uPlanimetric.Np; }
+            get { return uPlanimetric.Nk; }
         }
 
         public Multiplier NG_BF_planimetric_multiplier
@@ -189,7 +189,7 @@ namespace TReport.TData.DataSet
 
         public uPlanimetric NG_HPP3_planimetric_unit
         {
-            get { return uPlanimetric.Np; }
+            get { return uPlanimetric.Nk; }
         }
 
         public Multiplier NG_HPP3_planimetric_multiplier
@@ -412,7 +412,7 @@ namespace TReport.TData.DataSet
 
         public uPlanimetric BFG_BVN_planimetric_unit
         {
-            get { return uPlanimetric.Np; }
+            get { return uPlanimetric.Nk; }
         }
 
         public Multiplier BFG_BVN_planimetric_multiplier
@@ -590,6 +590,252 @@ namespace TReport.TData.DataSet
         }
 
         public Multiplier TopGas_time_max_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #endregion
+
+        #region IColdBlast
+
+        #region Flow
+        public double? ColdBlast_flow
+        {
+            get { return base.DP_FCB24; }
+        }
+
+        public uFlow ColdBlast_flow_unit
+        {
+            get { return uFlow.m3_sutki; }
+        }
+
+        public Multiplier ColdBlast_flow_multiplier
+        {
+            get { return Multiplier.thousand; }
+        }
+        #endregion
+
+        #region Temp
+        public double? ColdBlast_temp
+        {
+            get { return base.CoolFlow_T; }
+        }
+
+        public uTemp ColdBlast_temp_unit
+        {
+            get { return uTemp.grad_C; }
+        }
+
+        public Multiplier ColdBlast_temp_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region Pressure
+        public double? ColdBlast_pressure
+        {
+            get { return base.CoolFlow_P; }
+        }
+
+        public uPressure ColdBlast_pressure_unit
+        {
+            get { return uPressure.kgs_sm2; }
+        }
+
+        public Multiplier ColdBlast_pressure_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region Planimetric
+        public double? ColdBlast_planimetric
+        {
+            get { return base.CoolFlow_a; }
+        }
+
+        public uPlanimetric ColdBlast_planimetric_unit
+        {
+            get { return uPlanimetric.Nk; }
+        }
+
+        public Multiplier ColdBlast_planimetric_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region pr_Flow
+        public double? ColdBlast_pr_flow
+        {
+            get { return base.Blow_Cold_s; }
+        }
+
+        public uFlow ColdBlast_pr_flow_unit
+        {
+            get { return uFlow.m3_sutki; }
+        }
+
+        public Multiplier ColdBlast_pr_flow_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region pr_Time_norm
+        public int? ColdBlast_time_norm
+        {
+            get { return (int?)null; }
+        }
+
+        public uTime ColdBlast_time_norm_unit
+        {
+            get { return uTime.not; }
+        }
+
+        public Multiplier ColdBlast_time_norm_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region pr_Time_max
+        public int? ColdBlast_time_max
+        {
+            get { return (int?)null; }
+        }
+
+        public uTime ColdBlast_time_max_unit
+        {
+            get { return uTime.not; }
+        }
+
+        public Multiplier ColdBlast_time_max_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #endregion
+
+        #region IHotBlast
+
+        #region Flow
+        public double? HotBlast_flow
+        {
+            get { return null; }
+        }
+
+        public uFlow HotBlast_flow_unit
+        {
+            get { return uFlow.not; }
+        }
+
+        public Multiplier HotBlast_flow_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region Temp
+        public double? HotBlast_temp
+        {
+            get { return base.DP_TGD24; }
+        }
+
+        public uTemp HotBlast_temp_unit
+        {
+            get { return uTemp.grad_C; }
+        }
+
+        public Multiplier HotBlast_temp_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region Pressure
+        public double? HotBlast_pressure
+        {
+            get { return base.DP_PGD24; }
+        }
+
+        public uPressure HotBlast_pressure_unit
+        {
+            get { return uPressure.kgs_sm2; }
+        }
+
+        public Multiplier HotBlast_pressure_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region Planimetric
+        public double? HotBlast_planimetric
+        {
+            get { return null; }
+        }
+
+        public uPlanimetric HotBlast_planimetric_unit
+        {
+            get { return uPlanimetric.not; }
+        }
+
+        public Multiplier HotBlast_planimetric_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region pr_Flow
+        public double? HotBlast_pr_flow
+        {
+            get { return null; }
+        }
+
+        public uFlow HotBlast_pr_flow_unit
+        {
+            get { return uFlow.not; }
+        }
+
+        public Multiplier HotBlast_pr_flow_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region pr_Time_norm
+        public int? HotBlast_time_norm
+        {
+            get { return (int?)null; }
+        }
+
+        public uTime HotBlast_time_norm_unit
+        {
+            get { return uTime.not; }
+        }
+
+        public Multiplier HotBlast_time_norm_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region pr_Time_max
+        public int? HotBlast_time_max
+        {
+            get { return (int?)null; }
+        }
+
+        public uTime HotBlast_time_max_unit
+        {
+            get { return uTime.not; }
+        }
+
+        public Multiplier HotBlast_time_max_multiplier
         {
             get { return Multiplier.not; }
         }

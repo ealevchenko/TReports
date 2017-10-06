@@ -413,7 +413,11 @@ namespace TReport.TREntities
             return null;
         }
 
-
+        /// <summary>
+        /// Получить набор данных доменный газ
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public TypeEnergyValueObjEntity GetTypeBlastFurnaceGas(teBlastFurnaceGas type)
         {
             List<EnergyValueObjEntity> list = new List<EnergyValueObjEntity>();
@@ -438,13 +442,224 @@ namespace TReport.TREntities
                 list_energy = list,
             };
         }
-
+        /// <summary>
+        /// Получить список набора данных Доменный газ
+        /// </summary>
+        /// <returns></returns>
         public List<TypeEnergyValueObjEntity> GetBlastFurnaceGas()
         {
             List<TypeEnergyValueObjEntity> list = new List<TypeEnergyValueObjEntity>();
             foreach (teBlastFurnaceGas type in Enum.GetValues(typeof(teBlastFurnaceGas)))
             {
                 list.Add(GetTypeBlastFurnaceGas(type));
+            }
+            return list;
+        }
+        #endregion
+
+        #region Дутье
+        public enum teBlast : int
+        {
+            cold_blast = 1,
+            hot_blast
+        }
+        /// <summary>
+        /// Получить набор данных Холодное дутье
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public EnergyValueObjEntity GetColdBlast(trObj obj)
+        {
+            EnergySutkiObject eso = list_energy_sutki.Find(e => e.trobj == obj);
+            if (eso == null) return null;
+            if (eso.energy_sutki is IColdBlast)
+            {
+                EnergyValueObjEntity evoe = new EnergyValueObjEntity()
+                {
+                    obj = (int)obj,
+                    name = teBlast.cold_blast.ToString().GetREnergy() + " " + obj.ToString().GetResources(),
+                    flow = new FlowValue(((IColdBlast)eso.energy_sutki).ColdBlast_flow, ("flow_sutky").GetREnergy(), ((IColdBlast)eso.energy_sutki).ColdBlast_flow_unit, ((IColdBlast)eso.energy_sutki).ColdBlast_flow_multiplier),
+                    avg_temp = new TempValue(((IColdBlast)eso.energy_sutki).ColdBlast_temp, ("avg_temp").GetREnergy(), ((IColdBlast)eso.energy_sutki).ColdBlast_temp_unit, ((IColdBlast)eso.energy_sutki).ColdBlast_temp_multiplier),
+                    avg_pressure = new PressureValue(((IColdBlast)eso.energy_sutki).ColdBlast_pressure, ("avg_pressure").GetREnergy(), ((IColdBlast)eso.energy_sutki).ColdBlast_pressure_unit, ((IColdBlast)eso.energy_sutki).ColdBlast_pressure_multiplier),
+                    planimetric = new PlanimetricValue(((IColdBlast)eso.energy_sutki).ColdBlast_planimetric, ("planimetric_value").GetREnergy(), ((IColdBlast)eso.energy_sutki).ColdBlast_planimetric_unit, ((IColdBlast)eso.energy_sutki).ColdBlast_planimetric_multiplier),
+                    pr_flow = new FlowValue(((IColdBlast)eso.energy_sutki).ColdBlast_pr_flow, ("pr_flow_sutky").GetREnergy(), ((IColdBlast)eso.energy_sutki).ColdBlast_pr_flow_unit, ((IColdBlast)eso.energy_sutki).ColdBlast_pr_flow_multiplier),
+                    time_norm = new TimeValue(((IColdBlast)eso.energy_sutki).ColdBlast_time_norm, ("time_norm").GetREnergy(), ((IColdBlast)eso.energy_sutki).ColdBlast_time_norm_unit, ((IColdBlast)eso.energy_sutki).ColdBlast_time_norm_multiplier),
+                    time_max = new TimeValue(((IColdBlast)eso.energy_sutki).ColdBlast_time_max, ("time_max").GetREnergy(), ((IColdBlast)eso.energy_sutki).ColdBlast_time_max_unit, ((IColdBlast)eso.energy_sutki).ColdBlast_time_max_multiplier),
+                };
+                return evoe;
+            }
+            return null;
+        }
+        /// <summary>
+        /// Получить набор данных Горячее дутье
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public EnergyValueObjEntity GetHotBlast(trObj obj)
+        {
+            EnergySutkiObject eso = list_energy_sutki.Find(e => e.trobj == obj);
+            if (eso == null) return null;
+            if (eso.energy_sutki is IHotBlast)
+            {
+                EnergyValueObjEntity evoe = new EnergyValueObjEntity()
+                {
+                    obj = (int)obj,
+                    name = teBlast.hot_blast.ToString().GetREnergy() + " " + obj.ToString().GetResources(),
+                    flow = new FlowValue(((IHotBlast)eso.energy_sutki).HotBlast_flow, ("flow_sutky").GetREnergy(), ((IHotBlast)eso.energy_sutki).HotBlast_flow_unit, ((IHotBlast)eso.energy_sutki).HotBlast_flow_multiplier),
+                    avg_temp = new TempValue(((IHotBlast)eso.energy_sutki).HotBlast_temp, ("avg_temp").GetREnergy(), ((IHotBlast)eso.energy_sutki).HotBlast_temp_unit, ((IHotBlast)eso.energy_sutki).HotBlast_temp_multiplier),
+                    avg_pressure = new PressureValue(((IHotBlast)eso.energy_sutki).HotBlast_pressure, ("avg_pressure").GetREnergy(), ((IHotBlast)eso.energy_sutki).HotBlast_pressure_unit, ((IHotBlast)eso.energy_sutki).HotBlast_pressure_multiplier),
+                    planimetric = new PlanimetricValue(((IHotBlast)eso.energy_sutki).HotBlast_planimetric, ("planimetric_value").GetREnergy(), ((IHotBlast)eso.energy_sutki).HotBlast_planimetric_unit, ((IHotBlast)eso.energy_sutki).HotBlast_planimetric_multiplier),
+                    pr_flow = new FlowValue(((IHotBlast)eso.energy_sutki).HotBlast_pr_flow, ("pr_flow_sutky").GetREnergy(), ((IHotBlast)eso.energy_sutki).HotBlast_pr_flow_unit, ((IHotBlast)eso.energy_sutki).HotBlast_pr_flow_multiplier),
+                    time_norm = new TimeValue(((IHotBlast)eso.energy_sutki).HotBlast_time_norm, ("time_norm").GetREnergy(), ((IHotBlast)eso.energy_sutki).HotBlast_time_norm_unit, ((IHotBlast)eso.energy_sutki).HotBlast_time_norm_multiplier),
+                    time_max = new TimeValue(((IHotBlast)eso.energy_sutki).HotBlast_time_max, ("time_max").GetREnergy(), ((IHotBlast)eso.energy_sutki).HotBlast_time_max_unit, ((IHotBlast)eso.energy_sutki).HotBlast_time_max_multiplier),
+                };
+                return evoe;
+            }
+            return null;
+        }
+        /// <summary>
+        /// Получить набор данных дутье
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public TypeEnergyValueObjEntity GetTypeBlast(teBlast type)
+        {
+            List<EnergyValueObjEntity> list = new List<EnergyValueObjEntity>();
+            EnergyValueObjEntity evoe = null;
+            foreach (trObj obj in base.trObjs)
+            {
+                switch (type)
+                {
+                    case teBlast.cold_blast: evoe = GetColdBlast(obj); break;
+                    case teBlast.hot_blast: evoe = GetHotBlast(obj); break;
+                    default: evoe = null; break;
+                }
+                if (evoe != null)
+                {
+                    list.Add(evoe);
+                }
+            }
+            return new TypeEnergyValueObjEntity()
+            {
+                type = (int)type,
+                name = type.ToString().GetREnergy(),
+                list_energy = list,
+            };
+        }
+        /// <summary>
+        /// Получить список набора данных дутье
+        /// </summary>
+        /// <returns></returns>
+        public List<TypeEnergyValueObjEntity> GetBlast()
+        {
+            List<TypeEnergyValueObjEntity> list = new List<TypeEnergyValueObjEntity>();
+            foreach (teBlast type in Enum.GetValues(typeof(teBlast)))
+            {
+                list.Add(GetTypeBlast(type));
+            }
+            return list;
+        }
+        #endregion
+
+        #region ПАР
+        public enum teSteam : int
+        {
+            steam_bf = 1,
+            steam_bl,
+            steam_bvn,
+        }
+        ///// <summary>
+        ///// Получить набор данных Холодное дутье
+        ///// </summary>
+        ///// <param name="obj"></param>
+        ///// <returns></returns>
+        //public EnergyValueObjEntity GetColdBlast(trObj obj)
+        //{
+        //    EnergySutkiObject eso = list_energy_sutki.Find(e => e.trobj == obj);
+        //    if (eso == null) return null;
+        //    if (eso.energy_sutki is IColdBlast)
+        //    {
+        //        EnergyValueObjEntity evoe = new EnergyValueObjEntity()
+        //        {
+        //            obj = (int)obj,
+        //            name = teBlast.cold_blast.ToString().GetREnergy() + " " + obj.ToString().GetResources(),
+        //            flow = new FlowValue(((IColdBlast)eso.energy_sutki).ColdBlast_flow, ("flow_sutky").GetREnergy(), ((IColdBlast)eso.energy_sutki).ColdBlast_flow_unit, ((IColdBlast)eso.energy_sutki).ColdBlast_flow_multiplier),
+        //            avg_temp = new TempValue(((IColdBlast)eso.energy_sutki).ColdBlast_temp, ("avg_temp").GetREnergy(), ((IColdBlast)eso.energy_sutki).ColdBlast_temp_unit, ((IColdBlast)eso.energy_sutki).ColdBlast_temp_multiplier),
+        //            avg_pressure = new PressureValue(((IColdBlast)eso.energy_sutki).ColdBlast_pressure, ("avg_pressure").GetREnergy(), ((IColdBlast)eso.energy_sutki).ColdBlast_pressure_unit, ((IColdBlast)eso.energy_sutki).ColdBlast_pressure_multiplier),
+        //            planimetric = new PlanimetricValue(((IColdBlast)eso.energy_sutki).ColdBlast_planimetric, ("planimetric_value").GetREnergy(), ((IColdBlast)eso.energy_sutki).ColdBlast_planimetric_unit, ((IColdBlast)eso.energy_sutki).ColdBlast_planimetric_multiplier),
+        //            pr_flow = new FlowValue(((IColdBlast)eso.energy_sutki).ColdBlast_pr_flow, ("pr_flow_sutky").GetREnergy(), ((IColdBlast)eso.energy_sutki).ColdBlast_pr_flow_unit, ((IColdBlast)eso.energy_sutki).ColdBlast_pr_flow_multiplier),
+        //            time_norm = new TimeValue(((IColdBlast)eso.energy_sutki).ColdBlast_time_norm, ("time_norm").GetREnergy(), ((IColdBlast)eso.energy_sutki).ColdBlast_time_norm_unit, ((IColdBlast)eso.energy_sutki).ColdBlast_time_norm_multiplier),
+        //            time_max = new TimeValue(((IColdBlast)eso.energy_sutki).ColdBlast_time_max, ("time_max").GetREnergy(), ((IColdBlast)eso.energy_sutki).ColdBlast_time_max_unit, ((IColdBlast)eso.energy_sutki).ColdBlast_time_max_multiplier),
+        //        };
+        //        return evoe;
+        //    }
+        //    return null;
+        //}
+        /// <summary>
+        /// Получить набор данных Пар на печь
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        //public EnergyValueObjEntity GetSteamBF(trObj obj)
+        //{
+        //    EnergySutkiObject eso = list_energy_sutki.Find(e => e.trobj == obj);
+        //    if (eso == null) return null;
+        //    if (eso.energy_sutki is ISteamBF)
+        //    {
+        //        EnergyValueObjEntity evoe = new EnergyValueObjEntity()
+        //        {
+        //            obj = (int)obj,
+        //            name = teBlast.hot_blast.ToString().GetREnergy() + " " + obj.ToString().GetResources(),
+        //            flow = new FlowValue(((IHotBlast)eso.energy_sutki).HotBlast_flow, ("flow_sutky").GetREnergy(), ((IHotBlast)eso.energy_sutki).HotBlast_flow_unit, ((IHotBlast)eso.energy_sutki).HotBlast_flow_multiplier),
+        //            avg_temp = new TempValue(((IHotBlast)eso.energy_sutki).HotBlast_temp, ("avg_temp").GetREnergy(), ((IHotBlast)eso.energy_sutki).HotBlast_temp_unit, ((IHotBlast)eso.energy_sutki).HotBlast_temp_multiplier),
+        //            avg_pressure = new PressureValue(((IHotBlast)eso.energy_sutki).HotBlast_pressure, ("avg_pressure").GetREnergy(), ((IHotBlast)eso.energy_sutki).HotBlast_pressure_unit, ((IHotBlast)eso.energy_sutki).HotBlast_pressure_multiplier),
+        //            planimetric = new PlanimetricValue(((IHotBlast)eso.energy_sutki).HotBlast_planimetric, ("planimetric_value").GetREnergy(), ((IHotBlast)eso.energy_sutki).HotBlast_planimetric_unit, ((IHotBlast)eso.energy_sutki).HotBlast_planimetric_multiplier),
+        //            pr_flow = new FlowValue(((IHotBlast)eso.energy_sutki).HotBlast_pr_flow, ("pr_flow_sutky").GetREnergy(), ((IHotBlast)eso.energy_sutki).HotBlast_pr_flow_unit, ((IHotBlast)eso.energy_sutki).HotBlast_pr_flow_multiplier),
+        //            time_norm = new TimeValue(((IHotBlast)eso.energy_sutki).HotBlast_time_norm, ("time_norm").GetREnergy(), ((IHotBlast)eso.energy_sutki).HotBlast_time_norm_unit, ((IHotBlast)eso.energy_sutki).HotBlast_time_norm_multiplier),
+        //            time_max = new TimeValue(((IHotBlast)eso.energy_sutki).HotBlast_time_max, ("time_max").GetREnergy(), ((IHotBlast)eso.energy_sutki).HotBlast_time_max_unit, ((IHotBlast)eso.energy_sutki).HotBlast_time_max_multiplier),
+        //        };
+        //        return evoe;
+        //    }
+        //    return null;
+        //}
+        /// <summary>
+        /// Получить набор данных пар
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public TypeEnergyValueObjEntity GetTypeSteam(teSteam type)
+        {
+            List<EnergyValueObjEntity> list = new List<EnergyValueObjEntity>();
+            EnergyValueObjEntity evoe = null;
+            foreach (trObj obj in base.trObjs)
+            {
+                switch (type)
+                {
+                    //case teSteam.steam_bf: evoe = GetSteamBF(obj); break;
+                    default: evoe = null; break;
+                }
+                if (evoe != null)
+                {
+                    list.Add(evoe);
+                }
+            }
+            return new TypeEnergyValueObjEntity()
+            {
+                type = (int)type,
+                name = type.ToString().GetREnergy(),
+                list_energy = list,
+            };
+        }
+        /// <summary>
+        /// Получить список набора данных пар
+        /// </summary>
+        /// <returns></returns>
+        public List<TypeEnergyValueObjEntity> GetSteam()
+        {
+            List<TypeEnergyValueObjEntity> list = new List<TypeEnergyValueObjEntity>();
+            foreach (teSteam type in Enum.GetValues(typeof(teSteam)))
+            {
+                list.Add(GetTypeSteam(type));
             }
             return list;
         }
@@ -463,6 +678,8 @@ namespace TReport.TREntities
             {
                 case groupEnergy.natur_gas: list = GetNaturGas(); break;
                 case groupEnergy.blast_furnace_gas: list = GetBlastFurnaceGas(); break;
+                case groupEnergy.blast: list = GetBlast(); break;
+                case groupEnergy.steam: list = GetSteam(); break;
             }
             return new GroupEnergyValueObjEntity()
             {

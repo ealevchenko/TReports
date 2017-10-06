@@ -74,7 +74,7 @@ namespace TReport.TData.DataSet
 
         public uPlanimetric NG_BF_planimetric_unit
         {
-            get { return uPlanimetric.Np; }
+            get { return uPlanimetric.Nk; }
         }
 
         public Multiplier NG_BF_planimetric_multiplier
@@ -304,7 +304,7 @@ namespace TReport.TData.DataSet
 
         public uPlanimetric BFG_BVN_planimetric_unit
         {
-            get { return uPlanimetric.Np; }
+            get { return uPlanimetric.Nk; }
         }
 
         public Multiplier BFG_BVN_planimetric_multiplier
