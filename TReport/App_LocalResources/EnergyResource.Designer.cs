@@ -160,6 +160,15 @@ namespace TReport.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Природный газ на ПУТ.
+        /// </summary>
+        public static string natur_gas_psi {
+            get {
+                return ResourceManager.GetString("natur_gas_psi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Природный газ на технужды.
         /// </summary>
         public static string natur_gas_tn {

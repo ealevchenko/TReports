@@ -150,6 +150,9 @@
   <data name="natur_gas_hpp3" xml:space="preserve">
     <value>Природный газ на ТЭЦ-3</value>
   </data>
+  <data name="natur_gas_psi" xml:space="preserve">
+    <value>Природный газ на ПУТ</value>
+  </data>
   <data name="natur_gas_tn" xml:space="preserve">
     <value>Природный газ на технужды</value>
   </data>

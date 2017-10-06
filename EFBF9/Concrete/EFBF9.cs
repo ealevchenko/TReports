@@ -11,12 +11,13 @@ using System.Threading.Tasks;
 
 namespace EFBF9.Concrete
 {
-    public class EFBF9 : IBF9UnloadMaterial, IBF9UnloadBunker, IBF9EnergySutki
+    public class EFBF9 : IBF9UnloadMaterial, IBF9UnloadBunker, IBF9EnergySutki, IBF9EnergySutkiPSI
     {
         protected EFDbContext context = new EFDbContext();
         protected string sp_bf9_ums;
         protected string sp_bf9_ub;
         protected string sp_bf9_es;
+        protected string sp_bf9_espsi;
 
         private eventID eventID = eventID.EFBF9;
 
@@ -26,6 +27,7 @@ namespace EFBF9.Concrete
                 sp_bf9_ums = ConfigurationManager.AppSettings["sp_bf9_ums"].ToString();
                 sp_bf9_ub = ConfigurationManager.AppSettings["sp_bf9_ub"].ToString();
                 sp_bf9_es = ConfigurationManager.AppSettings["sp_bf9_es"].ToString();
+                sp_bf9_espsi = ConfigurationManager.AppSettings["sp_bf9_espsi"].ToString();
             }
             catch (Exception e)
             {
@@ -71,7 +73,7 @@ namespace EFBF9.Concrete
             }
         }
         /// <summary>
-        /// Получить энергоресурсяы за указанные сутки
+        /// Получить энергоресурсы за указанные сутки
         /// </summary>
         /// <param name="dt"></param>
         /// <returns></returns>
@@ -89,5 +91,23 @@ namespace EFBF9.Concrete
             }
         }
 
+        /// <summary>
+        /// Получить энергоресурсы ПУТ за указанные сутки
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public List<bf9_EnergySutkiPSI> GetBF9EnergySutkiPSI(DateTime dt)
+        {
+            try
+            {
+                SqlParameter dt_start = new SqlParameter("@DT", dt);
+                return context.Database.SqlQuery<bf9_EnergySutkiPSI>("EXEC " + this.sp_bf9_espsi + " @DT", dt_start).ToList();
+            }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("GetBF9EnergySutkiPSI(dt={0})", dt), eventID);
+                return null;
+            }
+        }
     }
 }

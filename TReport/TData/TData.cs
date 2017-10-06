@@ -42,6 +42,26 @@ namespace TReport.TData
             }
         }
         /// <summary>
+        /// Получить набор данных учет энергоресурсов за сутки по ПУТ ДП-9 за указанную дату
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public bf9_DataEnergySutkiPSI GetBF9EnergySutkiPSI(DateTime date)
+        {
+            try
+            {
+                EFBF9.Concrete.EFBF9 ef = new EFBF9.Concrete.EFBF9();
+                List<bf9_EnergySutkiPSI> list = null;
+                list = ef.GetBF9EnergySutkiPSI(date);
+                return (list != null && list.Count() > 0) ? new bf9_DataEnergySutkiPSI(list[0]) : new bf9_DataEnergySutkiPSI(new bf9_EnergySutkiPSI());
+            }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("GetBF9EnergySutkiPSI(date={0})", date), eventID);
+                return new bf9_DataEnergySutkiPSI(new bf9_EnergySutkiPSI());
+            }
+        }
+        /// <summary>
         /// Получить набор данных учет энергоресурсов за сутки по ДП-8 за указанную дату
         /// </summary>
         /// <param name="date"></param>
@@ -75,6 +95,8 @@ namespace TReport.TData
                 {
                     case trObj.dc2_dp9:
                         return GetBF9EnergySutki(date);
+                    case trObj.dc2_dp9_pci: 
+                        return GetBF9EnergySutkiPSI(date);
                     case trObj.dc1_dp8:
                         return GetBF8EnergySutki(date);
                     default: return null;

@@ -56,8 +56,11 @@
     </Compile>
     <Compile Include="App_LocalResources\SR.cs" />
     <Compile Include="TData\DataSet\bf8_DataEnergySutki.cs" />
+    <Compile Include="TData\DataSet\bf9_DataEnergySutkiPSI.cs" />
     <Compile Include="TData\DataSet\bf9_DataEnergySutki.cs" />
+    <Compile Include="TData\Interfaces\ITopGas.cs" />
     <Compile Include="TData\Interfaces\IBlastFurnaceGas_BVN.cs" />
+    <Compile Include="TData\Interfaces\INaturGas_PSI.cs" />
     <Compile Include="TData\Interfaces\INaturGas_TN.cs" />
     <Compile Include="TData\Interfaces\INaturGas_BF.cs" />
     <Compile Include="TData\Interfaces\INaturGas_HPP3.cs" />

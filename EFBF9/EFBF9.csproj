@@ -53,12 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IBF9EnergySutkiPSI.cs" />
     <Compile Include="Abstract\IBF9EnergySutki.cs" />
     <Compile Include="Abstract\IBF9UnloadMaterial.cs" />
     <Compile Include="Abstract\IBF9UnloadBunker.cs" />
     <Compile Include="Concrete\EFBF9.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="DataSet\EnergoSutki.cs" />
+    <Compile Include="DataSet\EnergySutkiPSI.cs" />
     <Compile Include="DataSet\UnloadBunker.cs" />
     <Compile Include="DataSet\UnloadMaterialSmena.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
