@@ -331,7 +331,11 @@ namespace TReport.TREntities
             top_gas,
             blast_furnace_gas_gsu5,
         }
-
+        /// <summary>
+        /// Получить набор данных Доменный газ на БВН
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public EnergyValueObjEntity GetBlastFurnaceGasBVN(trObj obj)
         {
             EnergySutkiObject eso = list_energy_sutki.Find(e => e.trobj == obj);
@@ -354,7 +358,11 @@ namespace TReport.TREntities
             }
             return null;
         }
-
+        /// <summary>
+        /// Получить набор данных  Колошниковый газ на выходе
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public EnergyValueObjEntity GetTopGas(trObj obj)
         {
             EnergySutkiObject eso = list_energy_sutki.Find(e => e.trobj == obj);
@@ -377,6 +385,33 @@ namespace TReport.TREntities
             }
             return null;
         }
+        /// <summary>
+        /// Получить набор данных Выход доменного газа на ГСУ5
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public EnergyValueObjEntity GetBlastFurnaceGasGSU5(trObj obj)
+        {
+            EnergySutkiObject eso = list_energy_sutki.Find(e => e.trobj == obj);
+            if (eso == null) return null;
+            if (eso.energy_sutki is IBlastFurnaceGas_GSU5)
+            {
+                EnergyValueObjEntity evoe = new EnergyValueObjEntity()
+                {
+                    obj = (int)obj,
+                    name = teBlastFurnaceGas.blast_furnace_gas_gsu5.ToString().GetREnergy() + " " + obj.ToString().GetResources(),
+                    flow = new FlowValue(((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_flow, ("flow_sutky").GetREnergy(), ((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_flow_unit, ((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_flow_multiplier),
+                    avg_temp = new TempValue(((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_temp, ("avg_temp").GetREnergy(), ((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_temp_unit, ((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_temp_multiplier),
+                    avg_pressure = new PressureValue(((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_pressure, ("avg_pressure").GetREnergy(), ((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_pressure_unit, ((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_pressure_multiplier),
+                    planimetric = new PlanimetricValue(((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_planimetric, ("planimetric_value").GetREnergy(), ((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_planimetric_unit, ((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_planimetric_multiplier),
+                    pr_flow = new FlowValue(((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_pr_flow, ("pr_flow_sutky").GetREnergy(), ((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_pr_flow_unit, ((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_pr_flow_multiplier),
+                    time_norm = new TimeValue(((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_time_norm, ("time_norm").GetREnergy(), ((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_time_norm_unit, ((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_time_norm_multiplier),
+                    time_max = new TimeValue(((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_time_max, ("time_max").GetREnergy(), ((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_time_max_unit, ((IBlastFurnaceGas_GSU5)eso.energy_sutki).BFG_GSU5_time_max_multiplier),
+                };
+                return evoe;
+            }
+            return null;
+        }
 
 
         public TypeEnergyValueObjEntity GetTypeBlastFurnaceGas(teBlastFurnaceGas type)
@@ -388,8 +423,8 @@ namespace TReport.TREntities
                 switch (type) {
                     case teBlastFurnaceGas.blast_furnace_gas_bvn: evoe = GetBlastFurnaceGasBVN(obj); break;
                     case teBlastFurnaceGas.top_gas: evoe = GetTopGas(obj); break;
-                    //case teBlastFurnaceGas.top_gas: evoe = GetNaturGasHPP3(obj); break;
-                    //case teBlastFurnaceGas.blast_furnace_gas_gsu5: evoe = GetNaturGasTN(obj); break;
+                    case teBlastFurnaceGas.blast_furnace_gas_gsu5: evoe = GetBlastFurnaceGasGSU5(obj); break;
+
                     default: evoe=null; break;
                 }
                 if (evoe != null) {

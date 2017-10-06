@@ -9,7 +9,7 @@ using TReport.TData.Interfaces;
 
 namespace TReport.TData.DataSet
 {
-    public class bf8_DataEnergySutki : bf8_EnergySutki, INaturGas_BF, INaturGas_TN, IBlastFurnaceGas_BVN
+    public class bf8_DataEnergySutki : bf8_EnergySutki, INaturGas_BF, INaturGas_TN, IBlastFurnaceGas_BVN, IBlastFurnaceGas_GSU5
     {
         public DateTime Date { get; set; }
 
@@ -359,6 +359,129 @@ namespace TReport.TData.DataSet
         }
 
         public Multiplier BFG_BVN_time_max_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #endregion
+
+        #region IBlastFurnaceGas_GSU5
+
+        #region Flow
+        public double? BFG_GSU5_flow
+        {
+            get { return base.FDG_na_svechu; }
+        }
+
+        public uFlow BFG_GSU5_flow_unit
+        {
+            get { return uFlow.m3_sutki; }
+        }
+
+        public Multiplier BFG_GSU5_flow_multiplier
+        {
+            get { return Multiplier.thousand; }
+        }
+        #endregion
+
+        #region Temp
+        public double? BFG_GSU5_temp
+        {
+            get { return null; }
+        }
+
+        public uTemp BFG_GSU5_temp_unit
+        {
+            get { return uTemp.not; }
+        }
+
+        public Multiplier BFG_GSU5_temp_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region Pressure
+        public double? BFG_GSU5_pressure
+        {
+            get { return null; }
+        }
+
+        public uPressure BFG_GSU5_pressure_unit
+        {
+            get { return uPressure.not; }
+        }
+
+        public Multiplier BFG_GSU5_pressure_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region Planimetric
+        public double? BFG_GSU5_planimetric
+        {
+            get { return null; }
+        }
+
+        public uPlanimetric BFG_GSU5_planimetric_unit
+        {
+            get { return uPlanimetric.not; }
+        }
+
+        public Multiplier BFG_GSU5_planimetric_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region pr_Flow
+        public double? BFG_GSU5_pr_flow
+        {
+            get { return null; }
+        }
+
+        public uFlow BFG_GSU5_pr_flow_unit
+        {
+            get { return uFlow.not; }
+        }
+
+        public Multiplier BFG_GSU5_pr_flow_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region pr_Time_norm
+        public int? BFG_GSU5_time_norm
+        {
+            get { return (int?)null; }
+        }
+
+        public uTime BFG_GSU5_time_norm_unit
+        {
+            get { return uTime.not; }
+        }
+
+        public Multiplier BFG_GSU5_time_norm_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region pr_Time_max
+        public int? BFG_GSU5_time_max
+        {
+            get { return (int?)null; }
+        }
+
+        public uTime BFG_GSU5_time_max_unit
+        {
+            get { return uTime.not; }
+        }
+
+        public Multiplier BFG_GSU5_time_max_multiplier
         {
             get { return Multiplier.not; }
         }
