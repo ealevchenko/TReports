@@ -9,7 +9,7 @@ using TReport.TData.Interfaces;
 
 namespace TReport.TData.DataSet
 {
-    public class bf9_DataEnergySutki : bf9_EnergySutki, INaturGas_BF, INaturGas_HPP3, INaturGas_TN, IBlastFurnaceGas_BVN
+    public class bf9_DataEnergySutki : bf9_EnergySutki, INaturGas_BF, INaturGas_HPP3, INaturGas_TN, IBlastFurnaceGas_BVN, ITopGas
     {
 
         #region IESNaturGas
@@ -22,7 +22,7 @@ namespace TReport.TData.DataSet
 
         public uFlow NG_BF_flow_unit
         {
-            get { return uFlow.mm3_sutki; }
+            get { return uFlow.m3_sutki; }
         }
 
         public Multiplier NG_BF_flow_multiplier
@@ -90,7 +90,7 @@ namespace TReport.TData.DataSet
 
         public uFlow NG_BF_pr_flow_unit
         {
-            get { return uFlow.mm3_sutki; }
+            get { return uFlow.m3_sutki; }
         }
 
         public Multiplier NG_BF_pr_flow_multiplier
@@ -252,7 +252,7 @@ namespace TReport.TData.DataSet
 
         public uFlow NG_TN_flow_unit
         {
-            get { return uFlow.mm3_sutki; }
+            get { return uFlow.m3_sutki; }
         }
 
         public Multiplier NG_TN_flow_multiplier
@@ -361,7 +361,7 @@ namespace TReport.TData.DataSet
 
         public uFlow BFG_BVN_flow_unit
         {
-            get { return uFlow.mm3_sutki; }
+            get { return uFlow.m3_sutki; }
         }
 
         public Multiplier BFG_BVN_flow_multiplier
@@ -429,7 +429,7 @@ namespace TReport.TData.DataSet
 
         public uFlow BFG_BVN_pr_flow_unit
         {
-            get { return uFlow.mm3_sutki; }
+            get { return uFlow.m3_sutki; }
         }
 
         public Multiplier BFG_BVN_pr_flow_multiplier
@@ -467,6 +467,129 @@ namespace TReport.TData.DataSet
         }
 
         public Multiplier BFG_BVN_time_max_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #endregion
+
+        #region ITopGas
+
+        #region Flow
+        public double? TopGas_flow
+        {
+            get { return base.FDG_CLR_24; }
+        }
+
+        public uFlow TopGas_flow_unit
+        {
+            get { return uFlow.m3_sutki; }
+        }
+
+        public Multiplier TopGas_flow_multiplier
+        {
+            get { return Multiplier.thousand; }
+        }
+        #endregion
+
+        #region Temp
+        public double? TopGas_temp
+        {
+            get { return base.PrGazPech_T; }
+        }
+
+        public uTemp TopGas_temp_unit
+        {
+            get { return uTemp.grad_C; }
+        }
+
+        public Multiplier TopGas_temp_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region Pressure
+        public double? TopGas_pressure
+        {
+            get { return base.CLRdomgas_P; }
+        }
+
+        public uPressure TopGas_pressure_unit
+        {
+            get { return uPressure.kgs_sm2; }
+        }
+
+        public Multiplier TopGas_pressure_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region Planimetric
+        public double? TopGas_planimetric
+        {
+            get { return base.CLRdomgas_a; }
+        }
+
+        public uPlanimetric TopGas_planimetric_unit
+        {
+            get { return uPlanimetric.Nk; }
+        }
+
+        public Multiplier TopGas_planimetric_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region pr_Flow
+        public double? TopGas_pr_flow
+        {
+            get { return base.Vixod_poluchistogo; }
+        }
+
+        public uFlow TopGas_pr_flow_unit
+        {
+            get { return uFlow.m3_sutki; }
+        }
+
+        public Multiplier TopGas_pr_flow_multiplier
+        {
+            get { return Multiplier.thousand; }
+        }
+        #endregion
+
+        #region pr_Time_norm
+        public int? TopGas_time_norm
+        {
+            get { return (int?)base.VKG_TimeN; }
+        }
+
+        public uTime TopGas_time_norm_unit
+        {
+            get { return uTime.min; }
+        }
+
+        public Multiplier TopGas_time_norm_multiplier
+        {
+            get { return Multiplier.not; }
+        }
+        #endregion
+
+        #region pr_Time_max
+        public int? TopGas_time_max
+        {
+            get { return (int?)base.VKG_TimeM; }
+        }
+
+        public uTime TopGas_time_max_unit
+        {
+            get { return uTime.min; }
+        }
+
+        public Multiplier TopGas_time_max_multiplier
         {
             get { return Multiplier.not; }
         }
@@ -609,10 +732,6 @@ namespace TReport.TData.DataSet
             base.DP_O2CD124 = es.DP_O2CD124;
             base.WL_domgaz = es.WL_domgaz;
         }
-
-
-
-
 
     }
 }

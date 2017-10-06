@@ -23,7 +23,7 @@ namespace TReport.TData.DataSet
 
         public uFlow NG_BF_flow_unit
         {
-            get { return uFlow.mm3_sutki; }
+            get { return uFlow.m3_sutki; }
         }
 
         public Multiplier NG_BF_flow_multiplier
@@ -91,7 +91,7 @@ namespace TReport.TData.DataSet
 
         public uFlow NG_BF_pr_flow_unit
         {
-            get { return uFlow.mm3_sutki; }
+            get { return uFlow.m3_sutki; }
         }
 
         public Multiplier NG_BF_pr_flow_multiplier
@@ -144,7 +144,7 @@ namespace TReport.TData.DataSet
 
         public uFlow NG_TN_flow_unit
         {
-            get { return uFlow.mm3_sutki; }
+            get { return uFlow.m3_sutki; }
         }
 
         public Multiplier NG_TN_flow_multiplier
@@ -253,7 +253,7 @@ namespace TReport.TData.DataSet
 
         public uFlow BFG_BVN_flow_unit
         {
-            get { return uFlow.mm3_sutki; }
+            get { return uFlow.m3_sutki; }
         }
 
         public Multiplier BFG_BVN_flow_multiplier
@@ -321,7 +321,7 @@ namespace TReport.TData.DataSet
 
         public uFlow BFG_BVN_pr_flow_unit
         {
-            get { return uFlow.mm3_sutki; }
+            get { return uFlow.m3_sutki; }
         }
 
         public Multiplier BFG_BVN_pr_flow_multiplier

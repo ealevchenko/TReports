@@ -113,16 +113,16 @@ namespace TReport.TREntities
 
         public TREnergy(List<trObj> trObjs) : base(trObjs) { }
 
-        /// <summary>
-        /// Получить строку с учетом культуры
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public string GetEnergyResource(string key)
-        {
-            ResourceManager resourceManager = new ResourceManager(typeof(EnergyResource));
-            return resourceManager.GetString(key, CultureInfo.CurrentCulture);
-        }
+        ///// <summary>
+        ///// Получить строку с учетом культуры
+        ///// </summary>
+        ///// <param name="key"></param>
+        ///// <returns></returns>
+        //public string GetEnergyResource(string key)
+        //{
+        //    ResourceManager resourceManager = new ResourceManager(typeof(EnergyResource));
+        //    return resourceManager.GetString(key, CultureInfo.CurrentCulture);
+        //}
 
         #region методы для работы с исходными данными EnergoSutki & EnergoSutkiObject
         /// <summary>
@@ -164,6 +164,7 @@ namespace TReport.TREntities
             natur_gas_bf = 1,
             natur_gas_hpp3,
             natur_gas_tn,
+            natur_gas_psi,
         }
         /// <summary>
         /// Получить набор данных природный газ на печь
@@ -179,14 +180,14 @@ namespace TReport.TREntities
                 EnergyValueObjEntity evoe = new EnergyValueObjEntity()
                 {
                     obj = (int)obj,
-                    name = GetEnergyResource(teNaturGas.natur_gas_bf.ToString()) + " " + base.GetResource(obj.ToString()),
-                    flow = new FlowValue(((INaturGas_BF)eso.energy_sutki).NG_BF_flow, GetEnergyResource("flow_sutky"), ((INaturGas_BF)eso.energy_sutki).NG_BF_flow_unit, ((INaturGas_BF)eso.energy_sutki).NG_BF_flow_multiplier),
-                    avg_temp = new TempValue(((INaturGas_BF)eso.energy_sutki).NG_BF_temp, GetEnergyResource("avg_temp"), ((INaturGas_BF)eso.energy_sutki).NG_BF_temp_unit, ((INaturGas_BF)eso.energy_sutki).NG_BF_temp_multiplier),
-                    avg_pressure = new PressureValue(((INaturGas_BF)eso.energy_sutki).NG_BF_pressure, GetEnergyResource("avg_pressure"), ((INaturGas_BF)eso.energy_sutki).NG_BF_pressure_unit, ((INaturGas_BF)eso.energy_sutki).NG_BF_pressure_multiplier),
-                    planimetric = new PlanimetricValue(((INaturGas_BF)eso.energy_sutki).NG_BF_planimetric, GetEnergyResource("planimetric_value"), ((INaturGas_BF)eso.energy_sutki).NG_BF_planimetric_unit, ((INaturGas_BF)eso.energy_sutki).NG_BF_planimetric_multiplier),
-                    pr_flow = new FlowValue(((INaturGas_BF)eso.energy_sutki).NG_BF_pr_flow, GetEnergyResource("pr_flow_sutky"), ((INaturGas_BF)eso.energy_sutki).NG_BF_pr_flow_unit, ((INaturGas_BF)eso.energy_sutki).NG_BF_pr_flow_multiplier),
-                    time_norm = new TimeValue(((INaturGas_BF)eso.energy_sutki).NG_BF_time_norm, GetEnergyResource("time_norm"), ((INaturGas_BF)eso.energy_sutki).NG_BF_time_norm_unit, ((INaturGas_BF)eso.energy_sutki).NG_BF_time_norm_multiplier),
-                    time_max = new TimeValue(((INaturGas_BF)eso.energy_sutki).NG_BF_time_max, GetEnergyResource("time_max"), ((INaturGas_BF)eso.energy_sutki).NG_BF_time_max_unit, ((INaturGas_BF)eso.energy_sutki).NG_BF_time_max_multiplier),
+                    name = teNaturGas.natur_gas_bf.ToString().GetREnergy() + " " + obj.ToString().GetResources(),
+                    flow = new FlowValue(((INaturGas_BF)eso.energy_sutki).NG_BF_flow, ("flow_sutky").GetREnergy(), ((INaturGas_BF)eso.energy_sutki).NG_BF_flow_unit, ((INaturGas_BF)eso.energy_sutki).NG_BF_flow_multiplier),
+                    avg_temp = new TempValue(((INaturGas_BF)eso.energy_sutki).NG_BF_temp, ("avg_temp").GetREnergy(), ((INaturGas_BF)eso.energy_sutki).NG_BF_temp_unit, ((INaturGas_BF)eso.energy_sutki).NG_BF_temp_multiplier),
+                    avg_pressure = new PressureValue(((INaturGas_BF)eso.energy_sutki).NG_BF_pressure, ("avg_pressure").GetREnergy(), ((INaturGas_BF)eso.energy_sutki).NG_BF_pressure_unit, ((INaturGas_BF)eso.energy_sutki).NG_BF_pressure_multiplier),
+                    planimetric = new PlanimetricValue(((INaturGas_BF)eso.energy_sutki).NG_BF_planimetric, ("planimetric_value").GetREnergy(), ((INaturGas_BF)eso.energy_sutki).NG_BF_planimetric_unit, ((INaturGas_BF)eso.energy_sutki).NG_BF_planimetric_multiplier),
+                    pr_flow = new FlowValue(((INaturGas_BF)eso.energy_sutki).NG_BF_pr_flow, ("pr_flow_sutky").GetREnergy(), ((INaturGas_BF)eso.energy_sutki).NG_BF_pr_flow_unit, ((INaturGas_BF)eso.energy_sutki).NG_BF_pr_flow_multiplier),
+                    time_norm = new TimeValue(((INaturGas_BF)eso.energy_sutki).NG_BF_time_norm, ("time_norm").GetREnergy(), ((INaturGas_BF)eso.energy_sutki).NG_BF_time_norm_unit, ((INaturGas_BF)eso.energy_sutki).NG_BF_time_norm_multiplier),
+                    time_max = new TimeValue(((INaturGas_BF)eso.energy_sutki).NG_BF_time_max, ("time_max").GetREnergy(), ((INaturGas_BF)eso.energy_sutki).NG_BF_time_max_unit, ((INaturGas_BF)eso.energy_sutki).NG_BF_time_max_multiplier),
                 };
                 return evoe;
             }
@@ -208,14 +209,14 @@ namespace TReport.TREntities
                 EnergyValueObjEntity evoe = new EnergyValueObjEntity()
                 {
                     obj = (int)obj,
-                    name = GetEnergyResource(teNaturGas.natur_gas_hpp3.ToString()),
-                    flow = new FlowValue(((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_flow, GetEnergyResource("flow_sutky"), ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_flow_unit, ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_flow_multiplier),
-                    avg_temp = new TempValue(((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_temp, GetEnergyResource("avg_temp"), ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_temp_unit, ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_temp_multiplier),
-                    avg_pressure = new PressureValue(((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_pressure, GetEnergyResource("avg_pressure"), ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_pressure_unit, ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_pressure_multiplier),
-                    planimetric = new PlanimetricValue(((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_planimetric, GetEnergyResource("planimetric_value"), ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_planimetric_unit, ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_planimetric_multiplier),
-                    pr_flow = new FlowValue(((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_pr_flow, GetEnergyResource("pr_flow_sutky"), ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_pr_flow_unit, ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_pr_flow_multiplier),
-                    time_norm = new TimeValue(((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_time_norm, GetEnergyResource("time_norm"), ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_time_norm_unit, ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_time_norm_multiplier),
-                    time_max = new TimeValue(((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_time_max, GetEnergyResource("time_max"), ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_time_max_unit, ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_time_max_multiplier),
+                    name = teNaturGas.natur_gas_hpp3.ToString().GetREnergy(),
+                    flow = new FlowValue(((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_flow, ("flow_sutky").GetREnergy(), ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_flow_unit, ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_flow_multiplier),
+                    avg_temp = new TempValue(((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_temp, ("avg_temp").GetREnergy(), ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_temp_unit, ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_temp_multiplier),
+                    avg_pressure = new PressureValue(((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_pressure, ("avg_pressure").GetREnergy(), ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_pressure_unit, ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_pressure_multiplier),
+                    planimetric = new PlanimetricValue(((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_planimetric, ("planimetric_value").GetREnergy(), ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_planimetric_unit, ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_planimetric_multiplier),
+                    pr_flow = new FlowValue(((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_pr_flow, ("pr_flow_sutky").GetREnergy(), ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_pr_flow_unit, ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_pr_flow_multiplier),
+                    time_norm = new TimeValue(((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_time_norm, ("time_norm").GetREnergy(), ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_time_norm_unit, ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_time_norm_multiplier),
+                    time_max = new TimeValue(((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_time_max, ("time_max").GetREnergy(), ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_time_max_unit, ((INaturGas_HPP3)eso.energy_sutki).NG_HPP3_time_max_multiplier),
                 };
                 return evoe;
             }
@@ -236,19 +237,48 @@ namespace TReport.TREntities
                 EnergyValueObjEntity evoe = new EnergyValueObjEntity()
                 {
                     obj = (int)obj,
-                    name = GetEnergyResource(teNaturGas.natur_gas_tn.ToString()) + " " + base.GetResource(obj.ToString()),
-                    flow = new FlowValue(((INaturGas_TN)eso.energy_sutki).NG_TN_flow, GetEnergyResource("flow_sutky"), ((INaturGas_TN)eso.energy_sutki).NG_TN_flow_unit, ((INaturGas_TN)eso.energy_sutki).NG_TN_flow_multiplier),
-                    avg_temp = new TempValue(((INaturGas_TN)eso.energy_sutki).NG_TN_temp, GetEnergyResource("avg_temp"), ((INaturGas_TN)eso.energy_sutki).NG_TN_temp_unit, ((INaturGas_TN)eso.energy_sutki).NG_TN_temp_multiplier),
-                    avg_pressure = new PressureValue(((INaturGas_TN)eso.energy_sutki).NG_TN_pressure, GetEnergyResource("avg_pressure"), ((INaturGas_TN)eso.energy_sutki).NG_TN_pressure_unit, ((INaturGas_TN)eso.energy_sutki).NG_TN_pressure_multiplier),
-                    planimetric = new PlanimetricValue(((INaturGas_TN)eso.energy_sutki).NG_TN_planimetric, GetEnergyResource("planimetric_value"), ((INaturGas_TN)eso.energy_sutki).NG_TN_planimetric_unit, ((INaturGas_TN)eso.energy_sutki).NG_TN_planimetric_multiplier),
-                    pr_flow = new FlowValue(((INaturGas_TN)eso.energy_sutki).NG_TN_pr_flow, GetEnergyResource("pr_flow_sutky"), ((INaturGas_TN)eso.energy_sutki).NG_TN_pr_flow_unit, ((INaturGas_TN)eso.energy_sutki).NG_TN_pr_flow_multiplier),
-                    time_norm = new TimeValue(((INaturGas_TN)eso.energy_sutki).NG_TN_time_norm, GetEnergyResource("time_norm"), ((INaturGas_TN)eso.energy_sutki).NG_TN_time_norm_unit, ((INaturGas_TN)eso.energy_sutki).NG_TN_time_norm_multiplier),
-                    time_max = new TimeValue(((INaturGas_TN)eso.energy_sutki).NG_TN_time_max, GetEnergyResource("time_max"), ((INaturGas_TN)eso.energy_sutki).NG_TN_time_max_unit, ((INaturGas_TN)eso.energy_sutki).NG_TN_time_max_multiplier),
+                    name = teNaturGas.natur_gas_tn.ToString().GetREnergy() + " " + obj.ToString().GetResources(),
+                    flow = new FlowValue(((INaturGas_TN)eso.energy_sutki).NG_TN_flow, ("flow_sutky").GetREnergy(), ((INaturGas_TN)eso.energy_sutki).NG_TN_flow_unit, ((INaturGas_TN)eso.energy_sutki).NG_TN_flow_multiplier),
+                    avg_temp = new TempValue(((INaturGas_TN)eso.energy_sutki).NG_TN_temp, ("avg_temp").GetREnergy(), ((INaturGas_TN)eso.energy_sutki).NG_TN_temp_unit, ((INaturGas_TN)eso.energy_sutki).NG_TN_temp_multiplier),
+                    avg_pressure = new PressureValue(((INaturGas_TN)eso.energy_sutki).NG_TN_pressure, ("avg_pressure").GetREnergy(), ((INaturGas_TN)eso.energy_sutki).NG_TN_pressure_unit, ((INaturGas_TN)eso.energy_sutki).NG_TN_pressure_multiplier),
+                    planimetric = new PlanimetricValue(((INaturGas_TN)eso.energy_sutki).NG_TN_planimetric, ("planimetric_value").GetREnergy(), ((INaturGas_TN)eso.energy_sutki).NG_TN_planimetric_unit, ((INaturGas_TN)eso.energy_sutki).NG_TN_planimetric_multiplier),
+                    pr_flow = new FlowValue(((INaturGas_TN)eso.energy_sutki).NG_TN_pr_flow, ("pr_flow_sutky").GetREnergy(), ((INaturGas_TN)eso.energy_sutki).NG_TN_pr_flow_unit, ((INaturGas_TN)eso.energy_sutki).NG_TN_pr_flow_multiplier),
+                    time_norm = new TimeValue(((INaturGas_TN)eso.energy_sutki).NG_TN_time_norm, ("time_norm").GetREnergy(), ((INaturGas_TN)eso.energy_sutki).NG_TN_time_norm_unit, ((INaturGas_TN)eso.energy_sutki).NG_TN_time_norm_multiplier),
+                    time_max = new TimeValue(((INaturGas_TN)eso.energy_sutki).NG_TN_time_max, ("time_max").GetREnergy(), ((INaturGas_TN)eso.energy_sutki).NG_TN_time_max_unit, ((INaturGas_TN)eso.energy_sutki).NG_TN_time_max_multiplier),
                 };
                 return evoe;
             }
             return null;
         }
+        /// <summary>
+        /// Получить набор данных природный газ на ПУТ
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public EnergyValueObjEntity GetNaturGasPSI(trObj obj)
+        {
+            EnergySutkiObject eso = list_energy_sutki.Find(e => e.trobj == obj);
+            if (eso == null) return null;
+            if (eso.energy_sutki is INaturGas_PSI)
+            {
+
+                EnergyValueObjEntity evoe = new EnergyValueObjEntity()
+                {
+                    obj = (int)obj,
+                    name = teNaturGas.natur_gas_psi.ToString().GetREnergy()  + " " + obj.ToString().GetResources(),
+                    flow = new FlowValue(((INaturGas_PSI)eso.energy_sutki).NG_PSI_flow, ("flow_sutky").GetREnergy(), ((INaturGas_PSI)eso.energy_sutki).NG_PSI_flow_unit, ((INaturGas_PSI)eso.energy_sutki).NG_PSI_flow_multiplier),
+                    avg_temp = new TempValue(((INaturGas_PSI)eso.energy_sutki).NG_PSI_temp, ("avg_temp").GetREnergy(), ((INaturGas_PSI)eso.energy_sutki).NG_PSI_temp_unit, ((INaturGas_PSI)eso.energy_sutki).NG_PSI_temp_multiplier),
+                    avg_pressure = new PressureValue(((INaturGas_PSI)eso.energy_sutki).NG_PSI_pressure, ("avg_pressure").GetREnergy(), ((INaturGas_PSI)eso.energy_sutki).NG_PSI_pressure_unit, ((INaturGas_PSI)eso.energy_sutki).NG_PSI_pressure_multiplier),
+                    planimetric = new PlanimetricValue(((INaturGas_PSI)eso.energy_sutki).NG_PSI_planimetric, ("planimetric_value").GetREnergy(), ((INaturGas_PSI)eso.energy_sutki).NG_PSI_planimetric_unit, ((INaturGas_PSI)eso.energy_sutki).NG_PSI_planimetric_multiplier),
+                    pr_flow = new FlowValue(((INaturGas_PSI)eso.energy_sutki).NG_PSI_pr_flow, ("pr_flow_sutky").GetREnergy(), ((INaturGas_PSI)eso.energy_sutki).NG_PSI_pr_flow_unit, ((INaturGas_PSI)eso.energy_sutki).NG_PSI_pr_flow_multiplier),
+                    time_norm = new TimeValue(((INaturGas_PSI)eso.energy_sutki).NG_PSI_time_norm, ("time_norm").GetREnergy(), ((INaturGas_PSI)eso.energy_sutki).NG_PSI_time_norm_unit, ((INaturGas_PSI)eso.energy_sutki).NG_PSI_time_norm_multiplier),
+                    time_max = new TimeValue(((INaturGas_PSI)eso.energy_sutki).NG_PSI_time_max, ("time_max").GetREnergy(), ((INaturGas_PSI)eso.energy_sutki).NG_PSI_time_max_unit, ((INaturGas_PSI)eso.energy_sutki).NG_PSI_time_max_multiplier),
+                };
+                return evoe;
+            }
+            return null;
+        }
+
         /// <summary>
         /// Получить набор данных природный газ
         /// </summary>
@@ -264,6 +294,8 @@ namespace TReport.TREntities
                     case teNaturGas.natur_gas_bf: evoe = GetNaturGasBF(obj); break;
                     case teNaturGas.natur_gas_hpp3: evoe = GetNaturGasHPP3(obj); break;
                     case teNaturGas.natur_gas_tn: evoe = GetNaturGasTN(obj); break;
+                    case teNaturGas.natur_gas_psi: evoe = GetNaturGasPSI(obj); break;
+
                     default: evoe=null; break;
                 }
                 if (evoe != null) {
@@ -273,7 +305,7 @@ namespace TReport.TREntities
             return new TypeEnergyValueObjEntity()
             {
                 type = (int)type,
-                name = GetEnergyResource(type.ToString()),
+                name = type.ToString().GetREnergy(),
                 list_energy = list,
             };
         }
@@ -309,19 +341,43 @@ namespace TReport.TREntities
                 EnergyValueObjEntity evoe = new EnergyValueObjEntity()
                 {
                     obj = (int)obj,
-                    name = GetEnergyResource(teBlastFurnaceGas.blast_furnace_gas_bvn.ToString()) + " " + base.GetResource(obj.ToString()),
-                    flow = new FlowValue(((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_flow, GetEnergyResource("flow_sutky"), ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_flow_unit, ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_flow_multiplier),
-                    avg_temp = new TempValue(((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_temp, GetEnergyResource("avg_temp"), ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_temp_unit, ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_temp_multiplier),
-                    avg_pressure = new PressureValue(((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_pressure, GetEnergyResource("avg_pressure"), ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_pressure_unit, ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_pressure_multiplier),
-                    planimetric = new PlanimetricValue(((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_planimetric, GetEnergyResource("planimetric_value"), ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_planimetric_unit, ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_planimetric_multiplier),
-                    pr_flow = new FlowValue(((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_pr_flow, GetEnergyResource("pr_flow_sutky"), ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_pr_flow_unit, ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_pr_flow_multiplier),
-                    time_norm = new TimeValue(((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_time_norm, GetEnergyResource("time_norm"), ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_time_norm_unit, ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_time_norm_multiplier),
-                    time_max = new TimeValue(((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_time_max, GetEnergyResource("time_max"), ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_time_max_unit, ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_time_max_multiplier),
+                    name = teBlastFurnaceGas.blast_furnace_gas_bvn.ToString().GetREnergy() + " " + obj.ToString().GetResources(),
+                    flow = new FlowValue(((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_flow, ("flow_sutky").GetREnergy(), ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_flow_unit, ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_flow_multiplier),
+                    avg_temp = new TempValue(((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_temp, ("avg_temp").GetREnergy(), ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_temp_unit, ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_temp_multiplier),
+                    avg_pressure = new PressureValue(((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_pressure, ("avg_pressure").GetREnergy(), ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_pressure_unit, ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_pressure_multiplier),
+                    planimetric = new PlanimetricValue(((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_planimetric, ("planimetric_value").GetREnergy(), ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_planimetric_unit, ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_planimetric_multiplier),
+                    pr_flow = new FlowValue(((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_pr_flow, ("pr_flow_sutky").GetREnergy(), ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_pr_flow_unit, ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_pr_flow_multiplier),
+                    time_norm = new TimeValue(((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_time_norm, ("time_norm").GetREnergy(), ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_time_norm_unit, ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_time_norm_multiplier),
+                    time_max = new TimeValue(((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_time_max, ("time_max").GetREnergy(), ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_time_max_unit, ((IBlastFurnaceGas_BVN)eso.energy_sutki).BFG_BVN_time_max_multiplier),
                 };
                 return evoe;
             }
             return null;
         }
+
+        public EnergyValueObjEntity GetTopGas(trObj obj)
+        {
+            EnergySutkiObject eso = list_energy_sutki.Find(e => e.trobj == obj);
+            if (eso == null) return null;
+            if (eso.energy_sutki is ITopGas)
+            {
+                EnergyValueObjEntity evoe = new EnergyValueObjEntity()
+                {
+                    obj = (int)obj,
+                    name = teBlastFurnaceGas.top_gas.ToString().GetREnergy() + " " + obj.ToString().GetResources(),
+                    flow = new FlowValue(((ITopGas)eso.energy_sutki).TopGas_flow, ("flow_sutky").GetREnergy(), ((ITopGas)eso.energy_sutki).TopGas_flow_unit, ((ITopGas)eso.energy_sutki).TopGas_flow_multiplier),
+                    avg_temp = new TempValue(((ITopGas)eso.energy_sutki).TopGas_temp, ("avg_temp").GetREnergy(), ((ITopGas)eso.energy_sutki).TopGas_temp_unit, ((ITopGas)eso.energy_sutki).TopGas_temp_multiplier),
+                    avg_pressure = new PressureValue(((ITopGas)eso.energy_sutki).TopGas_pressure, ("avg_pressure").GetREnergy(), ((ITopGas)eso.energy_sutki).TopGas_pressure_unit, ((ITopGas)eso.energy_sutki).TopGas_pressure_multiplier),
+                    planimetric = new PlanimetricValue(((ITopGas)eso.energy_sutki).TopGas_planimetric, ("planimetric_value").GetREnergy(), ((ITopGas)eso.energy_sutki).TopGas_planimetric_unit, ((ITopGas)eso.energy_sutki).TopGas_planimetric_multiplier),
+                    pr_flow = new FlowValue(((ITopGas)eso.energy_sutki).TopGas_pr_flow, ("pr_flow_sutky").GetREnergy(), ((ITopGas)eso.energy_sutki).TopGas_pr_flow_unit, ((ITopGas)eso.energy_sutki).TopGas_pr_flow_multiplier),
+                    time_norm = new TimeValue(((ITopGas)eso.energy_sutki).TopGas_time_norm, ("time_norm").GetREnergy(), ((ITopGas)eso.energy_sutki).TopGas_time_norm_unit, ((ITopGas)eso.energy_sutki).TopGas_time_norm_multiplier),
+                    time_max = new TimeValue(((ITopGas)eso.energy_sutki).TopGas_time_max, ("time_max").GetREnergy(), ((ITopGas)eso.energy_sutki).TopGas_time_max_unit, ((ITopGas)eso.energy_sutki).TopGas_time_max_multiplier),
+                };
+                return evoe;
+            }
+            return null;
+        }
+
 
         public TypeEnergyValueObjEntity GetTypeBlastFurnaceGas(teBlastFurnaceGas type)
         {
@@ -331,6 +387,7 @@ namespace TReport.TREntities
             {
                 switch (type) {
                     case teBlastFurnaceGas.blast_furnace_gas_bvn: evoe = GetBlastFurnaceGasBVN(obj); break;
+                    case teBlastFurnaceGas.top_gas: evoe = GetTopGas(obj); break;
                     //case teBlastFurnaceGas.top_gas: evoe = GetNaturGasHPP3(obj); break;
                     //case teBlastFurnaceGas.blast_furnace_gas_gsu5: evoe = GetNaturGasTN(obj); break;
                     default: evoe=null; break;
@@ -342,7 +399,7 @@ namespace TReport.TREntities
             return new TypeEnergyValueObjEntity()
             {
                 type = (int)type,
-                name = GetEnergyResource(type.ToString()),
+                name = type.ToString().GetREnergy(),
                 list_energy = list,
             };
         }
@@ -375,7 +432,7 @@ namespace TReport.TREntities
             return new GroupEnergyValueObjEntity()
             {
                 group = group,
-                name = GetEnergyResource(group.ToString()),
+                name = group.ToString().GetResources(),
                 list_type_energy = list
             };
         }
