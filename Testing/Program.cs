@@ -62,8 +62,14 @@ namespace Testing
         
             #region Test_TREnergy
             Test_TREnergy ttre = new Test_TREnergy();
-            ttre.GetEnergySutkit(); // Получить энерго ресурсы за уазаную дату по всем печам
+            //ttre.GetEnergySutkit(); // Получить энерго ресурсы за уазаную дату по всем печам
             //ttre.GetResources(); // тест ресурсов
+            #endregion  
+
+            #region Test_EFDataSet
+            Test_EFDataSet tds = new Test_EFDataSet();
+            //tds.EFDataSet_TRDataSet(); //Проверка работы dataset
+            //tds.EFDataSet_TRTags(); //Проверка работы tags
             #endregion  
 
             //PressureUnit pu = new PressureUnit("Тест параметр давление", uPressure.kgs_m2, Multiplier.nott);

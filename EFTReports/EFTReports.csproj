@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DD22DE55-D847-4A70-A849-A7AD318A675D}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{9ED5CA1B-4F40-4BFB-A21D-59CD3FE388B4}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Testing</RootNamespace>
-    <AssemblyName>Testing</AssemblyName>
+    <RootNamespace>EFTReports</RootNamespace>
+    <AssemblyName>EFTReports</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,6 +41,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,48 +50,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Abstract\IEnergyReports.cs" />
+    <Compile Include="Abstract\ITags.cs" />
+    <Compile Include="Abstract\IDataSet.cs" />
+    <Compile Include="Concrete\EFDataSet.cs" />
+    <Compile Include="Concrete\EFEnergyReports.cs" />
+    <Compile Include="Entities\TRDataSet.cs" />
+    <Compile Include="Concrete\EFDbContext.cs" />
+    <Compile Include="Entities\TRTags.cs" />
+    <Compile Include="Entities\GroupEnergy.cs" />
+    <Compile Include="Entities\REnergyDay.cs" />
+    <Compile Include="Entities\TypeEnergy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test_EFBF9.cs" />
-    <Compile Include="Test_EFBF8.cs" />
-    <Compile Include="Test_EFBF7.cs" />
-    <Compile Include="Test_EFDataSet.cs" />
-    <Compile Include="Test_TREnergy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EFBF7\EFBF7.csproj">
-      <Project>{f03f33e8-a200-422c-97c1-9798d68a9bf9}</Project>
-      <Name>EFBF7</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EFBF8\EFBF8.csproj">
-      <Project>{b795339d-8870-49e6-bd42-060066a795d5}</Project>
-      <Name>EFBF8</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EFBF9\EFBF9.csproj">
-      <Project>{f3d4028c-6faa-4744-92f2-0ffa41f53de2}</Project>
-      <Name>EFBF9</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EFTReports\EFTReports.csproj">
-      <Project>{9ed5ca1b-4f40-4bfb-a21d-59cd3fe388b4}</Project>
-      <Name>EFTReports</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Measurement\Measurement\Measurement.csproj">
-      <Project>{f785389e-1c3f-4c79-8e6e-b34e75f953ea}</Project>
-      <Name>Measurement</Name>
+    <Folder Include="Model\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Helpers\libClass\libClass.csproj">
+      <Project>{38a8fe37-55f2-4357-a59d-d8c8a8755aa5}</Project>
+      <Name>libClass</Name>
     </ProjectReference>
     <ProjectReference Include="..\MLogs\MLogs.csproj">
       <Project>{8f256cd8-5a1c-466d-9874-639ec4fadb0f}</Project>
       <Name>MLogs</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TReport\TReport.csproj">
-      <Project>{d0f02229-8ed5-42ea-8378-23ac9402d60c}</Project>
-      <Name>TReport</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
