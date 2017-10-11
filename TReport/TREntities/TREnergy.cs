@@ -12,6 +12,9 @@ namespace TReport.TREntities
 {
     public class TREnergy:TR
     {
+        
+        
+        
         public class EnergyFlowValueEntity
         {
             public trObj trObj { get; set; }
@@ -63,16 +66,16 @@ namespace TReport.TREntities
         private List<int> GetIDTagsEnergyDay() {
             List<int> list = new List<int>();
             EFEnergyReports efer = new EFEnergyReports();
-            foreach (REnergyDay ed in efer.GetTREnergyDay())
-            { 
-                if (ed.flow!=null) list.Add((int)ed.flow);
-                if (ed.avg_temp != null) list.Add((int)ed.avg_temp);
-                if (ed.avg_pressure != null) list.Add((int)ed.avg_pressure);
-                if (ed.planimetric != null) list.Add((int)ed.planimetric);
-                if (ed.pr_flow != null) list.Add((int)ed.pr_flow);
-                if (ed.time_norm != null) list.Add((int)ed.time_norm);
-                if (ed.time_max != null) list.Add((int)ed.time_max);
-            }
+            //foreach (REnergyDay ed in efer.GetTREnergyDay())
+            //{ 
+            //    if (ed.flow!=null) list.Add((int)ed.flow);
+            //    if (ed.avg_temp != null) list.Add((int)ed.avg_temp);
+            //    if (ed.avg_pressure != null) list.Add((int)ed.avg_pressure);
+            //    if (ed.planimetric != null) list.Add((int)ed.planimetric);
+            //    if (ed.pr_flow != null) list.Add((int)ed.pr_flow);
+            //    if (ed.time_norm != null) list.Add((int)ed.time_norm);
+            //    if (ed.time_max != null) list.Add((int)ed.time_max);
+            //}
             return list;
         }
 
@@ -99,23 +102,23 @@ namespace TReport.TREntities
                         position = 0
                     };
 
-                    foreach (REnergyDay ed in efer.GetREnergyDayOfType(type.id))
-                    {
-                        EnergyFlowValueEntity ef = new EnergyFlowValueEntity()
-                         {
-                             name = ed.name_energy_ru,
-                             trObj = (trObj)ed.trobj,
-                             position = ed.position,
-                             flow = (DBFlowValue)list_data_measurement.Find(m => m.id == ed.flow).value_measurement,
-                             avg_temp = ed.avg_temp !=null ?(DBTempValue)list_data_measurement.Find(m => m.id == ed.avg_temp).value_measurement : null,
-                             avg_pressure = ed.avg_pressure !=null ?(DBPressureValue)list_data_measurement.Find(m => m.id == ed.avg_pressure).value_measurement : null,
-                             planimetric = ed.planimetric !=null ?(DBPlanimetricValue)list_data_measurement.Find(m => m.id == ed.planimetric).value_measurement : null,
-                             pr_flow = ed.pr_flow !=null ?(DBFlowValue)list_data_measurement.Find(m => m.id == ed.pr_flow).value_measurement : null,
-                             time_norm = ed.time_norm !=null ?(DBTimeValue)list_data_measurement.Find(m => m.id == ed.time_norm).value_measurement : null,
-                             time_max = ed.time_max !=null ? (DBTimeValue)list_data_measurement.Find(m => m.id == ed.time_max).value_measurement : null,
-                         };
-                        te.list_type_flow.Add(ef);
-                    }
+                    //foreach (REnergyDay ed in efer.GetREnergyDayOfType(type.id))
+                    //{
+                    //    EnergyFlowValueEntity ef = new EnergyFlowValueEntity()
+                    //     {
+                    //         name = ed.name_energy_ru,
+                    //         trObj = (trObj)ed.trobj,
+                    //         position = ed.position,
+                    //         flow = (DBFlowValue)list_data_measurement.Find(m => m.id == ed.flow).value_measurement,
+                    //         avg_temp = ed.avg_temp !=null ?(DBTempValue)list_data_measurement.Find(m => m.id == ed.avg_temp).value_measurement : null,
+                    //         avg_pressure = ed.avg_pressure !=null ?(DBPressureValue)list_data_measurement.Find(m => m.id == ed.avg_pressure).value_measurement : null,
+                    //         planimetric = ed.planimetric !=null ?(DBPlanimetricValue)list_data_measurement.Find(m => m.id == ed.planimetric).value_measurement : null,
+                    //         pr_flow = ed.pr_flow !=null ?(DBFlowValue)list_data_measurement.Find(m => m.id == ed.pr_flow).value_measurement : null,
+                    //         time_norm = ed.time_norm !=null ?(DBTimeValue)list_data_measurement.Find(m => m.id == ed.time_norm).value_measurement : null,
+                    //         time_max = ed.time_max !=null ? (DBTimeValue)list_data_measurement.Find(m => m.id == ed.time_max).value_measurement : null,
+                    //     };
+                    //    te.list_type_flow.Add(ef);
+                    //}
                     ge.list_type.Add(te);
                 }
                 this.list_energy_flow_day.Add(ge);
