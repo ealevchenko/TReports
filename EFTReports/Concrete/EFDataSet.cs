@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TReport;
 
 namespace EFTReports.Concrete
 {
@@ -156,7 +157,7 @@ namespace EFTReports.Concrete
                         tag = TRTags.tag,
                         description = TRTags.description,
                         type_measurement = TRTags.type_measurement,
-                        union = TRTags.union,
+                        unit = TRTags.unit,
                         multiplier = TRTags.multiplier,
 
                     };
@@ -172,7 +173,7 @@ namespace EFTReports.Concrete
                         dbEntry.tag = TRTags.tag;
                         dbEntry.description = TRTags.description;
                         dbEntry.type_measurement = TRTags.type_measurement;
-                        dbEntry.union = TRTags.union;
+                        dbEntry.unit = TRTags.unit;
                         dbEntry.multiplier = TRTags.multiplier;
                     }
                 }
@@ -204,6 +205,27 @@ namespace EFTReports.Concrete
                 }
             }
             return dbEntry;
+        }
+        /// <summary>
+        /// Получить список TRTags по указоному списку id
+        /// </summary>
+        /// <param name="list_id"></param>
+        /// <returns></returns>
+        public IQueryable<TRTags> GetTRTags(int[] list_id)
+        {
+            string lists_id = null;
+            try
+            {
+                lists_id = list_id.Count() > 0 ? list_id.IntsToString(',') : "0";
+                string sql = "SELECT * FROM [treports].[Tags] where [id] in(" + lists_id + ") ";
+                return context.Database.SqlQuery<TRTags>(sql).AsQueryable();
+            }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("GetTRTags(list_id={0})", lists_id), eventID);
+                return null;
+            }
+
         }
         #endregion
     }

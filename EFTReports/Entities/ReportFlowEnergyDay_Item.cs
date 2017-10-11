@@ -5,13 +5,13 @@ namespace EFTReports.Entities
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    //TODO: Убрать REnergyDay
-    [Table("treports.REnergyDay")]
-    public partial class REnergyDay
+
+    [Table("treports.ReportFlowEnergyDay_Item")]
+    public partial class ReportFlowEnergyDay_Item
     {
         public int id { get; set; }
 
-        public int id_type { get; set; }
+        public int id_report_type { get; set; }
 
         public int trobj { get; set; }
 
@@ -39,6 +39,6 @@ namespace EFTReports.Entities
 
         public int? time_max { get; set; }
 
-        //public virtual TypeEnergy TypeEnergy { get; set; }
+        public virtual ReportFlowEnergyDay_Type ReportFlowEnergyDay_Type { get; set; }
     }
 }

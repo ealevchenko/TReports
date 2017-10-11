@@ -91,6 +91,20 @@ namespace EFBF9.Concrete
             }
         }
 
+        public List<bf9_EnergySutki> GetBF9EnergySutki(DateTime dt, string sp)
+        {
+            try
+            {
+                SqlParameter dt_start = new SqlParameter("@DT", dt);
+                return context.Database.SqlQuery<bf9_EnergySutki>("EXEC " + sp + " @DT", dt_start).ToList();
+            }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("GetBF9EnergoSutki(dt={0})", dt), eventID);
+                return null;
+            }
+        }
+
         /// <summary>
         /// Получить энергоресурсы ПУТ за указанные сутки
         /// </summary>

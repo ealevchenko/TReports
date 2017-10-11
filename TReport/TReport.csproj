@@ -55,23 +55,12 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="App_LocalResources\SR.cs" />
-    <Compile Include="TData\DataSet\bf8_DataEnergySutki.cs" />
-    <Compile Include="TData\DataSet\bf9_DataEnergySutkiPSI.cs" />
-    <Compile Include="TData\DataSet\bf9_DataEnergySutki.cs" />
-    <Compile Include="TData\Interfaces\BlastFurnaceGas\IBlastFurnaceGas_GSU5.cs" />
-    <Compile Include="TData\Interfaces\BlastFurnaceGas\ITopGas.cs" />
-    <Compile Include="TData\Interfaces\BlastFurnaceGas\IBlastFurnaceGas_BVN.cs" />
-    <Compile Include="TData\Interfaces\Blast\IHotBlast.cs" />
-    <Compile Include="TData\Interfaces\Blast\IColdBlast.cs" />
-    <Compile Include="TData\Interfaces\NaturGas\INaturGas_PSI.cs" />
-    <Compile Include="TData\Interfaces\NaturGas\INaturGas_TN.cs" />
-    <Compile Include="TData\Interfaces\NaturGas\INaturGas_BF.cs" />
-    <Compile Include="TData\Interfaces\NaturGas\INaturGas_HPP3.cs" />
     <Compile Include="TData\TData.cs" />
     <Compile Include="TData\TRObjects.cs" />
     <Compile Include="TREntities\TR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TREntities\TREnergy.cs" />
+    <Compile Include="TREntities\TREnergy1.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EFBF7\EFBF7.csproj">
@@ -85,6 +74,10 @@
     <ProjectReference Include="..\EFBF9\EFBF9.csproj">
       <Project>{f3d4028c-6faa-4744-92f2-0ffa41f53de2}</Project>
       <Name>EFBF9</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EFTReports\EFTReports.csproj">
+      <Project>{9ed5ca1b-4f40-4bfb-a21d-59cd3fe388b4}</Project>
+      <Name>EFTReports</Name>
     </ProjectReference>
     <ProjectReference Include="..\Measurement\Measurement\Measurement.csproj">
       <Project>{f785389e-1c3f-4c79-8e6e-b34e75f953ea}</Project>

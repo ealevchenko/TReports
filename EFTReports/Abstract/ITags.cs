@@ -14,5 +14,7 @@ namespace EFTReports.Abstract
         TRTags GetTRTags(int id);
         int SaveTRTags(TRTags Tags);
         TRTags DeleteTRTags(int id);
+
+        IQueryable<TRTags> GetTRTags(int[] list_id);
     }
 }

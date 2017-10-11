@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EFTReports.Abstract
 {
-    public interface IEnergyReports
+    public interface IEnergyReports : IReportFlowEnergyDay
     {
         IQueryable<GroupEnergy> GroupEnergy { get; }
         IQueryable<GroupEnergy> GetGroupEnergy();
@@ -21,11 +21,16 @@ namespace EFTReports.Abstract
         int SaveTypeEnergy(TypeEnergy TypeEnergy);
         TypeEnergy DeleteTypeEnergy(int id);
 
+        IQueryable<TypeEnergy> GetTypeEnergyOfGroup(int group);
+        
+        //TODO: Убрать REnergyDay
         IQueryable<REnergyDay> REnergyDay { get; }
         IQueryable<REnergyDay> GetTREnergyDay();
         REnergyDay GetREnergyDay(int id);
         int SaveREnergyDay(REnergyDay REnergyDay);
         REnergyDay DeleteREnergyDay(int id);
+
+        IQueryable<REnergyDay> GetREnergyDayOfType(int type);
 
     }
 }

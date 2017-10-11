@@ -11,7 +11,7 @@ namespace EFTReports.Entities
     {
         public int id { get; set; }
 
-        public int? id_dataset { get; set; }
+        public int id_dataset { get; set; }
 
         public int trobj { get; set; }
 
@@ -24,10 +24,11 @@ namespace EFTReports.Entities
 
         public int type_measurement { get; set; }
 
-        public int union { get; set; }
+        public int unit { get; set; }
 
         public int multiplier { get; set; }
 
         public virtual TRDataSet TRDataSet { get; set; }
+
     }
 }

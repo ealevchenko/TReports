@@ -8,43 +8,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TReport;
+using libClass;
 
 namespace Testing
 {
     class Program
     {
-        //public class DM_BF9_UnloadBunker
-        //{
-        //    public DateTime datetime { get; set; }
-        //    public PressureValue davl1 { get; set; }
-        //}
 
-        //public class BF9_UnloadBunkerDataMeasurement : DataMeasurement<DM_BF9_UnloadBunker>
-        //{
-        //    public BF9_UnloadBunkerDataMeasurement(UnloadBunker obj)
-        //        : base(obj)
-        //    {
 
-        //    }
 
-        //    public BF9_UnloadBunkerDataMeasurement(List<UnloadBunker> list_obj)
-        //        : base(list_obj)
-        //    {
 
-        //    }
 
-        //    public override DM_BF9_UnloadBunker Convert(object obj)
-        //    {
-        //        return new DM_BF9_UnloadBunker()
-        //        {
-        //            datetime = ((UnloadBunker)obj).Дата_и_время,
-        //            davl1 = new PressureValue((double)((UnloadBunker)obj).Точность_рассыпания, "Точность_рассыпания", uPressure.bar, Multiplier.not)
-        //        };
-        //    }
-        //}
-        
-        static void Main(string[] args)
+
+        public static void Main(string[] args)
         {
+
             #region Test_EFBF7
             Test_EFBF7 tefbf7 = new Test_EFBF7();
             //tefbf7.GetBF7EnergySutkit(); // Получить энерго ресурсы за уазаную дату
@@ -53,25 +31,35 @@ namespace Testing
             #region Test_EFBF8
             Test_EFBF8 tefbf8 = new Test_EFBF8();
             //tefbf8.GetBF8EnergySutkit(); // Получить энерго ресурсы за уазаную дату
-            #endregion     
+            #endregion
 
             #region Test_EFBF9
             Test_EFBF9 tefbf9 = new Test_EFBF9();
             //tefbf9.GetBF9EnergySutkit(); // Получить энерго ресурсы за уазаную дату
-            #endregion  
-        
+            #endregion
+
             #region Test_TREnergy
             Test_TREnergy ttre = new Test_TREnergy();
             //ttre.GetEnergySutkit(); // Получить энерго ресурсы за уазаную дату по всем печам
             //ttre.GetResources(); // тест ресурсов
-            #endregion  
+            //ttre.GetEnergyFlowDay(); // тест ресурсов за сутки
+            #endregion
 
             #region Test_EFDataSet
             Test_EFDataSet tds = new Test_EFDataSet();
             //tds.EFDataSet_TRDataSet(); //Проверка работы dataset
             //tds.EFDataSet_TRTags(); //Проверка работы tags
-            #endregion  
+            #endregion
 
+            #region Test_TData
+            Test_TData ttd = new Test_TData();
+            //ttd.GetDataMeasurement(); // Проверка получения данных по id
+            #endregion
+
+            #region TestXML
+            TestXML xml = new TestXML();
+            xml.getXML();
+            #endregion
             //PressureUnit pu = new PressureUnit("Тест параметр давление", uPressure.kgs_m2, Multiplier.nott);
             //FlowUnit fu = new FlowUnit("Тест параметр расход", uFlow.kg_hour, Multiplier.not);
 
@@ -101,6 +89,8 @@ namespace Testing
             //list = efdp9.GetBF9UnloadBunker(DateTime.Now.AddHours(-5), DateTime.Now);
             //BF9_UnloadBunkerDataMeasurement ubdm = new BF9_UnloadBunkerDataMeasurement(list);
             //BF9_UnloadBunkerDataMeasurement ubdm1 = new BF9_UnloadBunkerDataMeasurement(list[1]);
+
+
 
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();

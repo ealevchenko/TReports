@@ -6,11 +6,11 @@ namespace EFTReports.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("treports.TypeEnergy")]
-    public partial class TypeEnergy
+    [Table("treports.ReportFlowEnergyDay_Group")]
+    public partial class ReportFlowEnergyDay_Group
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TypeEnergy()
+        public ReportFlowEnergyDay_Group()
         {
             ReportFlowEnergyDay_Type = new HashSet<ReportFlowEnergyDay_Type>();
         }
@@ -19,13 +19,7 @@ namespace EFTReports.Entities
 
         public int id_group { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string type_energy_ru { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        public string type_energy_en { get; set; }
+        public int position { get; set; }
 
         public virtual GroupEnergy GroupEnergy { get; set; }
 
