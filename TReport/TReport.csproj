@@ -60,7 +60,7 @@
     <Compile Include="TREntities\TR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TREntities\TREnergy.cs" />
-    <Compile Include="TREntities\TREnergy1.cs" />
+    <Compile Include="TREntities\TRForms.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EFBF7\EFBF7.csproj">
@@ -102,7 +102,11 @@
       <LastGenOutput>Resources.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="XMLForms\FlowEnergyDay.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

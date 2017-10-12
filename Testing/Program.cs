@@ -42,7 +42,7 @@ namespace Testing
             Test_TREnergy ttre = new Test_TREnergy();
             //ttre.GetEnergySutkit(); // Получить энерго ресурсы за уазаную дату по всем печам
             //ttre.GetResources(); // тест ресурсов
-            //ttre.GetEnergyFlowDay(); // тест ресурсов за сутки
+            ttre.GetEnergyFlowDay(); // тест ресурсов за сутки
             #endregion
 
             #region Test_EFDataSet
@@ -58,7 +58,7 @@ namespace Testing
 
             #region TestXML
             TestXML xml = new TestXML();
-            xml.getXML();
+            //xml.getXML();
             #endregion
             //PressureUnit pu = new PressureUnit("Тест параметр давление", uPressure.kgs_m2, Multiplier.nott);
             //FlowUnit fu = new FlowUnit("Тест параметр расход", uFlow.kg_hour, Multiplier.not);

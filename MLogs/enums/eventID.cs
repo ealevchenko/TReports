@@ -25,9 +25,10 @@ namespace MessageLog
 
         EFTReports = 10000,
         EFTReports_EFDataSet = 10100,
-        EFTReports_EFEnergyReports = 10200
+        EFTReports_EFEnergyReports = 10200,
+        EFTReports_EFReportForms = 10300,
 
-
-
+        TR = 11000,
+        TR_TREnergy = 11100
     }
 }

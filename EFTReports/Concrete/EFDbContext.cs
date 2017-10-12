@@ -20,6 +20,8 @@ namespace EFTReports.Concrete
         public virtual DbSet<GroupEnergy> GroupEnergy { get; set; }
         public virtual DbSet<TypeEnergy> TypeEnergy { get; set; }
 
+        public virtual DbSet<ReportForms> ReportForms { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TRDataSet>()

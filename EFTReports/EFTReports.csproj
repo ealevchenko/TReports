@@ -51,15 +51,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IEnergyReports.cs" />
+    <Compile Include="Abstract\IReportForms.cs" />
     <Compile Include="Abstract\ITags.cs" />
     <Compile Include="Abstract\IDataSet.cs" />
     <Compile Include="Concrete\EFDataSet.cs" />
     <Compile Include="Concrete\EFEnergyReports.cs" />
+    <Compile Include="Concrete\EFReportForms.cs" />
     <Compile Include="Entities\TRDataSet.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Entities\TRTags.cs" />
     <Compile Include="Entities\GroupEnergy.cs" />
     <Compile Include="Entities\TypeEnergy.cs" />
+    <Compile Include="Entities\ReportForms.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\TRConvert.cs" />
   </ItemGroup>

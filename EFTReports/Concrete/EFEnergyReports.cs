@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace EFTReports.Concrete
 {
@@ -43,6 +44,23 @@ namespace EFTReports.Concrete
             catch (Exception e)
             {
                 e.WriteErrorMethod(String.Format("GetGroupEnergy(id={0})", id), eventID);
+                return null;
+            }
+        }
+
+        public string GetNameGroupEnergyCulture(int id)
+        {
+            try
+            {
+                GroupEnergy group = GetGroupEnergy(id);
+                if (group == null) return null;
+                if (CultureInfo.CurrentUICulture.Name == "en-US") 
+                { return group.group_energy_en; }
+                else { return group.group_energy_ru; }
+            }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("GetNameGroupEnergyCulture(id={0})", id), eventID);
                 return null;
             }
         }
@@ -132,6 +150,23 @@ namespace EFTReports.Concrete
             catch (Exception e)
             {
                 e.WriteErrorMethod(String.Format("GetTypeEnergy(id={0})", id), eventID);
+                return null;
+            }
+        }
+
+        public string GetNameTypeEnergyCulture(int id)
+        {
+            try
+            {
+                TypeEnergy type = GetTypeEnergy(id);
+                if (type == null) return null;
+                if (CultureInfo.CurrentUICulture.Name == "en-US") 
+                { return type.type_energy_en; }
+                else { return type.type_energy_ru; }
+            }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("GetNameTypeEnergyCulture(id={0})", id), eventID);
                 return null;
             }
         }

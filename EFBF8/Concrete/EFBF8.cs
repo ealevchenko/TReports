@@ -30,6 +30,19 @@ namespace EFBF8.Concrete
                 e.WriteError("Ошибка чтения AppSettings",eventID);
             }
         }
+        public List<bf8_EnergySutki> GetBF8EnergySutki(DateTime dt, string sp)
+        {
+            try
+            {
+                SqlParameter dt_start = new SqlParameter("@DT", dt);
+                return context.Database.SqlQuery<bf8_EnergySutki>("EXEC " + sp + " @DT", dt_start).ToList();
+            }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("GetBF8EnergySutki(dt={0})", dt), eventID);
+                return null;
+            }
+        }
         /// <summary>
         /// Получить энергоресурсяы за указанные сутки
         /// </summary>

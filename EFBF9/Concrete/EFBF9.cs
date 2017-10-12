@@ -100,11 +100,23 @@ namespace EFBF9.Concrete
             }
             catch (Exception e)
             {
-                e.WriteErrorMethod(String.Format("GetBF9EnergoSutki(dt={0})", dt), eventID);
+                e.WriteErrorMethod(String.Format("GetBF9EnergoSutki(dt={0}, sp={1})", dt, sp), eventID);
                 return null;
             }
         }
-
+        public List<bf9_EnergySutkiPSI> GetBF9EnergySutkiPSI(DateTime dt, string sp)
+        {
+            try
+            {
+                SqlParameter dt_start = new SqlParameter("@DT", dt);
+                return context.Database.SqlQuery<bf9_EnergySutkiPSI>("EXEC " + sp + " @DT", dt_start).ToList();
+            }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("GetBF9EnergySutkiPSI(dt={0}, sp={1})", dt, sp), eventID);
+                return null;
+            }
+        }
         /// <summary>
         /// Получить энергоресурсы ПУТ за указанные сутки
         /// </summary>
