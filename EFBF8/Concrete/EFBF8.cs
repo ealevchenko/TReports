@@ -39,7 +39,7 @@ namespace EFBF8.Concrete
             }
             catch (Exception e)
             {
-                e.WriteErrorMethod(String.Format("GetBF8EnergySutki(dt={0})", dt), eventID);
+                e.WriteErrorMethod(String.Format("GetBF8EnergySutki(dt={0}, sp={sp})", dt, sp), eventID);
                 return null;
             }
         }
