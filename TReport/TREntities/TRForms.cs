@@ -2,6 +2,7 @@
 using EFTReports.Entities;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -51,11 +52,20 @@ namespace TReport.TREntities
             public ItemValue time_norm { get; set; }
             public ItemValue time_max { get; set; }
             public ItemEnergyFlowDay() { }
+            public string name_energy
+            {
+                get
+                {
+                    if (CultureInfo.CurrentUICulture.Name == "en-US")
+                    { return this.name_energy_en; }
+                    else { return this.name_energy_ru; }
+                }
+            }
         }
         public class ItemValue { 
             public int tag { get; set; }
             public int? unit { get; set; }
-            public int? measurement { get; set; }
+            public int? multiplier { get; set; }
             public ItemValue() { }
         }
 

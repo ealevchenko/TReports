@@ -68,7 +68,9 @@ namespace TReport.TREntities
             TRForms tr_forms = new TRForms();
             //this.formEnergyFlowDay = tr_forms.GetFormEnergyFlowDay();
             // десериализация
-            this.formEnergyFlowDay = tr_forms.GetFormEnergyFlowDay(@"D:\Мои документы\Visual Studio 2013\Projects\Work\TechnologicalReports\TReports\TReport\XMLForms\FlowEnergyDay.xml");            
+ //           this.formEnergyFlowDay = tr_forms.GetFormEnergyFlowDay(@"D:\Мои документы\Visual Studio 2013\Projects\Work\TechnologicalReports\TReports\TReport\XMLForms\FlowEnergyDay.xml");            
+            this.formEnergyFlowDay = tr_forms.GetFormEnergyFlowDay(@"D:\Мои документы\Visual Studio 2013\Projects\Work\TReports\TReport\XMLForms\FlowEnergyDay.xml");            
+
         }
 
         /// <summary>
@@ -127,19 +129,40 @@ namespace TReport.TREntities
                         {
                             try
                             {
+                                //Преобразование 
+                                DBFlowValue flow = item.flow != null && item.flow.tag >0 ? (DBFlowValue)list_data_measurement.Find(m => m.id == item.flow.tag).value_measurement : null;
+                                flow = flow != null && item.flow.multiplier != null ? (DBFlowValue)flow.ConvertMultiplier((Multiplier)item.flow.multiplier) : flow;
+
+                                DBTempValue avg_temp = item.avg_temp != null && item.avg_temp.tag > 0 ? (DBTempValue)list_data_measurement.Find(m => m.id == item.avg_temp.tag).value_measurement : null;
+                                avg_temp = avg_temp != null && item.avg_temp.multiplier != null ? (DBTempValue)avg_temp.ConvertMultiplier((Multiplier)item.avg_temp.multiplier) : avg_temp;
+
+                                DBPressureValue avg_pressure = item.avg_pressure != null && item.avg_pressure.tag > 0 ? (DBPressureValue)list_data_measurement.Find(m => m.id == item.avg_pressure.tag).value_measurement : null;
+                                avg_pressure = avg_pressure != null && item.avg_pressure.multiplier != null ? (DBPressureValue)avg_pressure.ConvertMultiplier((Multiplier)item.avg_pressure.multiplier) : avg_pressure;
+
+                                DBPlanimetricValue planimetric = item.planimetric != null && item.planimetric.tag > 0 ? (DBPlanimetricValue)list_data_measurement.Find(m => m.id == item.planimetric.tag).value_measurement : null;
+                                planimetric = planimetric != null && item.planimetric.multiplier != null ? (DBPlanimetricValue)planimetric.ConvertMultiplier((Multiplier)item.planimetric.multiplier) : planimetric;
+
+                                DBFlowValue pr_flow = item.pr_flow != null && item.pr_flow.tag > 0 ? (DBFlowValue)list_data_measurement.Find(m => m.id == item.pr_flow.tag).value_measurement : null;
+                                pr_flow = pr_flow != null && item.pr_flow.multiplier != null ? (DBFlowValue)pr_flow.ConvertMultiplier((Multiplier)item.pr_flow.multiplier) : pr_flow;
+
+                                DBTimeValue time_norm = item.time_norm != null && item.time_norm.tag > 0 ? (DBTimeValue)list_data_measurement.Find(m => m.id == item.time_norm.tag).value_measurement : null;
+                                time_norm = time_norm != null && item.time_norm.multiplier != null ? (DBTimeValue)time_norm.ConvertMultiplier((Multiplier)item.time_norm.multiplier) : time_norm;
+
+                                DBTimeValue time_max = item.time_max != null && item.time_max.tag > 0 ? (DBTimeValue)list_data_measurement.Find(m => m.id == item.time_max.tag).value_measurement : null;
+                                time_max = time_max != null && item.time_max.multiplier != null ? (DBTimeValue)time_max.ConvertMultiplier((Multiplier)item.time_max.multiplier) : time_max;
 
                                 EnergyFlowValueEntity ef = new EnergyFlowValueEntity()
                                  {
-                                     name = item.name_energy_ru,
+                                     name = item.name_energy,
                                      trObj = (trObj)item.trobj,
                                      position = item.position,
-                                     flow = item.flow != null && item.flow.tag >0 ? (DBFlowValue)list_data_measurement.Find(m => m.id == item.flow.tag).value_measurement : null,
-                                     avg_temp = item.avg_temp != null && item.avg_temp.tag > 0 ? (DBTempValue)list_data_measurement.Find(m => m.id == item.avg_temp.tag).value_measurement : null,
-                                     avg_pressure = item.avg_pressure != null && item.avg_pressure.tag > 0 ? (DBPressureValue)list_data_measurement.Find(m => m.id == item.avg_pressure.tag).value_measurement : null,
-                                     planimetric = item.planimetric != null && item.planimetric.tag > 0 ? (DBPlanimetricValue)list_data_measurement.Find(m => m.id == item.planimetric.tag).value_measurement : null,
-                                     pr_flow = item.pr_flow != null && item.pr_flow.tag > 0 ? (DBFlowValue)list_data_measurement.Find(m => m.id == item.pr_flow.tag).value_measurement : null,
-                                     time_norm = item.time_norm != null && item.time_norm.tag > 0 ? (DBTimeValue)list_data_measurement.Find(m => m.id == item.time_norm.tag).value_measurement : null,
-                                     time_max = item.time_max != null && item.time_max.tag > 0 ? (DBTimeValue)list_data_measurement.Find(m => m.id == item.time_max.tag).value_measurement : null,
+                                     flow = flow,
+                                     avg_temp = avg_temp,
+                                     avg_pressure = avg_pressure,
+                                     planimetric = planimetric,
+                                     pr_flow = pr_flow,
+                                     time_norm = time_norm,
+                                     time_max = time_max,
                                  };
                                 type.list_type_flow.Add(ef);
                             }
@@ -148,7 +171,7 @@ namespace TReport.TREntities
                                 e.WriteError(String.Format("Ошибка формирования строки отчета. Параметр :{0}, объект: {1}", item.name_energy_ru, item.trobj), eventID);
                                 type.list_type_flow.Add(new EnergyFlowValueEntity()
                                 {
-                                    name = item.name_energy_ru,
+                                    name = item.name_energy,
                                     trObj = (trObj)item.trobj,
                                     position = item.position,
                                 });
