@@ -66,9 +66,9 @@ namespace TReport.TREntities
 
         public void GetForms() { 
             TRForms tr_forms = new TRForms();
-            this.formEnergyFlowDay = tr_forms.GetFormEnergyFlowDay();
+            //this.formEnergyFlowDay = tr_forms.GetFormEnergyFlowDay();
             // десериализация
-            //this.formEnergyFlowDay = tr_forms.GetFormEnergyFlowDay(@"D:\Мои документы\Visual Studio 2013\Projects\Work\TReports\TReport\XMLForms\FlowEnergyDay.xml");            
+            this.formEnergyFlowDay = tr_forms.GetFormEnergyFlowDay(@"D:\Мои документы\Visual Studio 2013\Projects\Work\TechnologicalReports\TReports\TReport\XMLForms\FlowEnergyDay.xml");            
         }
 
         /// <summary>
@@ -84,13 +84,14 @@ namespace TReport.TREntities
                     foreach (TReport.TREntities.TRForms.ItemEnergyFlowDay i in t.Items) {
                         if (base.trObjs.Find(o => o == (trObj)i.trobj) > 0) // если есть в списке разрешенных
                         {
-                            if (i.flow != null) list.Add((int)i.flow);
-                            if (i.avg_temp != null) list.Add((int)i.avg_temp);
-                            if (i.avg_pressure != null) list.Add((int)i.avg_pressure);
-                            if (i.planimetric != null) list.Add((int)i.planimetric);
-                            if (i.pr_flow != null) list.Add((int)i.pr_flow);
-                            if (i.time_norm != null) list.Add((int)i.time_norm);
-                            if (i.time_max != null) list.Add((int)i.time_max);
+                            if (i.flow != null) list.Add((int)i.flow.tag);
+                            if (i.avg_temp != null) list.Add((int)i.avg_temp.tag);
+                            if (i.avg_pressure != null) list.Add((int)i.avg_pressure.tag);
+                            if (i.planimetric != null) list.Add((int)i.planimetric.tag);
+                            if (i.pr_flow != null) list.Add((int)i.pr_flow.tag);
+                            if (i.time_norm != null) list.Add((int)i.time_norm.tag);
+                            if (i.time_max != null) list.Add((int)i.time_max.tag);
+
                         }
                     }
                 }
@@ -132,13 +133,13 @@ namespace TReport.TREntities
                                      name = item.name_energy_ru,
                                      trObj = (trObj)item.trobj,
                                      position = item.position,
-                                     flow = item.flow != null ? (DBFlowValue)list_data_measurement.Find(m => m.id == item.flow).value_measurement : null,
-                                     avg_temp = item.avg_temp != null ? (DBTempValue)list_data_measurement.Find(m => m.id == item.avg_temp).value_measurement : null,
-                                     avg_pressure = item.avg_pressure != null ? (DBPressureValue)list_data_measurement.Find(m => m.id == item.avg_pressure).value_measurement : null,
-                                     planimetric = item.planimetric != null ? (DBPlanimetricValue)list_data_measurement.Find(m => m.id == item.planimetric).value_measurement : null,
-                                     pr_flow = item.pr_flow != null ? (DBFlowValue)list_data_measurement.Find(m => m.id == item.pr_flow).value_measurement : null,
-                                     time_norm = item.time_norm != null ? (DBTimeValue)list_data_measurement.Find(m => m.id == item.time_norm).value_measurement : null,
-                                     time_max = item.time_max != null ? (DBTimeValue)list_data_measurement.Find(m => m.id == item.time_max).value_measurement : null,
+                                     flow = item.flow != null && item.flow.tag >0 ? (DBFlowValue)list_data_measurement.Find(m => m.id == item.flow.tag).value_measurement : null,
+                                     avg_temp = item.avg_temp != null && item.avg_temp.tag > 0 ? (DBTempValue)list_data_measurement.Find(m => m.id == item.avg_temp.tag).value_measurement : null,
+                                     avg_pressure = item.avg_pressure != null && item.avg_pressure.tag > 0 ? (DBPressureValue)list_data_measurement.Find(m => m.id == item.avg_pressure.tag).value_measurement : null,
+                                     planimetric = item.planimetric != null && item.planimetric.tag > 0 ? (DBPlanimetricValue)list_data_measurement.Find(m => m.id == item.planimetric.tag).value_measurement : null,
+                                     pr_flow = item.pr_flow != null && item.pr_flow.tag > 0 ? (DBFlowValue)list_data_measurement.Find(m => m.id == item.pr_flow.tag).value_measurement : null,
+                                     time_norm = item.time_norm != null && item.time_norm.tag > 0 ? (DBTimeValue)list_data_measurement.Find(m => m.id == item.time_norm.tag).value_measurement : null,
+                                     time_max = item.time_max != null && item.time_max.tag > 0 ? (DBTimeValue)list_data_measurement.Find(m => m.id == item.time_max.tag).value_measurement : null,
                                  };
                                 type.list_type_flow.Add(ef);
                             }

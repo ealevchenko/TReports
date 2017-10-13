@@ -20,6 +20,7 @@ namespace TReport.TREntities
             public List<GroupEnergyFlowDay> Groups { get; set; }
             public EnergyFlowDay() { }
         }
+
         public class GroupEnergyFlowDay
         {
             public int id_group { get; set; }
@@ -27,6 +28,7 @@ namespace TReport.TREntities
             public List<TypeEnergyFlowDay> Types { get; set; }
             public GroupEnergyFlowDay() { }
         }
+
         public class TypeEnergyFlowDay
         {
             public int id_type { get; set; }
@@ -34,21 +36,29 @@ namespace TReport.TREntities
             public List<ItemEnergyFlowDay> Items { get; set; }
             public TypeEnergyFlowDay() { }
         }
+
         public class ItemEnergyFlowDay
         {
             public int trobj { get; set; }
             public string name_energy_ru { get; set; }
             public string name_energy_en { get; set; }
             public int position { get; set; }
-            public int? flow { get; set; }
-            public int? avg_temp { get; set; }
-            public int? avg_pressure { get; set; }
-            public int? planimetric { get; set; }
-            public int? pr_flow { get; set; }
-            public int? time_norm { get; set; }
-            public int? time_max { get; set; }
+            public ItemValue flow { get; set; }
+            public ItemValue avg_temp { get; set; }
+            public ItemValue avg_pressure { get; set; }
+            public ItemValue planimetric { get; set; }
+            public ItemValue pr_flow { get; set; }
+            public ItemValue time_norm { get; set; }
+            public ItemValue time_max { get; set; }
             public ItemEnergyFlowDay() { }
         }
+        public class ItemValue { 
+            public int tag { get; set; }
+            public int? unit { get; set; }
+            public int? measurement { get; set; }
+            public ItemValue() { }
+        }
+
         #endregion
 
         public TRForms() { }
@@ -95,7 +105,7 @@ namespace TReport.TREntities
 
         public EnergyFlowDay GetFormEnergyFlowDay(string file) {
             XmlSerializer formatter = new XmlSerializer(typeof(EnergyFlowDay));
-            FileStream fs = new FileStream(@"D:\Мои документы\Visual Studio 2013\Projects\Work\TReports\TReport\XMLForms\FlowEnergyDay.xml", FileMode.OpenOrCreate);
+            FileStream fs = new FileStream(file, FileMode.OpenOrCreate);
             EnergyFlowDay res = (EnergyFlowDay)((XmlSerializer)formatter).Deserialize(fs);
             return  res;
         }
