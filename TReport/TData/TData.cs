@@ -1,4 +1,5 @@
-﻿using EFBF8.DataSet;
+﻿using EFBF7.DataSet;
+using EFBF8.DataSet;
 using EFBF9.DataSet;
 using EFTReports.Concrete;
 using EFTReports.Entities;
@@ -81,6 +82,22 @@ namespace TReport.TData
             }
         }
 
+        public bf7_EnergySutki GetBF7EnergyDay(DateTime date, string sp)
+        {
+            try
+            {
+                EFBF7.Concrete.EFBF7 ef = new EFBF7.Concrete.EFBF7();
+                List<bf7_EnergySutki> list = null;
+                list = ef.GetBF7EnergySutki(date, sp);
+                return (list != null && list.Count() > 0) ? list[0] : new bf7_EnergySutki();
+            }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("GetBF7EnergyDay(date={0}, sp={1})", date, sp), eventID);
+                return new bf7_EnergySutki();
+            }
+        }
+
         /// <summary>
         /// Получить объект с данными по указаному dataset за указаный период
         /// </summary>
@@ -98,7 +115,7 @@ namespace TReport.TData
                     case 1: return GetBF9EnergyDay(date, trds.dataset1);
                     case 2: return GetBF9EnergyDayPSI(date, trds.dataset1);
                     case 3: return GetBF8EnergyDay(date, trds.dataset1);
-                    //case 4: return GetBF7EnergyDay(date, trds.dataset1);
+                    case 4: return GetBF7EnergyDay(date, trds.dataset1);
                     //case 5: return GetBF6EnergyDay(date, trds.dataset1);
                     //TODO: Доработать вызов DataObject-ов в базе храним методы и автоматически вызываем
                     default: return null;
@@ -128,14 +145,14 @@ namespace TReport.TData
                 FieldInfo[] myFieldInfo;
                 myFieldInfo = data.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
                 foreach (TRTags tg in ds) {
-                    FieldInfo fi = myFieldInfo.ToList().Find(f => f.Name == "<" + tg.tag + ">k__BackingField");
+                    FieldInfo fi = myFieldInfo.ToList().Find(f => f.Name == "<" + tg.tag.Trim() + ">k__BackingField");
                     //Type type = fi.GetValue(data).GetType();
                     //string val = fi.GetValue(data).ToString();
                     //object val = fi.GetValue(data);
                     list.Add(new DataMeasurement() { 
                         id = tg.id, 
                         id_dataset = tg.id_dataset,
-                        value_measurement = ((TypeMeasurement)tg.type_measurement).GetDBValueMeasurement(fi.GetValue(data), tg.tag, "", tg.unit, (Multiplier)tg.multiplier)
+                        value_measurement = ((TypeMeasurement)tg.type_measurement).GetDBValueMeasurement(fi.GetValue(data), tg.tag.Trim(), "", tg.unit, (Multiplier)tg.multiplier)
                     });
                 }
             }

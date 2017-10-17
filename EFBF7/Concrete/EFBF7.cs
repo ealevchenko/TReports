@@ -31,6 +31,25 @@ namespace EFBF7.Concrete
             }
         }
         /// <summary>
+        ///  Получить энергоресурсяы за указанные сутки через указанную хранимую процедуру
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="sp"></param>
+        /// <returns></returns>
+        public List<bf7_EnergySutki> GetBF7EnergySutki(DateTime dt, string sp)
+        {
+            try
+            {
+                SqlParameter dt_start = new SqlParameter("@DT", dt);
+                return context.Database.SqlQuery<bf7_EnergySutki>("EXEC " + sp + " @DT", dt_start).ToList();
+            }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("GetBF7EnergySutki(dt={0}, sp={sp})", dt, sp), eventID);
+                return null;
+            }
+        }
+        /// <summary>
         /// Получить энергоресурсяы за указанные сутки
         /// </summary>
         /// <param name="dt"></param>
