@@ -51,9 +51,14 @@ namespace Testing
             //tds.EFDataSet_TRTags(); //Проверка работы tags
             #endregion
 
-            #region Test_TData
-            Test_TData ttd = new Test_TData();
-            //ttd.GetDataMeasurement(); // Проверка получения данных по id
+            //#region Test_TData Old
+            //Test_TData ttd = new Test_TData();
+            ////ttd.GetDataMeasurement(); // Old Проверка получения данных по id
+            //#endregion
+
+            #region Test_TDataSources
+            Test_TDataSources ttds = new Test_TDataSources();
+            //ttds.GetDataMeasurement(); // Проверка получения данных по id
             #endregion
 
             #region TestXML

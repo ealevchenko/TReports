@@ -13,6 +13,7 @@ namespace MessageLog
         Null = -1,
 
         TData = 1000,
+        TDataSources = 1100,
 
         EFBF9 = 2000,
         EFBF9_EFBF9UnloadMaterial = 2100,
@@ -27,6 +28,7 @@ namespace MessageLog
         EFTReports_EFDataSet = 10100,
         EFTReports_EFEnergyReports = 10200,
         EFTReports_EFReportForms = 10300,
+        EFTReports_EFDataSources = 10400,
 
         TR = 11000,
         TR_TREnergy = 11100

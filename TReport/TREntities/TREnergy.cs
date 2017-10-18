@@ -104,8 +104,13 @@ namespace TReport.TREntities
         public void GetEnergyFlowDay(DateTime date)
         {
             //List<int> list_tags = GetIDTagsEnergyDay();
-            TData.TData t_data = new TData.TData();
-            List<DataMeasurement> list_data_measurement = t_data.GetDataMeasurement(GetIDTagsEnergyFlowDay(), date);
+            TData.TDataSources t_data = new TData.TDataSources();
+
+           SQLParameter[] sqlpars =  new SQLParameter[] { 
+                new SQLParameter() { where = type_where.DATE, value = date } 
+            };
+
+           List<DataMeasurement> list_data_measurement = t_data.GetDataMeasurement(GetIDTagsEnergyFlowDay(), sqlpars);
 
             EFEnergyReports e_reports = new EFEnergyReports();
 

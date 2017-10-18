@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace EFTReports.Abstract
 {
-    public interface ITags
+    interface ITags
     {
-        IQueryable<TRTags> TRTags { get; }
-        IQueryable<TRTags> GetTRTags();
-        TRTags GetTRTags(int id);
-        int SaveTRTags(TRTags Tags);
-        TRTags DeleteTRTags(int id);
+        IQueryable<Tags> Tags { get; }
+        IQueryable<Tags> GetTags();
+        Tags GetTags(int id);
+        int SaveTags(Tags Tags);
+        Tags DeleteTags(int id);
 
-        IQueryable<TRTags> GetTRTags(int[] list_id);
+        IQueryable<Tags> GetTags(int[] list_id);
     }
 }

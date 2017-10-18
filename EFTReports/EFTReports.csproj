@@ -50,19 +50,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IConnections.cs" />
+    <Compile Include="Abstract\IDataSetParameters.cs" />
+    <Compile Include="Abstract\IDataSets.cs" />
     <Compile Include="Abstract\IEnergyReports.cs" />
+    <Compile Include="Abstract\IFactoryProviders.cs" />
     <Compile Include="Abstract\IReportForms.cs" />
     <Compile Include="Abstract\ITags.cs" />
-    <Compile Include="Abstract\IDataSet.cs" />
-    <Compile Include="Concrete\EFDataSet.cs" />
+    <Compile Include="Concrete\EFDataSources.cs" />
     <Compile Include="Concrete\EFEnergyReports.cs" />
     <Compile Include="Concrete\EFReportForms.cs" />
-    <Compile Include="Entities\TRDataSet.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
-    <Compile Include="Entities\TRTags.cs" />
     <Compile Include="Entities\GroupEnergy.cs" />
     <Compile Include="Entities\TypeEnergy.cs" />
     <Compile Include="Entities\ReportForms.cs" />
+    <Compile Include="Entities\Connections.cs" />
+    <Compile Include="Entities\DataSetParameters.cs" />
+    <Compile Include="Entities\DataSets.cs" />
+    <Compile Include="Entities\FactoryProviders.cs" />
+    <Compile Include="Entities\Tags.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\TRConvert.cs" />
   </ItemGroup>
