@@ -12,6 +12,7 @@ namespace EFTReports.Concrete
             : base("name=TReports")
         {
         }
+        public virtual DbSet<Access> Access { get; set; }
 
         public virtual DbSet<Connections> Connections { get; set; }
         public virtual DbSet<DataSetParameters> DataSetParameters { get; set; }

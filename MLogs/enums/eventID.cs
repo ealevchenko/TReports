@@ -29,6 +29,7 @@ namespace MessageLog
         EFTReports_EFEnergyReports = 10200,
         EFTReports_EFReportForms = 10300,
         EFTReports_EFDataSources = 10400,
+        EFTReports_EFAccess = 10500,
 
         TR = 11000,
         TR_TREnergy = 11100
