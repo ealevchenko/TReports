@@ -11,21 +11,6 @@ using TReport;
 
 namespace EFTReports.Concrete
 {
-    public enum type_dataset : int
-    {
-        TABLE=0, SP=1, VIEW=2,
-    }
-
-    public enum type_tag : int
-    {
-        DATETIME=1, INT=2, STRING=3, DATE=4
-    }    
-
-    public enum type_where : int
-    {
-        DATE=1, DATE_START=2, DATE_STOP=3, ID=4, ID_OBJECT=5, ID_REPORT
-    }
-
     public class EFDataSources : IFactoryProviders, IConnections, IDataSets, IDataSetParameters, ITags
     {
         protected EFDbContext context = new EFDbContext();

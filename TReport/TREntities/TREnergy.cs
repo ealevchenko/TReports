@@ -1,5 +1,5 @@
-﻿using EFTReports.Concrete;
-using EFTReports.Entities;
+﻿using EFTReports.Concrete; //TODO: Убрать переделав отчет flowenergyday
+//using EFTReports.Entities;
 using Measurement;
 using MessageLog;
 using System;
@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using TReport.App_LocalResources;
 using TReport.TData;
+using TReport.TRForms;
 
 namespace TReport.TREntities
 {
@@ -53,7 +54,9 @@ namespace TReport.TREntities
             public GroupEnergyFlowValueEntity() { }
         }
 
-        private TReport.TREntities.TRForms.EnergyFlowDay formEnergyFlowDay;
+        private EnergyFlowDay formEnergyFlowDay;
+        private FormEnergyDay formEnergyDay;
+        public FormEnergyDay ReportEnergyDay { get { return this.formEnergyDay; } }
 
         private List<GroupEnergyFlowValueEntity> list_energy_flow_day = new List<GroupEnergyFlowValueEntity>();
         public List<GroupEnergyFlowValueEntity> ListFlowDay { get { return this.list_energy_flow_day; } }
@@ -65,13 +68,52 @@ namespace TReport.TREntities
         public TREnergy(List<trObj> trObjs) : base(trObjs) {  GetForms(); }
 
         public void GetForms() { 
-            TRForms tr_forms = new TRForms();
-            this.formEnergyFlowDay = tr_forms.GetFormEnergyFlowDay();
+            
+            //this.formEnergyFlowDay = tr_forms.GetFormEnergyFlowDay();
+            //this.formEnergyDay = tr_forms.GetForm<FormEnergyDay>();
+            this.formEnergyDay = base.forms.GetForm<FormEnergyDay>(@"D:\Мои документы\Visual Studio 2013\Projects\Work\TReports\TReport\XMLForms\EnergyDay.xml");
             // десериализация
             //this.formEnergyFlowDay = tr_forms.GetFormEnergyFlowDay(@"D:\Мои документы\Visual Studio 2013\Projects\Work\TechnologicalReports\TReports\TReport\XMLForms\FlowEnergyDay.xml");            
-            //this.formEnergyFlowDay = tr_forms.GetFormEnergyFlowDay(@"D:\Мои документы\Visual Studio 2013\Projects\Work\TReports\TReport\XMLForms\FlowEnergyDay.xml");            
+            this.formEnergyFlowDay = base.forms.GetFormEnergyFlowDay(@"D:\Мои документы\Visual Studio 2013\Projects\Work\TReports\TReport\XMLForms\FlowEnergyDay.xml");            
 
         }
+
+        #region Energyday
+        /// <summary>
+        /// Получить отчет среднесуточные значения
+        /// </summary>
+        /// <param name="date"></param>
+        public void GetEnergyDay(DateTime date) {
+            if (this.formEnergyDay == null) return;
+            // получим список тегов из формы, с учетом объектов
+            List<int> lists = base.forms.GetIDTags(this.formEnergyDay, base.trObjs.Cast<int>().Select(o => o).ToArray());
+            // получим переменные для запроса на выборку
+            TData.TDataSources t_data = new TData.TDataSources();
+            SQLParameter[] sqlpars = new SQLParameter[] { 
+                new SQLParameter() { where = type_where.DATE, value = date } 
+            };
+            // получим значения тегов после выборки
+            List<DataMeasurement> list_data_measurement = t_data.GetDataMeasurement(lists, sqlpars);
+            // Заполним значениями форму
+            foreach (GroupEnergyDay ged in this.formEnergyDay.Groups.OrderBy(g=>g.position)) {
+                foreach (TypeEnergyDay ted in ged.Types.OrderBy(t => t.position)) {
+                    foreach (ItemEnergyDay ied in ted.Items.OrderBy(i => i.position)) {
+                        foreach (trObj obj in base.trObjs) {
+                            ItemObject io = ied.ItemObject.Find(o => o.trobj == (int)obj);
+                            if (io != null) {
+                                DBValueMeasurement val = list_data_measurement.Find(m => m.id == io.parameter.tag).value_measurement;
+                                val = val != null && io.parameter.multiplier != null ? val.ConvertMultiplier((Multiplier)io.parameter.multiplier) : val;
+                                io.parameter.value = val;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region EnergyFlowDay
 
         /// <summary>
         /// Получить список тегов для отчета расход за сутки
@@ -79,11 +121,11 @@ namespace TReport.TREntities
         /// <returns></returns>
         private List<int> GetIDTagsEnergyFlowDay() {
             List<int> list = new List<int>();
-
-            foreach (TReport.TREntities.TRForms.GroupEnergyFlowDay g in this.formEnergyFlowDay.Groups)
+            if (this.formEnergyFlowDay == null) return list;
+            foreach (GroupEnergyFlowDay g in this.formEnergyFlowDay.Groups)
             {
-                foreach (TReport.TREntities.TRForms.TypeEnergyFlowDay t in g.Types) {
-                    foreach (TReport.TREntities.TRForms.ItemEnergyFlowDay i in t.Items) {
+                foreach (TypeEnergyFlowDay t in g.Types) {
+                    foreach (ItemEnergyFlowDay i in t.Items) {
                         if (base.trObjs.Find(o => o == (trObj)i.trobj) > 0) // если есть в списке разрешенных
                         {
                             if (i.flow != null) list.Add((int)i.flow.tag);
@@ -103,32 +145,30 @@ namespace TReport.TREntities
 
         public void GetEnergyFlowDay(DateTime date)
         {
-            //List<int> list_tags = GetIDTagsEnergyDay();
             TData.TDataSources t_data = new TData.TDataSources();
-
            SQLParameter[] sqlpars =  new SQLParameter[] { 
                 new SQLParameter() { where = type_where.DATE, value = date } 
             };
-
            List<DataMeasurement> list_data_measurement = t_data.GetDataMeasurement(GetIDTagsEnergyFlowDay(), sqlpars);
 
-            EFEnergyReports e_reports = new EFEnergyReports();
 
-            foreach (TReport.TREntities.TRForms.GroupEnergyFlowDay g in this.formEnergyFlowDay.Groups.OrderBy(g=>g.position))
+            EFEnergyReports e_reports = new EFEnergyReports();
+            if (this.formEnergyFlowDay == null) return;
+            foreach (GroupEnergyFlowDay g in this.formEnergyFlowDay.Groups.OrderBy(g=>g.position))
             {
                 GroupEnergyFlowValueEntity group = new GroupEnergyFlowValueEntity()
                 {
                     name = e_reports.GetNameGroupEnergyCulture(g.id_group),
                     position = 0
                 };
-                foreach (TReport.TREntities.TRForms.TypeEnergyFlowDay t in g.Types.OrderBy(t=>t.position))
+                foreach (TypeEnergyFlowDay t in g.Types.OrderBy(t=>t.position))
                 {
                     TypeEnergyFlowValueEntity type = new TypeEnergyFlowValueEntity()
                     {
                         name = e_reports.GetNameTypeEnergyCulture(t.id_type),
                         position = 0
                     };
-                    foreach (TReport.TREntities.TRForms.ItemEnergyFlowDay item in t.Items.OrderBy(i=>i.position))
+                    foreach (ItemEnergyFlowDay item in t.Items.OrderBy(i=>i.position))
                     {
                         if (base.trObjs.Find(o => o == (trObj)item.trobj) > 0) // если есть в списке разрешенных
                         {
@@ -186,7 +226,9 @@ namespace TReport.TREntities
                     group.list_type.Add(type);
                 }
                 this.list_energy_flow_day.Add(group); // Добавим группу
-            } 
+            }
         }
+
+        #endregion
     }
 }

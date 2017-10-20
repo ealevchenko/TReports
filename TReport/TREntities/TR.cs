@@ -7,12 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using TReport.App_LocalResources;
 using TReport.TData;
+using TReport.TRForms;
 
 namespace TReport.TREntities
 {
 
     public class TR
     {
+        protected TRForm forms = new TRForm();
         protected List<trObj> trObjs = new List<trObj>();
 
         public TR(trObj trObj)

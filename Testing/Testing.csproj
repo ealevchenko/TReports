@@ -57,6 +57,7 @@
     <Compile Include="Test_EFBF8.cs" />
     <Compile Include="Test_EFBF7.cs" />
     <Compile Include="Test_EFDataSet.cs" />
+    <Compile Include="Test_Forms.cs" />
     <Compile Include="Test_TDataSources.cs" />
     <Compile Include="Test_TData.cs" />
     <Compile Include="Test_TREnergy.cs" />

@@ -13,6 +13,21 @@ using System.Threading.Tasks;
 
 namespace TReport.TData
 {
+    public enum type_dataset : int
+    {
+        TABLE = 0, SP = 1, VIEW = 2,
+    }
+
+    public enum type_tag : int
+    {
+        DATETIME = 1, INT = 2, STRING = 3, DATE = 4
+    }
+
+    public enum type_where : int
+    {
+        DATE = 1, DATE_START = 2, DATE_STOP = 3, ID = 4, ID_OBJECT = 5, ID_REPORT
+    }
+    
     public class DataMeasurement
     {
         public int id { get; set; }
