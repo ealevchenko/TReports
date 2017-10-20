@@ -1,6 +1,5 @@
 ﻿using EFTReports.Concrete;
 using EFTReports.Entities;
-//using Measurement;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -106,21 +105,5 @@ namespace TReport.TRForms
             }
             return list;
         }
-
-        //TODO: Убрать переделав отчет flowenergyday
-        public EnergyFlowDay GetFormEnergyFlowDay() {
-            EFReportForms rep_forms = new EFReportForms();
-            ReportForms forms = rep_forms.GetReportForms("FlowEnergyDay");
-            if (forms == null) return null;
-            return XMLStringToClass<EnergyFlowDay>(forms.xml_form);
-        }
-        //TODO: Убрать переделав отчет flowenergyday
-        public EnergyFlowDay GetFormEnergyFlowDay(string file) {
-            XmlSerializer formatter = new XmlSerializer(typeof(EnergyFlowDay));
-            FileStream fs = new FileStream(file, FileMode.OpenOrCreate);
-            EnergyFlowDay res = (EnergyFlowDay)((XmlSerializer)formatter).Deserialize(fs);
-            return  res;
-        }
-
     }
 }

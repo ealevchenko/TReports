@@ -14,12 +14,6 @@ namespace Testing
 {
     class Program
     {
-
-
-
-
-
-
         public static void Main(string[] args)
         {
 
@@ -43,7 +37,7 @@ namespace Testing
             //ttre.GetEnergySutkit(); // Получить энерго ресурсы за уазаную дату по всем печам
             //ttre.GetResources(); // тест ресурсов
             ttre.GetEnergyFlowDay(); // тест ресурсов за сутки
-            //ttre.GetEnergyDay(); // тест ресурсов за сутки
+            ttre.GetEnergyDay(); // тест ресурсов за сутки
             #endregion
 
             #region Test_EFDataSet

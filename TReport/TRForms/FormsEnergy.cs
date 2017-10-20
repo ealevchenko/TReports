@@ -4,37 +4,39 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TReport.App_LocalResources;
+using TReport.TData;
 
 namespace TReport.TRForms
 {
+    interface IObject {
+        string Object { get; }
+    }
+    
     #region Класс формы представления FlowEnergyDay
-    public class EnergyFlowDay
+    public class FormEnergyFlowDay
     {
         public List<GroupEnergyFlowDay> Groups { get; set; }
-        public EnergyFlowDay() { }
+        public FormEnergyFlowDay() { }
     }
 
-    public class GroupEnergyFlowDay
+    public class GroupEnergyFlowDay : ObjectName
     {
-        public int id_group { get; set; }
         public int position { get; set; }
         public List<TypeEnergyFlowDay> Types { get; set; }
         public GroupEnergyFlowDay() { }
     }
 
-    public class TypeEnergyFlowDay
+    public class TypeEnergyFlowDay : ObjectName
     {
-        public int id_type { get; set; }
         public int position { get; set; }
         public List<ItemEnergyFlowDay> Items { get; set; }
         public TypeEnergyFlowDay() { }
     }
 
-    public class ItemEnergyFlowDay
+    public class ItemEnergyFlowDay : ObjectName, IObject
     {
         public int trobj { get; set; }
-        public string name_energy_ru { get; set; }
-        public string name_energy_en { get; set; }
         public int position { get; set; }
         public ItemValue flow { get; set; }
         public ItemValue avg_temp { get; set; }
@@ -44,14 +46,9 @@ namespace TReport.TRForms
         public ItemValue time_norm { get; set; }
         public ItemValue time_max { get; set; }
         public ItemEnergyFlowDay() { }
-        public string name_energy
+        public string Object
         {
-            get
-            {
-                if (CultureInfo.CurrentUICulture.Name == "en-US")
-                { return this.name_energy_en; }
-                else { return this.name_energy_ru; }
-            }
+            get { return ((trObj)this.trobj).ToString().GetResources(); }
         }
     }
     #endregion
@@ -83,11 +80,15 @@ namespace TReport.TRForms
         public ItemEnergyDay() { }
     }
 
-    public class ItemObject
+    public class ItemObject : IObject
     {
         public int trobj { get; set; }
         public ItemValue parameter { get; set; }
         public ItemObject() { }
+        public string Object
+        {
+            get { return ((trObj)this.trobj).ToString().GetResources(); }
+        }
     }
     #endregion
 
