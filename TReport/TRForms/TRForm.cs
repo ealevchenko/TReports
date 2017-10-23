@@ -56,10 +56,10 @@ namespace TReport.TRForms
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T GetForm<T>()
+        public T GetForm<T>(string name)
         {
             EFReportForms rep_forms = new EFReportForms();
-            ReportForms forms = rep_forms.GetReportForms(typeof(T).Name);
+            ReportForms forms = rep_forms.GetReportForms(name);
             if (forms == null) return default(T);
             return XMLStringToClass<T>(forms.xml_form);
         }
@@ -69,7 +69,7 @@ namespace TReport.TRForms
         /// <typeparam name="T"></typeparam>
         /// <param name="file"></param>
         /// <returns></returns>
-        public T GetForm<T>(string file)
+        public T GetFormOfFile<T>(string file)
         {
             XmlSerializer formatter = new XmlSerializer(typeof(T));            
             FileStream fs = new FileStream(file, FileMode.OpenOrCreate);   

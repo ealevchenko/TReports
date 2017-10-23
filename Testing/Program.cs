@@ -54,6 +54,8 @@ namespace Testing
             #region Test_Forms
             Test_Forms fors = new Test_Forms();
             //fors.CreateFormEnergyDay(); // Создание формы отчета среднесут энергоресурсов
+            //fors.ConvertFormEnergyFlowDayToForm(); // конвертировать в новую форму
+            //fors.ConvertFormEnergyDayToForm(); // конвертировать в новую форму
             #endregion
 
             Console.WriteLine("Press any key to exit...");
