@@ -75,7 +75,8 @@ namespace TReport.TREntities
                                     {
                                         try
                                         {
-                                            DBValueMeasurement param = val != null && val.tag > 0 ? (DBValueMeasurement)list_data_measurement.Find(m => m.id == val.tag).value_measurement : null;
+                                            DataMeasurement dm = val != null && val.tag > 0 ? list_data_measurement.Find(m => m.id == val.tag) : null;
+                                            DBValueMeasurement param = dm != null  ? (DBValueMeasurement)list_data_measurement.Find(m => m.id == val.tag).value_measurement : null;
                                             val.value = param != null && val.multiplier != null ? (DBValueMeasurement)param.ConvertMultiplier((Multiplier)val.multiplier) : param;
 
                                         }

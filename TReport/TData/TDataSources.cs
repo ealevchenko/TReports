@@ -204,7 +204,7 @@ namespace TReport.TData
                 if (dsc == null) return null;
                 DataTable data = GetDataTable(dsc);
                 foreach (Tags tag in ds){
-                    object val = data != null ? data.Rows[0][tag.tag.Trim()] : null;
+                    object val = data != null && data.Rows.Count>0 ? data.Rows[0][tag.tag.Trim()] : null;
                     list.Add(new DataMeasurement()
                     {
                         id = tag.id,
