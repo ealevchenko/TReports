@@ -1,5 +1,6 @@
 ﻿using EFTReports.Concrete;
 using EFTReports.Entities;
+using MessageLog;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,12 +11,11 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 
-
-
 namespace TReport.TRForms
 {
     public class TRForm
     {
+        private eventID eventID = eventID.TRForm;
 
         public TRForm() { }
 
@@ -58,10 +58,18 @@ namespace TReport.TRForms
         /// <returns></returns>
         public T GetForm<T>(string name)
         {
-            EFReportForms rep_forms = new EFReportForms();
-            ReportForms forms = rep_forms.GetReportForms(name);
-            if (forms == null) return default(T);
-            return XMLStringToClass<T>(forms.xml_form);
+            try
+            {
+                EFReportForms rep_forms = new EFReportForms();
+                ReportForms forms = rep_forms.GetReportForms(name);
+                if (forms == null) return default(T);
+                return XMLStringToClass<T>(forms.xml_form);
+            }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("GetForm<{0}>(name={1})",typeof(T).ToString(),name), eventID);
+                return default(T);
+            }
         }
         /// <summary>
         /// Получить форму из файла
@@ -71,9 +79,18 @@ namespace TReport.TRForms
         /// <returns></returns>
         public T GetFormOfFile<T>(string file)
         {
-            XmlSerializer formatter = new XmlSerializer(typeof(T));            
-            FileStream fs = new FileStream(file, FileMode.OpenOrCreate);   
-            return  (T)((XmlSerializer)formatter).Deserialize(fs);  
+            try
+            {
+                XmlSerializer formatter = new XmlSerializer(typeof(T));
+                FileStream fs = new FileStream(file, FileMode.OpenOrCreate);
+                return (T)((XmlSerializer)formatter).Deserialize(fs);
+            }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("GetFormOfFile<{0}>(file={1})", typeof(T).ToString(), file), eventID);
+                return default(T);
+            }
+
         }
         /// <summary>
         /// Получить список тегов
@@ -83,27 +100,36 @@ namespace TReport.TRForms
         /// <returns></returns>
         public List<int> GetIDTags(object forms, int[] id_objs)
         {
-            List<int> list = new List<int>();
-            string xmlforms = ToXMLString(forms);
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(xmlforms);
-            XmlNode root = doc.DocumentElement;
-            XmlNodeList tags = root.SelectNodes(".//tag");
-            EFDataSources efds = new EFDataSources();
-            foreach (XmlNode tag in tags)
+            try
             {
-                if (!String.IsNullOrWhiteSpace(tag.LastChild.InnerText)
-                    && tag.LastChild.InnerText != "0")
+                List<int> list = new List<int>();
+                string xmlforms = ToXMLString(forms);
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(xmlforms);
+                XmlNode root = doc.DocumentElement;
+                XmlNodeList tags = root.SelectNodes(".//tag");
+                EFDataSources efds = new EFDataSources();
+                foreach (XmlNode tag in tags)
                 {
-                    int id = int.Parse(tag.LastChild.InnerText);
-                    Tags t = efds.GetTags(id);
-                    if (t != null) {
-                        int? obj = id_objs.ToList().Find(i => i == t.trobj);
-                        if (obj > 0) { list.Add(t.id);}
+                    if (!String.IsNullOrWhiteSpace(tag.LastChild.InnerText)
+                        && tag.LastChild.InnerText != "0")
+                    {
+                        int id = int.Parse(tag.LastChild.InnerText);
+                        Tags t = efds.GetTags(id);
+                        if (t != null)
+                        {
+                            int? obj = id_objs.ToList().Find(i => i == t.trobj);
+                            if (obj > 0) { list.Add(t.id); }
+                        }
                     }
                 }
+                return list;
             }
-            return list;
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("GetIDTags(forms={0}, id_objs={1})", forms, id_objs), eventID);
+                return null;
+            }
         }
     }
 }

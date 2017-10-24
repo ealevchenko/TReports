@@ -62,7 +62,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TREntities\TREnergy.cs" />
     <Compile Include="TRForms\Form.cs" />
-    <Compile Include="TRForms\FormsEnergy.cs" />
     <Compile Include="TRForms\TRForm.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +115,7 @@
     </Content>
     <Content Include="XMLForms\NewFormEnergyFlowDay.xml" />
     <Content Include="XMLForms\NewFormEnergyDay.xml" />
+    <Content Include="XMLForms\EnergyGranulDay.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

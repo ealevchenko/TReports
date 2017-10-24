@@ -36,8 +36,11 @@ namespace Testing
             Test_TREnergy ttre = new Test_TREnergy();
             //ttre.GetEnergySutkit(); // Получить энерго ресурсы за уазаную дату по всем печам
             //ttre.GetResources(); // тест ресурсов
-            ttre.GetEnergyFlowDay(); // тест ресурсов за сутки
-            ttre.GetEnergyDay(); // тест ресурсов за сутки
+            //ttre.GetEnergyFlowDay(); // тест ресурсов за сутки
+            //ttre.GetEnergyDay(); // тест ресурсов за сутки
+            //ttre.GetEnergyGranulDay(); // тест ресурсов за сутки
+            ttre.GetReportsEnergy(); // тест всех ресурсов за сутки
+
             #endregion
 
             #region Test_EFDataSet
@@ -56,6 +59,7 @@ namespace Testing
             //fors.CreateFormEnergyDay(); // Создание формы отчета среднесут энергоресурсов
             //fors.ConvertFormEnergyFlowDayToForm(); // конвертировать в новую форму
             //fors.ConvertFormEnergyDayToForm(); // конвертировать в новую форму
+            //fors.CreateFormEnergyGranulDay(); // Создать форму по грануляции шлака
             #endregion
 
             Console.WriteLine("Press any key to exit...");

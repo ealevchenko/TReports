@@ -92,4 +92,5 @@ namespace TReport.TRForms
         public object value { get; set; }
         public Value() { }
     }
+
 }

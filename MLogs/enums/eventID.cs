@@ -32,6 +32,8 @@ namespace MessageLog
         EFTReports_EFAccess = 10500,
 
         TR = 11000,
-        TR_TREnergy = 11100
+        TR_TREnergy = 11100,
+
+        TRForm =  12000,
     }
 }

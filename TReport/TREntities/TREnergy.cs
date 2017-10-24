@@ -14,35 +14,56 @@ namespace TReport.TREntities
 {
     public class TREnergy:TR
     {
+        public enum Report : int
+        {
+            EnergyFlowDay = 0, EnergyAVGDay = 1, EnergyGranulDay = 2,
+        }
+
+        private List<Form> list_forms = new List<Form>();
+        public List<Form> ReportForms { get { return this.list_forms; } }
         private eventID eventID = eventID.TR_TREnergy;
 
-        private Form formEnergyFlowDay;
-        public Form EnergyFlowDay { get { return this.formEnergyFlowDay; } }
-        private Form formEnergyDay;
-        public Form EnergyDay { get { return this.formEnergyDay; } }
+        private List<Report> reports = new List<Report>();
 
-        public TREnergy(trObj trObj) : base(trObj) { GetForms(); }
+        public TREnergy(trObj trObj, Report[] reports) : base(trObj) { this.reports = reports.ToList(); GetForms(); }
 
-        public TREnergy(trObj[] trObjs) : base(trObjs) {  GetForms(); }
+        public TREnergy(trObj[] trObjs, Report[] reports) : base(trObjs) { this.reports = reports.ToList(); GetForms(); }
 
-        public TREnergy(List<trObj> trObjs) : base(trObjs) {  GetForms(); }
+        public TREnergy(List<trObj> trObjs, Report[] reports) : base(trObjs) { this.reports = reports.ToList(); GetForms(); }
 
-        public void GetForms() {
-
-            this.formEnergyDay = base.forms.GetForm<Form>("EnergyDay");
-            this.formEnergyFlowDay = base.forms.GetForm<Form>("EnergyFlowDay");
-            //this.formEnergyDay = base.forms.GetFormOfFile<Form>(@"D:\Мои документы\Visual Studio 2013\Projects\Work\TReports\TReport\XMLForms\NewFormEnergyDay.xml");             
-            //this.formEnergyFlowDay = base.forms.GetFormOfFile<Form>(@"D:\Мои документы\Visual Studio 2013\Projects\Work\TReports\TReport\XMLForms\NewFormEnergyFlowDay.xml");
-        }
-
-        public void GetEnergyFlowDay(DateTime date)
+        public void GetForms()
         {
-            GetFormValue(date, this.formEnergyFlowDay);
+            try
+            {
+                foreach (Report rep in reports)
+                {
+                    Form fm = base.forms.GetForm<Form>(rep.ToString());
+                    if (fm != null) { this.list_forms.Add(fm); }
+                }
+            }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("GetForms()"), eventID);
+            }
         }
 
-        public void GetEnergyDay(DateTime date) {
-            GetFormValue(date, this.formEnergyDay);        
+        public void GetReports(DateTime date)
+        {
+            try
+            {
+                foreach (Report rep in this.reports)
+                {
+                    Form fm = this.list_forms.Find(f => f.name.ToLower() == rep.ToString().ToLower());
+                    if (fm != null)
+                    {
+                        GetFormValue(date, fm);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("GetReports(date={0})", date), eventID);
+            }
         }
-
     }
 }
