@@ -58,6 +58,7 @@
     <Compile Include="TData\TDataSources.cs" />
     <Compile Include="TData\TRDBFactory.cs" />
     <Compile Include="TData\TRObjects.cs" />
+    <Compile Include="TRConvert.cs" />
     <Compile Include="TREntities\TR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TREntities\TREnergy.cs" />

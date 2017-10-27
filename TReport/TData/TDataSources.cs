@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace TReport.TData
 {
     public enum type_dataset : int
@@ -80,8 +81,6 @@ namespace TReport.TData
     public class TDataSources
     {
         private eventID eventID = eventID.TDataSources;
-
-
 
         public TDataSources(){}
 
@@ -204,13 +203,24 @@ namespace TReport.TData
                 if (dsc == null) return null;
                 DataTable data = GetDataTable(dsc);
                 foreach (Tags tag in ds){
-                    object val = data != null && data.Rows.Count>0 ? data.Rows[0][tag.tag.Trim()] : null;
-                    list.Add(new DataMeasurement()
+
+                    try
                     {
-                        id = tag.id,
-                        id_dataset = tag.id_dataset,
-                        value_measurement = ((TypeMeasurement)tag.type_measurement).GetDBValueMeasurement(val, tag.tag.Trim(), "", tag.unit, (Multiplier)tag.multiplier)
-                    });
+                        object val =null;
+                        if (data != null && data.Rows.Count > 0) {
+                            val = tag.tag.GetExpression(data.Rows[0]);
+                        }
+                        list.Add(new DataMeasurement()
+                        {
+                            id = tag.id,
+                            id_dataset = tag.id_dataset,
+                            value_measurement = ((TypeMeasurement)tag.type_measurement).GetDBValueMeasurement(val, tag.tag.Trim(), "", tag.unit, (Multiplier)tag.multiplier)
+                        });
+                    }
+                    catch (Exception e)
+                    {
+                        e.WriteError(String.Format("Ошибка преобразования тега: id={0}, tag={1} ", tag.id, tag.tag), eventID);
+                    }
                 }
             }
             return list;
