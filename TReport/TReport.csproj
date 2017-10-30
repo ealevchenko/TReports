@@ -110,12 +110,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="XMLForms\EnergyDay.xml" />
-    <Content Include="XMLForms\FlowEnergyDay.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="XMLForms\NewFormEnergyFlowDay.xml" />
-    <Content Include="XMLForms\NewFormEnergyDay.xml" />
+    <Content Include="XMLForms\EnergyFlowDay.xml" />
+    <Content Include="XMLForms\EnergyAVGDay.xml" />
     <Content Include="XMLForms\EnergyGranulDay.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
