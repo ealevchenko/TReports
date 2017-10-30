@@ -60,6 +60,7 @@ namespace Testing
             //fors.ConvertFormEnergyFlowDayToForm(); // конвертировать в новую форму
             //fors.ConvertFormEnergyDayToForm(); // конвертировать в новую форму
             //fors.CreateFormEnergyGranulDay(); // Создать форму по грануляции шлака
+            //fors.GetDBForms(); // считать все формы
             #endregion
 
             Console.WriteLine("Press any key to exit...");
