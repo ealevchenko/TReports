@@ -48,14 +48,34 @@ namespace TReport.TRForms
     {
         public int position { get; set; }
         public List<Type> Types { get; set; }
+        public bool totals  { get; set; }
         public Group() { }
+        public double SumValue(int position, int trobj)
+        {
+            double res = 0;
+            foreach (Type val in Types)
+            {
+                res += val.SumValue(position, trobj);
+            }
+            return res;
+        }
     }
 
     public class Type : ObjectName
     {
         public int position { get; set; }
         public List<Item> Items { get; set; }
+        public bool totals { get; set; }
         public Type() { }
+        public double SumValue(int position, int trobj)
+        {
+            double res = 0;
+            foreach (Item val in Items)
+            {
+                res += val.SumValue(position, trobj);
+            }
+            return res;
+        }
     }
 
     public class Item : ObjectName
@@ -63,6 +83,18 @@ namespace TReport.TRForms
         public int position { get; set; }
         public List<ItemObject> ItemObjects { get; set; }
         public Item() { }
+        public double SumValue(int position, int trobj)
+        {
+            double res = 0;
+            foreach (ItemObject val in ItemObjects)
+            {
+                if (val.trobj == trobj)
+                {
+                    res += val.SumValue(position);
+                }
+            }
+            return res;
+        }
     }
 
     public class ItemObject : IObject
@@ -74,6 +106,15 @@ namespace TReport.TRForms
             get { return ((trObj)this.trobj).ToString().GetResources(); }
         }
         public ItemObject() { }
+        public double SumValue(int position)
+        {
+            double res = 0;
+            foreach (ItemValue val in ItemValues)
+            {
+                res += val.SumValue(position);
+            }
+            return res;
+        }
     }
 
     public class ItemValue                     // Однострочный-многострочный
@@ -81,6 +122,19 @@ namespace TReport.TRForms
         public object Key { get; set; }                // онострочный значение null
         public List<Value> Values { get; set; }
         public ItemValue() { }
+        public double SumValue(int position)
+        {
+            double res = 0;
+            foreach (Value val in Values)
+            {
+                if (val.position == position)
+                {
+                    object valobj = val.value != null ? ((DBValueMeasurement)val.value).Value : null;
+                    res += valobj != null ? (double)valobj.ConvertDouble() : 0;
+                }
+            }
+            return res;
+        }
     }
 
     public class Value
