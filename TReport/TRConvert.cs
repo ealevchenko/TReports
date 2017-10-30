@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MessageLog;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -32,184 +33,268 @@ namespace TReport
 
     public static class TRExpression
     {
-
-        public enum expression : int
+        private static eventID eventID = eventID.TReport_TRExpression;
+        
+        /// <summary>
+        /// Перечень операторов
+        /// </summary>
+        public enum Operation : int
         {
-            tag = 0, instruction = 1
+            add = 1, ded = 2, mul = 3, div = 4, mod=5
         }
-
-        public class ExpressionValue
+        /// <summary>
+        /// класс данных Expression
+        /// </summary>
+        public class Expression
         {
-            public string tag { get; set; }
-            public object val { get; set; }
-            public int order { get; set; }
-            public expression expression { get; set; }
+            public object value { get; set; }
         }
-
-        public static List<ExpressionValue> GetExpressionValue(this string tag)
+        /// <summary>
+        /// преобразовать значения
+        /// </summary>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public static double? ConvertDouble(this object val)
         {
-            List<ExpressionValue> list = new List<ExpressionValue>();
-            if (string.IsNullOrWhiteSpace(tag) || !tag.Contains("=")) return list;
-            char[] array = tag.ToCharArray();
-            string tags = null;
-            int order = 0;
-            foreach (char c in array)
+            try
             {
-                if (c != '=')
+                if (val is System.Double)
                 {
-                    if (!"+-*/()".Contains(c))
+                    return (double?)val;
+                }
+                if (val is System.Single)
+                {
+                    return (double?)(Single?)val;
+                }
+                if (val is float)
+                {
+                    return (double?)(float?)val;
+                }
+                if (val is decimal)
+                {
+                    return (double?)(decimal?)val;
+                }
+                if (val is int) { 
+                    return (double?)(int?)val;                
+                }
+            }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("ConvertDouble(val={0}", val), eventID);
+            }
+            return null;
+        }
+        /// <summary>
+        /// Выполнить указаное вычисление переменых 
+        /// </summary>
+        /// <param name="expresions"></param>
+        /// <param name="oper"></param>
+        /// <returns></returns>
+        public static List<Expression> CalcExpression(this List<Expression> expresions, Operation oper)
+        {
+            try{
+            double? val1 = null;
+            double? val2 = null;
+            int index = 0;
+            while (index < expresions.Count())
+            {
+                if (expresions[index].value is Operation && (Operation)expresions[index].value == oper)
+                {
+                    if (!(expresions[index - 1].value is Operation) && expresions[index - 1].value != DBNull.Value)
+                    {
+                        val1 = expresions[index - 1].value.ConvertDouble();
+                    }
+                    if (!(expresions[index + 1].value is Operation) && expresions[index + 1].value != DBNull.Value)
+                    {
+                        val2 = expresions[index + 1].value.ConvertDouble();
+                    }
+                    if (val1 != null && val2 != null)
+                    {
+
+                        switch (oper)
+                        {
+                            case Operation.mul: expresions[index - 1].value = val1 * val2; break;
+                            case Operation.div: expresions[index - 1].value = val1 / val2; break;
+                            case Operation.mod: expresions[index - 1].value = val1 % val2; break;
+                            case Operation.add: expresions[index - 1].value = val1 + val2; break;
+                            case Operation.ded: expresions[index - 1].value = val1 - val2; break;
+                        }
+                        expresions.Remove(expresions[index]);
+                        expresions.Remove(expresions[index]);
+                        index--;
+                    }
+                }
+                index++;
+            }
+
+            }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("CalcExpression(expresions={0}, oper={1})", expresions, oper), eventID);
+            }
+            return expresions;
+        }
+        /// <summary>
+        /// Произвести вычисление ответления скобок списка переменных
+        /// </summary>
+        /// <param name="expresions"></param>
+        /// <returns></returns>
+        public static object CalcExpression(ref List<Expression> expresions)
+        {
+            try
+            {
+                List<Expression> line = new List<Expression>();
+                foreach (Expression ex in expresions)
+                {
+                    if (ex.value is IEnumerable)
+                    {
+                        List<Expression> new_line = (List<Expression>)ex.value;
+                        object res = CalcExpression(ref new_line);
+                        line.Add(new Expression() { value = res });
+                    }
+                    else
+                    {
+                        line.Add(ex);
+                    }
+
+                }
+                List<Expression> list_result = line.ToList().CalcExpression(Operation.mul).CalcExpression(Operation.div).CalcExpression(Operation.mod).CalcExpression(Operation.add).CalcExpression(Operation.ded);
+                return list_result != null && list_result.Count() > 0 ? list_result[0].value : null;
+            }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("CalcExpression(expresions={0}", expresions), eventID);
+                return null;
+            }
+        }
+        /// <summary>
+        /// Произвести вычисление списка переменных
+        /// </summary>
+        /// <param name="expresions"></param>
+        /// <returns></returns>
+        public static object CalcExpressions(this List<Expression> expresions) {
+            object value = CalcExpression(ref expresions);
+            return value;
+        }
+        /// <summary>
+        /// Получить значение поля тега
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="Row"></param>
+        /// <returns></returns>
+        public static object GetValue(this string tag, DataRow Row)
+        {
+            if (String.IsNullOrWhiteSpace(tag)) return null;
+            object value = null;
+            try { value = Row[tag.Trim()]; }
+            catch (Exception e)
+            {
+                try { value = (object)double.Parse(tag.Trim(), CultureInfo.CreateSpecificCulture("en-US")); }
+                catch (Exception ex)
+                {
+                    value = null;
+                }
+            }
+            return value;
+        }
+        /// <summary>
+        /// Список переменных и операций с учетом скобок
+        /// </summary>
+        /// <param name="expresions"></param>
+        /// <param name="array"></param>
+        /// <param name="index"></param>
+        /// <param name="Row"></param>
+        public static void GetExpression(ref List<Expression> expresions, char[] array, ref int index, DataRow Row)
+        {
+            try
+            {
+                object value = null;
+                string tags = null;
+                while (index < array.Count())
+                {
+                    char c = array[index];
+                    index++;
+                    if (!"+-*%/()".Contains(c))
                     {
                         tags += c;
                     }
                     else
                     {
-                        if (!String.IsNullOrWhiteSpace(tags))
+                        value = GetValue(tags, Row);
+                        if (value != null)
                         {
-                            list.Add(new ExpressionValue() { tag = tags, expression = expression.tag, order = order});
+                            expresions.Add(new Expression() { value = value });
+                            tags = null; // обнулим название тега
                         }
-                        if ("+-*/".Contains(c))
+                        if ("+-*%/".Contains(c))
                         {
-                            list.Add(new ExpressionValue() { tag = c.ToString(), expression = expression.instruction, order = order });
-                        }
-                        else {
-                            if (c == '(') order++;
-                            if (c == ')') order--;
-                        }
-                        
-                        tags = null;
-                    }
-                }
-            }
-            if (!String.IsNullOrWhiteSpace(tags))
-            {
-                list.Add(new ExpressionValue() { tag = tags, expression = expression.tag, order = order });
-            }
-            return list;
-        }
 
-        public static double? ConvertDouble(this object val)
-        {
-            if (val is System.Double)
-            {
-                return (double?)val;
-            }
-            if (val is System.Single)
-            {
-                return (double?)(Single?)val;
-            }
-            if (val is float)
-            {
-                return (double?)(float?)val;
-            }
-            if (val is decimal)
-            {
-                return (double?)(decimal?)val;
-            }
-            return null;
-        }
-
-        public static List<ExpressionValue> GetExpression(this List<ExpressionValue> list, char instruction)
-        {
-            if (!"+-/*".Contains(instruction)) return list;
-            double? val1 = null;
-            double? val2 = null;
-            int index = 0;
-            while (index < list.Count())
-            {
-                if (list[index].expression == expression.instruction && list[index].tag == instruction.ToString())
-                {
-                    if (list[index - 1].expression == expression.tag && list[index - 1].val != DBNull.Value)
-                    {
-                        val1 = list[index - 1].val.ConvertDouble();
-                    }
-                    if (list[index + 1].expression == expression.tag && list[index + 1].val != DBNull.Value)
-                    {
-                        val2 = list[index + 1].val.ConvertDouble();
-                    }
-                    if (val1 != null && val2 != null)
-                    {
-
-                        switch (instruction)
-                        {
-                            case '*': list[index - 1].val = val1 * val2; break;
-                            case '/': list[index - 1].val = val1 / val2; break;
-                            case '+': list[index - 1].val = val1 + val2; break;
-                            case '-': list[index - 1].val = val1 - val2; break;
-                        }
-                        list.Remove(list[index]);
-                        list.Remove(list[index]);
-                    }
-                }
-                index++;
-            }
-            return list;
-        }
-
-        public static void GetExpression(ref List<ExpressionValue> list)
-        {
-            if (list != null && list.Count() > 1)
-            {
-                List<IGrouping<int, ExpressionValue>> group = list.GroupBy(o => o.order).OrderByDescending(o => o.Key).ToList();
-                IGrouping<int, ExpressionValue> gr_end = group.FirstOrDefault();
-                //List<ExpressionValue> list_result = gr_end.ToList();
-                List<ExpressionValue> list_result = gr_end.ToList().GetExpression('*').GetExpression('/').GetExpression('+').GetExpression('-');
-                object result = list_result != null && list_result.Count() > 0 ? list_result[0].val : null;
-                ExpressionValue ev_new = new ExpressionValue() { expression = expression.tag, val = result, order = gr_end.Key - 1, tag = "()" };
-                bool bdel = true;
-                foreach (ExpressionValue ev in list.ToList())
-                {
-                    if (ev.order == gr_end.Key)
-                    {
-                        if (bdel)
-                        {
-                            ev.val = ev_new.val;
-                            ev.order = ev.order - 1;
-                            ev.tag = "()"; bdel = false;
+                            switch (c)
+                            {
+                                case '+': expresions.Add(new Expression() { value = Operation.add }); break;
+                                case '-': expresions.Add(new Expression() { value = Operation.ded }); break;
+                                case '*': expresions.Add(new Expression() { value = Operation.mul }); break;
+                                case '/': expresions.Add(new Expression() { value = Operation.div }); break;
+                                case '%': expresions.Add(new Expression() { value = Operation.mod }); break;
+                            }
                         }
                         else
-                            list.Remove(ev);
+                        {
+                            if (c == '(')
+                            {
+                                List<Expression> new_expresions = new List<Expression>();
+                                GetExpression(ref new_expresions, array, ref index, Row);
+                                expresions.Add(new Expression() { value = new_expresions });
+                            }
+                            if (c == ')')
+                            {
+                                //expresions.Add(new Expression() { value = new_expresions });
+                                return;
+                            }
+                        }
                     }
                 }
-                GetExpression(ref list);
+                value = GetValue(tags, Row);
+                if (value != null)
+                {
+                    expresions.Add(new Expression() { value = value });
+                }
             }
+            catch (Exception e)
+            {
+                e.WriteErrorMethod(String.Format("GetExpression(expresions={0}, array={1}, index={2}, Row={3})", expresions, array, index, Row), eventID);
 
-        }
-
-        public static object GetExpressions(this List<ExpressionValue> list)
-        {
-            GetExpression(ref list);
-            return list != null && list.Count() > 0 ? list[0].val : null;
+            }
+            return;
         }
         /// <summary>
-        /// Получить значение выражения по имени тега или последовательности операции над тегами
+        /// Получить результат вычисления над тегами
         /// </summary>
         /// <param name="tag"></param>
         /// <param name="Row"></param>
         /// <returns></returns>
         public static object GetExpression(this string tag, DataRow Row)
         {
-            if (tag.Contains("="))
+            
+            if (string.IsNullOrWhiteSpace(tag) || Row==null) return null;
+            try
             {
-                List<ExpressionValue> list_exp = tag.GetExpressionValue();
-                foreach (ExpressionValue ev in list_exp.Where(e => e.expression == expression.tag))
-                {
-                    try { ev.val = Row != null ? Row[ev.tag.Trim()] : null; }
-                    catch (Exception e)
-                    {
-                        try { ev.val = (object)double.Parse(ev.tag.Trim(), CultureInfo.CreateSpecificCulture("en-US")); }
-                        catch (Exception ex)
-                        {
-                            ev.val = null;
-                        }
-                    }
-                }
-                return list_exp.GetExpressions();
+                if (!tag.Contains("=")) return Row != null ? Row[tag.Trim()] : null;
+                //tag = "=GL_FCDL+GR_FCDR+(45.78+67*(GL_FCDL*2)-(GR_FCDR/7)+45)";
+                //tag = "=11+(22-44)*(66+77)";
+                List<Expression> expresions = new List<Expression>();
+                char[] array = tag.ToCharArray();
+                int index = 1; // начнем за символом =
+                GetExpression(ref expresions, array, ref index, Row);
+                return expresions.CalcExpressions();
             }
-            else
+            catch (Exception e)
             {
-                return Row != null   ? Row[tag.Trim()] : null;
+                e.WriteErrorMethod(String.Format("GetExpression(tag={0}, Row={1})", tag, Row), eventID);
+                return null;
             }
         }
+        
 
     }
     

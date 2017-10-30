@@ -35,5 +35,8 @@ namespace MessageLog
         TR_TREnergy = 11100,
 
         TRForm =  12000,
+
+        TReport = 13000,
+        TReport_TRExpression = 13100,
     }
 }
