@@ -38,10 +38,9 @@ namespace TReport.TREntities
                 foreach (Report rep in reports)
                 {
                     Form fm = base.forms.GetForm<Form>(rep.ToString());
-                    //Form fm = base.forms.GetFormOfFile<Form>(@"D:\Мои документы\Visual Studio 2013\Projects\Work\TReports\TReport\XMLForms\NewFormEnergyDay.xml");
+                    //Form fm = base.forms.GetFormOfFile<Form>(@"D:\Мои документы\Visual Studio 2013\Projects\Work\TReports\TReport\XMLForms\EnergyAVGDay.xml");
                     //Form fm = base.forms.GetFormOfFile<Form>(@"D:\Мои документы\Visual Studio 2013\Projects\Work\TReports\TReport\XMLForms\EnergyGranulDay.xml");
                     //Form fm = base.forms.GetFormOfFile<Form>(@"D:\Мои документы\Visual Studio 2013\Projects\Work\TReports\TReport\XMLForms\NewFormEnergyFlowDay.xml");
-
                     if (fm != null) { this.list_forms.Add(fm); }
                 }
             }
