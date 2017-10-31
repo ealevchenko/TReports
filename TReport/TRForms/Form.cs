@@ -49,6 +49,7 @@ namespace TReport.TRForms
         public int position { get; set; }
         public List<Type> Types { get; set; }
         public bool totals  { get; set; }
+        public bool visible  { get; set; }
         public Group() { }
         public double SumValue(int position, int trobj)
         {
@@ -66,6 +67,7 @@ namespace TReport.TRForms
         public int position { get; set; }
         public List<Item> Items { get; set; }
         public bool totals { get; set; }
+        public bool visible { get; set; }
         public Type() { }
         public double SumValue(int position, int trobj)
         {
